@@ -24,22 +24,24 @@ export function GlobalBackground() {
 
       {/* Faint grid texture */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+            "linear-gradient(rgba(255,255,255,0.7) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.7) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+          // Pin grid to its own GPU layer so it doesn't tear when other
+          // fixed layers (spotlight, particles canvas) compositing on top.
+          transform: "translateZ(0)",
         }}
       />
 
-      {/* Particle field (interactive, repels from cursor) — denser and a bit
-          bigger than hero-only so the dots stay visible on every section */}
+      {/* Particle field (interactive, repels from cursor) */}
       <Particles
-        density={140}
-        minSize={1}
-        maxSize={5}
-        minOpacity={0.25}
-        maxOpacity={0.9}
+        density={95}
+        minSize={1.2}
+        maxSize={3.2}
+        minOpacity={0.22}
+        maxOpacity={0.7}
         className="absolute inset-0 h-full w-full"
       />
 
