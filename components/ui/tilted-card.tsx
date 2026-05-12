@@ -22,7 +22,7 @@ export function TiltedCard({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const springConfig = { stiffness: 200, damping: 22, mass: 0.6 };
+  const springConfig = { stiffness: 260, damping: 18, mass: 0.45 };
   const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [max, -max]), springConfig);
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-max, max]), springConfig);
 
