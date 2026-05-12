@@ -710,7 +710,11 @@ export default function HomePage() {
                 },
               ].map((p, i) => (
                 <Reveal key={p.title} delay={120 + i * 100}>
-                  <div className="group glass rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+                  <TiltedCard
+                    glow={`rgba(${p.color.includes("indigo") ? "99,102,241" : p.color.includes("emerald") ? "16,185,129" : "245,158,11"}, 0.22)`}
+                    max={8}
+                    className="group glass rounded-2xl p-6 h-full"
+                  >
                     <div
                       className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${p.bg} ${p.color} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6`}
                     >
@@ -718,7 +722,7 @@ export default function HomePage() {
                     </div>
                     <h3 className="font-heading mb-1.5 text-base font-semibold text-white">{p.title}</h3>
                     <p className="text-sm leading-relaxed text-slate-400">{p.desc}</p>
-                  </div>
+                  </TiltedCard>
                 </Reveal>
               ))}
             </div>
