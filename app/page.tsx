@@ -328,16 +328,31 @@ const benefits = [
 
 /* ── Contact form ── */
 function ContactForm() {
-  const [form, setForm] = useState({ name: "", company: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", company: "", email: "", message: "", _website: "" });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
-    setSent(true);
-    setLoading(false);
+    setError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(data.error || "No pudimos enviar el mensaje. Intentá de nuevo.");
+      }
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error inesperado");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (sent) {
@@ -352,7 +367,7 @@ function ContactForm() {
           <h3 className="text-xl font-semibold font-heading text-white">¡Mensaje recibido!</h3>
           <p className="text-slate-400 max-w-xs">Te contactamos a la brevedad. Gracias por tu interés en Nova Solutions.</p>
           <button
-            onClick={() => { setSent(false); setForm({ name: "", company: "", email: "", message: "" }); }}
+            onClick={() => { setSent(false); setForm({ name: "", company: "", email: "", message: "", _website: "" }); }}
             className="mt-2 rounded-lg border border-white/10 px-5 py-2 text-sm text-slate-300 transition-all hover:border-indigo-400 hover:text-indigo-300 hover:-translate-y-0.5 cursor-pointer btn-press"
           >
             Enviar otro mensaje
@@ -366,7 +381,19 @@ function ContactForm() {
     "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:bg-white/[0.07] transition-all duration-300 hover:border-white/20";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      {/* Honeypot — hidden from real users, bots fill it */}
+      <div className="hidden" aria-hidden>
+        <label htmlFor="_website">Sitio web</label>
+        <input
+          id="_website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form._website}
+          onChange={(e) => setForm({ ...form, _website: e.target.value })}
+        />
+      </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="block mb-1.5 text-xs font-medium text-slate-400">Nombre *</label>
@@ -416,6 +443,11 @@ function ContactForm() {
           className={`${inputClass} resize-none`}
         />
       </div>
+      {error && (
+        <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200" role="alert">
+          {error}
+        </div>
+      )}
       <button
         type="submit"
         disabled={loading}
