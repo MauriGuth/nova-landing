@@ -105,16 +105,50 @@ function IconMail({ className }: { className?: string }) {
 /* ── Nova logo mark ── */
 function NovaLogo({ size = 32 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <defs>
-        <linearGradient id="nLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#818CF8" />
-          <stop offset="100%" stopColor="#6366F1" />
-        </linearGradient>
-      </defs>
-      <rect width="40" height="40" rx="10" fill="url(#nLogoGrad)" />
-      <path d="M10 28V12l8 11V12M22 12h8l-8 16h8" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <>
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 512 512"
+        className="block dark:hidden"
+        aria-hidden="true"
+      >
+        <rect width="512" height="512" rx="118" fill="oklch(0.62 0.18 265)" />
+        <text
+          x="256"
+          y="345"
+          textAnchor="middle"
+          fontFamily="Inter, Poppins, sans-serif"
+          fontWeight="700"
+          fontSize="282"
+          letterSpacing="-20"
+          fill="#FAF8F4"
+        >
+          N<tspan dx="-10" opacity="0.55">S</tspan>
+        </text>
+      </svg>
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 512 512"
+        className="hidden dark:block"
+        aria-hidden="true"
+      >
+        <rect width="512" height="512" rx="118" fill="#0E1116" />
+        <text
+          x="256"
+          y="345"
+          textAnchor="middle"
+          fontFamily="Inter, Poppins, sans-serif"
+          fontWeight="700"
+          fontSize="282"
+          letterSpacing="-20"
+          fill="#FAF8F4"
+        >
+          N<tspan dx="-10" fill="oklch(0.62 0.18 265)">S</tspan>
+        </text>
+      </svg>
+    </>
   );
 }
 
