@@ -279,6 +279,19 @@ body {
   100% { background-position: 200% 50%; }
 }
 
+/* Border-beam: animated conic-gradient sweep around a rounded border.
+   Registered with @property so the angle can interpolate. */
+@property --bb-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-beam-spin {
+  from { --bb-angle: 0deg; }
+  to { --bb-angle: 360deg; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

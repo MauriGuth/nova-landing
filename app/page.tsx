@@ -7,7 +7,7 @@ import {
   Terminal,
   Monitor,
   Star,
-  Printer,
+  Boxes,
   Zap,
   Shield,
   RefreshCw,
@@ -25,13 +25,14 @@ import { PageTransition } from "@/lib/animations/page-transition";
 import { RotatingText } from "@/components/ui/rotating-text";
 import { TiltedCard } from "@/components/ui/tilted-card";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
-import { Particles } from "@/components/ui/particles";
 import { Confetti } from "@/components/ui/confetti";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 import { Spotlight } from "@/components/ui/spotlight";
 import { Magnetic } from "@/components/ui/magnetic";
-import { MouseParallax } from "@/components/ui/mouse-parallax";
 import { Marquee } from "@/components/ui/marquee";
+import { GlobalBackground } from "@/components/ui/global-background";
+import { FlipCard } from "@/components/ui/flip-card";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 /* ── Scroll-reveal helpers ── */
 function useReveal<T extends HTMLElement = HTMLDivElement>() {
@@ -205,27 +206,27 @@ function ProductCard({ product: p }: { product: Product }) {
 /* ── Products data ── */
 const products = [
   {
-    id: "pos",
-    icon: Monitor,
-    name: "Nova POS",
-    tagline: "Sistema de punto de venta completo",
+    id: "erp",
+    icon: Boxes,
+    name: "Nova ERP",
+    tagline: "Sistema de gestión empresarial completo",
     description:
-      "Solución integral para restaurantes y cafeterías con gestión de mesas en tiempo real, pantalla de cocina, menú QR digital y cierre de caja automatizado.",
+      "Centralizá stock, compras, facturación y reportes de tu empresa en un solo lugar. Multi-sucursal, multi-usuario y con dashboard ejecutivo en tiempo real.",
     accent: "from-indigo-500 to-violet-600",
     glow: "rgba(99,102,241,0.3)",
     features: [
-      "Mapa de mesas interactivo",
-      "Display cocina y cafetería",
-      "Carta digital QR",
-      "Cierre de caja con fórmulas",
-      "Sincronización en tiempo real",
-      "Modo offline con sync automático",
+      "Gestión de stock multi-depósito",
+      "Compras y proveedores",
+      "Facturación electrónica AFIP",
+      "Dashboard ejecutivo en vivo",
+      "Roles y permisos por usuario",
+      "Multi-sucursal sincronizada",
     ],
   },
   {
-    id: "loyalty",
+    id: "point",
     icon: Star,
-    name: "Nova Loyalty",
+    name: "Nova Point",
     tagline: "Fidelización de clientes inteligente",
     description:
       "Programa de puntos y recompensas para retener clientes, aumentar la frecuencia de visita y construir relaciones a largo plazo con tu negocio.",
@@ -241,21 +242,21 @@ const products = [
     ],
   },
   {
-    id: "print",
-    icon: Printer,
-    name: "Nova Print",
-    tagline: "Impresión cloud para tu negocio",
+    id: "pos",
+    icon: Monitor,
+    name: "Nova POS",
+    tagline: "Sistema de punto de venta completo",
     description:
-      "Integración de impresión térmica en la nube que conecta tu sistema POS con impresoras de cocina, barra y caja sin configuración compleja.",
+      "Solución integral para restaurantes y cafeterías con gestión de mesas en tiempo real, pantalla de cocina, menú QR digital y cierre de caja automatizado.",
     accent: "from-orange-500 to-amber-600",
     glow: "rgba(249,115,22,0.3)",
     features: [
-      "Impresoras térmicas cloud",
-      "Múltiples destinos de impresión",
-      "Tickets y comandas automáticas",
-      "Configuración sin servidores",
-      "Compatible con ESC/POS",
-      "Monitoreo de estado en vivo",
+      "Mapa de mesas interactivo",
+      "Display cocina y cafetería",
+      "Carta digital QR",
+      "Cierre de caja con fórmulas",
+      "Sincronización en tiempo real",
+      "Modo offline con sync automático",
     ],
   },
 ];
@@ -269,6 +270,13 @@ const benefits = [
       "Desarrollamos software adaptado exactamente a los procesos de tu empresa, no soluciones genéricas.",
     color: "text-indigo-400",
     bg: "bg-indigo-500/10",
+    backTitle: "Cómo trabajamos",
+    backItems: [
+      "Análisis profundo de tus procesos",
+      "Prototipo navegable en 2 semanas",
+      "Iteración constante con tu equipo",
+      "Lanzamiento + capacitación",
+    ],
   },
   {
     icon: Zap,
@@ -277,6 +285,13 @@ const benefits = [
       "Stack tecnológico de última generación: React, NestJS, PostgreSQL, WebSockets para máxima performance.",
     color: "text-violet-400",
     bg: "bg-violet-500/10",
+    backTitle: "Nuestro stack",
+    backItems: [
+      "TypeScript · React · Next.js",
+      "NestJS · PostgreSQL · Redis",
+      "WebSockets · Docker · AWS",
+      "CI/CD con deploys sin downtime",
+    ],
   },
   {
     icon: RefreshCw,
@@ -285,6 +300,13 @@ const benefits = [
       "Todos los dispositivos actualizados al instante. Sin recargas, sin demoras, sin discrepancias de datos.",
     color: "text-emerald-400",
     bg: "bg-emerald-500/10",
+    backTitle: "Bajo el capó",
+    backItems: [
+      "WebSockets con reconexión automática",
+      "Resolución de conflictos integrada",
+      "Modo offline con sync diferido",
+      "Latencia < 50 ms en red local",
+    ],
   },
   {
     icon: Headphones,
@@ -293,6 +315,13 @@ const benefits = [
       "Acompañamiento post-lanzamiento. Actualizaciones continuas y soporte directo con el equipo de desarrollo.",
     color: "text-amber-400",
     bg: "bg-amber-500/10",
+    backTitle: "Lo que incluye",
+    backItems: [
+      "Respuesta < 2 hs en horario laboral",
+      "Canal directo con el equipo dev",
+      "Updates y patches sin downtime",
+      "Monitoring proactivo 24/7",
+    ],
   },
 ];
 
@@ -431,6 +460,7 @@ export default function HomePage() {
     <PageTransition>
     <div className="relative min-h-screen bg-[#070714] text-slate-200">
 
+      <GlobalBackground />
       <CustomCursor />
       <Spotlight />
       <ScrollProgress />
@@ -525,39 +555,19 @@ export default function HomePage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-24 pb-16">
-        {/* Animated gradient BG */}
-        <div
-          className="absolute inset-0 animate-gradient-shift"
-          style={{
-            backgroundSize: "400% 400%",
-            background:
-              "radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.25) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.2) 0%, transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(16,185,129,0.1) 0%, transparent 50%)",
-          }}
-        />
-        {/* Grid texture */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-        {/* Particles */}
-        <Particles density={70} className="absolute inset-0 h-full w-full" />
-
+      <section className="relative flex min-h-screen items-center justify-center px-4 pt-24 pb-16">
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           {/* Badge */}
           <div
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-medium text-indigo-300 opacity-0 animate-fade-up"
+            className="relative mb-6 inline-flex items-center gap-2 overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-medium text-indigo-300 opacity-0 animate-fade-up"
             style={{ animationDelay: "60ms" }}
           >
+            <BorderBeam duration={5} thickness={1.5} colorFrom="#818CF8" colorTo="#10B981" />
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
             </span>
-            Software a medida para tu empresa
+            <span className="relative">Software a medida para tu empresa</span>
           </div>
 
           {/* Headline */}
@@ -643,12 +653,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Glow orbs — drift slowly, plus subtle mouse parallax */}
-        <MouseParallax intensity={20} className="pointer-events-none absolute inset-0">
-          <div className="absolute -left-64 top-1/4 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl animate-orb-drift" />
-          <div className="absolute -right-64 bottom-1/4 h-96 w-96 rounded-full bg-violet-600/15 blur-3xl animate-orb-drift-reverse" />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-72 w-72 rounded-full bg-emerald-500/5 blur-3xl animate-pulse" />
-        </MouseParallax>
       </section>
 
       {/* ── Sobre nosotros ── */}
@@ -793,16 +797,46 @@ export default function HomePage() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {benefits.map((b, i) => (
-              <Reveal key={b.title} delay={i * 100}>
-                <div className="group glass rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-white/20 cursor-default">
-                  <div
-                    className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl ${b.bg} ${b.color} transition-all duration-500 group-hover:scale-110 group-hover:rotate-12`}
-                  >
-                    <b.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="font-heading mb-2 text-base font-semibold text-white">{b.title}</h3>
-                  <p className="text-sm leading-relaxed text-slate-400">{b.description}</p>
-                </div>
+              <Reveal key={b.title} delay={i * 100} className="h-full">
+                <FlipCard
+                  className="min-h-[280px]"
+                  front={
+                    <div className="flex h-full flex-col items-center justify-center rounded-2xl glass p-6 text-center cursor-pointer">
+                      <div
+                        className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl ${b.bg} ${b.color}`}
+                      >
+                        <b.icon className="h-6 w-6" />
+                      </div>
+                      <h3 className="font-heading mb-2 text-base font-semibold text-white">{b.title}</h3>
+                      <p className="text-sm leading-relaxed text-slate-400">{b.description}</p>
+                      <p className="mt-4 text-[11px] font-medium uppercase tracking-widest text-slate-500">
+                        Pasá el cursor →
+                      </p>
+                    </div>
+                  }
+                  back={
+                    <div
+                      className={`flex h-full flex-col justify-center rounded-2xl border p-6 cursor-pointer ${b.bg.replace("/10", "/20")} ${b.color.replace("text-", "border-").replace("400", "500/30")}`}
+                    >
+                      <p
+                        className={`mb-3 text-xs font-semibold uppercase tracking-widest ${b.color}`}
+                      >
+                        {b.backTitle}
+                      </p>
+                      <ul className="space-y-2 text-left">
+                        {b.backItems.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-2 text-sm leading-snug text-slate-200"
+                          >
+                            <Check className={`h-4 w-4 shrink-0 mt-0.5 ${b.color}`} />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  }
+                />
               </Reveal>
             ))}
           </div>

@@ -21,12 +21,20 @@ export function Particles({
   interactive = true,
   repelRadius = 130,
   repelStrength = 1.4,
+  minSize = 0.8,
+  maxSize = 4,
+  minOpacity = 0.2,
+  maxOpacity = 0.85,
   className = "",
 }: {
   density?: number;
   interactive?: boolean;
   repelRadius?: number;
   repelStrength?: number;
+  minSize?: number;
+  maxSize?: number;
+  minOpacity?: number;
+  maxOpacity?: number;
   className?: string;
 }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -54,13 +62,16 @@ export function Particles({
 
     const seed = () => {
       const { clientWidth: w, clientHeight: h } = canvas;
+      const sizeRange = maxSize - minSize;
+      const opacityRange = maxOpacity - minOpacity;
       dots = Array.from({ length: density }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        r: 0.6 + Math.random() * 1.6,
+        // Bias toward smaller dots — squared random gives more tiny than big
+        r: minSize + Math.pow(Math.random(), 1.8) * sizeRange,
         vx: (Math.random() - 0.5) * 0.12,
         vy: (Math.random() - 0.5) * 0.12,
-        o: 0.15 + Math.random() * 0.5,
+        o: minOpacity + Math.random() * opacityRange,
       }));
     };
 
@@ -143,7 +154,7 @@ export function Particles({
       document.removeEventListener("mouseleave", onMouseLeave);
       io.disconnect();
     };
-  }, [density, interactive, repelRadius, repelStrength]);
+  }, [density, interactive, repelRadius, repelStrength, minSize, maxSize, minOpacity, maxOpacity]);
 
   return (
     <canvas
