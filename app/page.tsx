@@ -170,6 +170,7 @@ function ProductCard({ product: p }: { product: Product }) {
   return (
     <TiltedCard
       glow={p.glow}
+      max={14}
       className="group glass-strong cursor-default rounded-3xl p-7 h-full"
     >
       {/* Icon */}
@@ -712,7 +713,7 @@ export default function HomePage() {
                 <Reveal key={p.title} delay={120 + i * 100}>
                   <TiltedCard
                     glow={`rgba(${p.color.includes("indigo") ? "99,102,241" : p.color.includes("emerald") ? "16,185,129" : "245,158,11"}, 0.22)`}
-                    max={8}
+                    max={16}
                     className="group glass rounded-2xl p-6 h-full"
                   >
                     <div
