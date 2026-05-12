@@ -2,6 +2,31 @@
 
 import { useState, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import {
+  Terminal,
+  Monitor,
+  Star,
+  Printer,
+  Zap,
+  Shield,
+  RefreshCw,
+  Headphones,
+  Code,
+  ArrowRight,
+  Check,
+  Menu as MenuIcon,
+  X as XIcon,
+  Mail,
+  Loader2,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { PageTransition } from "@/lib/animations/page-transition";
+import { RotatingText } from "@/components/ui/rotating-text";
+import { TiltedCard } from "@/components/ui/tilted-card";
+import { AnimatedCounter } from "@/components/ui/animated-counter";
+import { Particles } from "@/components/ui/particles";
+import { Confetti } from "@/components/ui/confetti";
 
 /* ── Scroll-reveal helpers ── */
 function useReveal<T extends HTMLElement = HTMLDivElement>() {
@@ -73,106 +98,6 @@ function ScrollProgress() {
   );
 }
 
-/* ── Icons (inline SVG, no dependency) ── */
-function IconTerminal({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" />
-    </svg>
-  );
-}
-function IconMonitor({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
-    </svg>
-  );
-}
-function IconStar({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  );
-}
-function IconPrinter({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" />
-    </svg>
-  );
-}
-function IconZap({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-    </svg>
-  );
-}
-function IconShield({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    </svg>
-  );
-}
-function IconRefresh({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" /><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
-    </svg>
-  );
-}
-function IconHeadphones({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 18v-6a9 9 0 0 1 18 0v6" /><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
-    </svg>
-  );
-}
-function IconCode({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-    </svg>
-  );
-}
-function IconArrowRight({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-    </svg>
-  );
-}
-function IconCheck({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
-function IconMenu({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
-    </svg>
-  );
-}
-function IconX({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  );
-}
-function IconMail({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
-    </svg>
-  );
-}
-
 /* ── Nova logo mark ── */
 function NovaLogo({ size = 32 }: { size?: number }) {
   return (
@@ -223,10 +148,10 @@ function NovaLogo({ size = 32 }: { size?: number }) {
   );
 }
 
-/* ── Product card with cursor-follow glow + tilt ── */
+/* ── Product card backed by TiltedCard (motion spring + cursor-follow glow) ── */
 type Product = {
   id: string;
-  icon: (props: { className?: string }) => React.JSX.Element;
+  icon: LucideIcon;
   name: string;
   tagline: string;
   description: string;
@@ -236,42 +161,10 @@ type Product = {
 };
 
 function ProductCard({ product: p }: { product: Product }) {
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    el.style.setProperty("--mx", `${x}px`);
-    el.style.setProperty("--my", `${y}px`);
-    // Subtle tilt — max 4deg
-    const rx = ((y / rect.height) - 0.5) * -4;
-    const ry = ((x / rect.width) - 0.5) * 4;
-    el.style.setProperty("--rx", `${rx}deg`);
-    el.style.setProperty("--ry", `${ry}deg`);
-  };
-
-  const handleLeave = () => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.setProperty("--rx", `0deg`);
-    el.style.setProperty("--ry", `0deg`);
-  };
-
   return (
-    <div
-      ref={ref}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      className="group card-glow glass-strong cursor-default rounded-3xl p-7 transition-transform duration-300 ease-out hover:-translate-y-1 h-full"
-      style={
-        {
-          "--glow": p.glow,
-          transform: "perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))",
-        } as React.CSSProperties
-      }
+    <TiltedCard
+      glow={p.glow}
+      className="group glass-strong cursor-default rounded-3xl p-7 h-full"
     >
       {/* Icon */}
       <div
@@ -294,13 +187,13 @@ function ProductCard({ product: p }: { product: Product }) {
             style={{ transitionDelay: `${i * 25}ms` }}
           >
             <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 transition-transform duration-300 group-hover:scale-110">
-              <IconCheck className="h-2.5 w-2.5" />
+              <Check className="h-2.5 w-2.5" />
             </span>
             {f}
           </li>
         ))}
       </ul>
-    </div>
+    </TiltedCard>
   );
 }
 
@@ -308,7 +201,7 @@ function ProductCard({ product: p }: { product: Product }) {
 const products = [
   {
     id: "pos",
-    icon: IconMonitor,
+    icon: Monitor,
     name: "Nova POS",
     tagline: "Sistema de punto de venta completo",
     description:
@@ -326,7 +219,7 @@ const products = [
   },
   {
     id: "loyalty",
-    icon: IconStar,
+    icon: Star,
     name: "Nova Loyalty",
     tagline: "Fidelización de clientes inteligente",
     description:
@@ -344,7 +237,7 @@ const products = [
   },
   {
     id: "print",
-    icon: IconPrinter,
+    icon: Printer,
     name: "Nova Print",
     tagline: "Impresión cloud para tu negocio",
     description:
@@ -365,7 +258,7 @@ const products = [
 /* ── Why Nova data ── */
 const benefits = [
   {
-    icon: IconCode,
+    icon: Code,
     title: "Soluciones a medida",
     description:
       "Desarrollamos software adaptado exactamente a los procesos de tu empresa, no soluciones genéricas.",
@@ -373,7 +266,7 @@ const benefits = [
     bg: "bg-indigo-500/10",
   },
   {
-    icon: IconZap,
+    icon: Zap,
     title: "Tecnología moderna",
     description:
       "Stack tecnológico de última generación: React, NestJS, PostgreSQL, WebSockets para máxima performance.",
@@ -381,7 +274,7 @@ const benefits = [
     bg: "bg-violet-500/10",
   },
   {
-    icon: IconRefresh,
+    icon: RefreshCw,
     title: "Sync en tiempo real",
     description:
       "Todos los dispositivos actualizados al instante. Sin recargas, sin demoras, sin discrepancias de datos.",
@@ -389,7 +282,7 @@ const benefits = [
     bg: "bg-emerald-500/10",
   },
   {
-    icon: IconHeadphones,
+    icon: Headphones,
     title: "Soporte dedicado",
     description:
       "Acompañamiento post-lanzamiento. Actualizaciones continuas y soporte directo con el equipo de desarrollo.",
@@ -414,20 +307,23 @@ function ContactForm() {
 
   if (sent) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 rounded-2xl glass p-10 text-center animate-scale-in">
-        <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
-          <span className="absolute inset-0 rounded-full bg-emerald-500/30 animate-ping" />
-          <IconCheck className="relative h-8 w-8" />
+      <>
+        <Confetti />
+        <div className="flex flex-col items-center justify-center gap-4 rounded-2xl glass p-10 text-center animate-scale-in">
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
+            <span className="absolute inset-0 rounded-full bg-emerald-500/30 animate-ping" />
+            <Check className="relative h-8 w-8" />
+          </div>
+          <h3 className="text-xl font-semibold font-heading text-white">¡Mensaje recibido!</h3>
+          <p className="text-slate-400 max-w-xs">Te contactamos a la brevedad. Gracias por tu interés en Nova Solutions.</p>
+          <button
+            onClick={() => { setSent(false); setForm({ name: "", company: "", email: "", message: "" }); }}
+            className="mt-2 rounded-lg border border-white/10 px-5 py-2 text-sm text-slate-300 transition-all hover:border-indigo-400 hover:text-indigo-300 hover:-translate-y-0.5 cursor-pointer btn-press"
+          >
+            Enviar otro mensaje
+          </button>
         </div>
-        <h3 className="text-xl font-semibold font-heading text-white">¡Mensaje recibido!</h3>
-        <p className="text-slate-400 max-w-xs">Te contactamos a la brevedad. Gracias por tu interés en Nova Solutions.</p>
-        <button
-          onClick={() => { setSent(false); setForm({ name: "", company: "", email: "", message: "" }); }}
-          className="mt-2 rounded-lg border border-white/10 px-5 py-2 text-sm text-slate-300 transition-all hover:border-indigo-400 hover:text-indigo-300 hover:-translate-y-0.5 cursor-pointer"
-        >
-          Enviar otro mensaje
-        </button>
-      </div>
+      </>
     );
   }
 
@@ -488,17 +384,17 @@ function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className="group flex w-full items-center justify-center gap-2 cursor-pointer rounded-xl bg-indigo-600 py-3.5 text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/25 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0 active:scale-[0.98]"
+        className="group btn-press ripple flex w-full items-center justify-center gap-2 cursor-pointer rounded-xl bg-indigo-600 py-3.5 text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/25 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
       >
         {loading ? (
           <>
-            <span className="spinner" />
+            <Loader2 className="h-4 w-4 animate-spin" />
             <span>Enviando…</span>
           </>
         ) : (
           <>
             <span>Enviar mensaje</span>
-            <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </>
         )}
       </button>
@@ -527,6 +423,7 @@ export default function HomePage() {
   ];
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-[#070714] text-slate-200">
 
       <ScrollProgress />
@@ -578,44 +475,46 @@ export default function HomePage() {
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
           >
-            {mobileOpen ? <IconX className="h-5 w-5" /> : <IconMenu className="h-5 w-5" />}
+            {mobileOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
           </button>
         </nav>
 
         {/* Mobile menu */}
-        {mobileOpen && (
-          <div className="md:hidden border-t border-white/10 px-5 pb-4 pt-3 animate-slide-down">
-            <ul className="space-y-1">
-              {navLinks.map((l, i) => (
-                <li
-                  key={l.href}
-                  className="opacity-0 animate-fade-up"
-                  style={{ animationDelay: `${i * 60}ms`, animationFillMode: "forwards" }}
-                >
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              key="mobile-menu"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden overflow-hidden border-t border-white/10"
+            >
+              <ul className="px-5 pb-4 pt-3 space-y-1 stagger-children">
+                {navLinks.map((l) => (
+                  <li key={l.href}>
+                    <a
+                      href={l.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="block cursor-pointer rounded-lg px-4 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+                <li className="pt-2">
                   <a
-                    href={l.href}
+                    href="#contacto"
                     onClick={() => setMobileOpen(false)}
-                    className="block cursor-pointer rounded-lg px-4 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                    className="block cursor-pointer rounded-xl bg-indigo-600 px-5 py-2.5 text-center text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/30"
                   >
-                    {l.label}
+                    Contactanos
                   </a>
                 </li>
-              ))}
-              <li
-                className="pt-2 opacity-0 animate-fade-up"
-                style={{ animationDelay: `${navLinks.length * 60}ms`, animationFillMode: "forwards" }}
-              >
-                <a
-                  href="#contacto"
-                  onClick={() => setMobileOpen(false)}
-                  className="block cursor-pointer rounded-xl bg-indigo-600 px-5 py-2.5 text-center text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/30"
-                >
-                  Contactanos
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* ── Hero ── */}
@@ -638,6 +537,8 @@ export default function HomePage() {
             backgroundSize: "60px 60px",
           }}
         />
+        {/* Particles */}
+        <Particles density={70} className="absolute inset-0 h-full w-full" />
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           {/* Badge */}
@@ -658,7 +559,10 @@ export default function HomePage() {
             style={{ animationDelay: "180ms" }}
           >
             Soluciones que{" "}
-            <span className="gradient-text-animated">transforman</span>
+            <RotatingText
+              words={["transforman", "impulsan", "aceleran", "digitalizan"]}
+              interval={2600}
+            />
             <br />
             tu negocio
           </h1>
@@ -681,7 +585,7 @@ export default function HomePage() {
               className="group cursor-pointer inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all hover:bg-indigo-500 hover:shadow-indigo-500/40 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
             >
               Ver productos
-              <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
             <a
               href="#contacto"
@@ -694,16 +598,34 @@ export default function HomePage() {
           {/* Floating stat cards */}
           <div className="mt-16 grid grid-cols-3 gap-4 sm:gap-6 max-w-lg mx-auto">
             {[
-              { value: "3+", label: "Productos", float: "animate-float" },
-              { value: "99.9%", label: "Uptime", float: "animate-float-delayed" },
-              { value: "24/7", label: "Soporte", float: "animate-float" },
+              {
+                label: "Productos",
+                float: "animate-float",
+                counter: { to: 3, format: (n: number) => `${Math.round(n)}+` },
+              },
+              {
+                label: "Uptime",
+                float: "animate-float-delayed",
+                counter: { to: 99.9, format: (n: number) => `${n.toFixed(1)}%` },
+              },
+              {
+                label: "Soporte",
+                float: "animate-float",
+                counter: { to: 0, static: "24/7" as const },
+              },
             ].map((s, i) => (
               <div
                 key={s.label}
                 className={`glass rounded-2xl px-4 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-white/20 opacity-0 animate-fade-up ${s.float}`}
                 style={{ animationDelay: `${600 + i * 120}ms`, animationFillMode: "forwards" }}
               >
-                <div className="font-heading text-2xl font-bold text-white">{s.value}</div>
+                <div className="font-heading text-2xl font-bold text-white">
+                  {"static" in s.counter ? (
+                    s.counter.static
+                  ) : (
+                    <AnimatedCounter to={s.counter.to} format={s.counter.format} />
+                  )}
+                </div>
                 <div className="mt-0.5 text-xs font-medium text-slate-400">{s.label}</div>
               </div>
             ))}
@@ -741,7 +663,7 @@ export default function HomePage() {
                   className="group cursor-pointer inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/30"
                 >
                   Conocé nuestros productos
-                  <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
               </div>
             </Reveal>
@@ -749,21 +671,21 @@ export default function HomePage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
               {[
                 {
-                  icon: IconZap,
+                  icon: Zap,
                   title: "Innovación",
                   desc: "Tecnologías de punta para resultados que marcan la diferencia.",
                   color: "text-indigo-400",
                   bg: "bg-indigo-500/10",
                 },
                 {
-                  icon: IconShield,
+                  icon: Shield,
                   title: "Calidad",
                   desc: "Código robusto, bien probado y mantenible en el tiempo.",
                   color: "text-emerald-400",
                   bg: "bg-emerald-500/10",
                 },
                 {
-                  icon: IconHeadphones,
+                  icon: Headphones,
                   title: "Soporte",
                   desc: "Acompañamos a nuestros clientes mucho más allá del lanzamiento.",
                   color: "text-amber-400",
@@ -866,7 +788,7 @@ export default function HomePage() {
                         className="group flex items-center gap-4 -mx-2 px-2 py-1 rounded-lg transition-colors hover:bg-white/5"
                       >
                         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-400 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                          <IconMail className="h-5 w-5" />
+                          <Mail className="h-5 w-5" />
                         </div>
                         <div>
                           <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Email</p>
@@ -877,7 +799,7 @@ export default function HomePage() {
                       </a>
                       <div className="flex items-center gap-4">
                         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-400">
-                          <IconTerminal className="h-5 w-5" />
+                          <Terminal className="h-5 w-5" />
                         </div>
                         <div>
                           <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Respuesta</p>
@@ -972,5 +894,6 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
+    </PageTransition>
   );
 }
