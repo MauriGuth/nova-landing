@@ -66,18 +66,20 @@ export function CustomCursor() {
     };
   }, [mx, my, visible]);
 
-  if (!enabled) return null;
-
-  const ringScale = pressed ? 0.7 : hovering ? 1.8 : 1;
-  const dotScale = pressed ? 1.4 : hovering ? 0 : 1;
-
   // The `.custom-cursor-active` class is added to <html> so CSS in globals.css
-  // can hide the native cursor only when this component is mounted.
+  // can hide the native cursor only when this component is mounted on a
+  // fine-pointer device. Must be declared BEFORE any conditional return so
+  // hook order is stable across renders.
   useEffect(() => {
     if (!enabled) return;
     document.documentElement.classList.add("custom-cursor-active");
     return () => document.documentElement.classList.remove("custom-cursor-active");
   }, [enabled]);
+
+  if (!enabled) return null;
+
+  const ringScale = pressed ? 0.7 : hovering ? 1.8 : 1;
+  const dotScale = pressed ? 1.4 : hovering ? 0 : 1;
 
   return (
     <>
