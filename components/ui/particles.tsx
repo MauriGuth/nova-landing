@@ -13,13 +13,20 @@ type Dot = {
 
 /**
  * Lightweight canvas particle field. Renders ~80 slow-drifting dots in the
- * indigo/violet palette. Pauses while off-screen and respects reduced motion.
+ * indigo/violet palette. Particles get repelled when the cursor approaches.
+ * Pauses while off-screen and respects reduced motion.
  */
 export function Particles({
   density = 80,
+  interactive = true,
+  repelRadius = 130,
+  repelStrength = 1.4,
   className = "",
 }: {
   density?: number;
+  interactive?: boolean;
+  repelRadius?: number;
+  repelStrength?: number;
   className?: string;
 }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -36,6 +43,7 @@ export function Particles({
     let dots: Dot[] = [];
     let raf = 0;
     let running = true;
+    const mouse = { x: -9999, y: -9999 };
 
     const resize = () => {
       const { clientWidth: w, clientHeight: h } = canvas;
@@ -60,6 +68,20 @@ export function Particles({
       const { clientWidth: w, clientHeight: h } = canvas;
       ctx.clearRect(0, 0, w, h);
       for (const d of dots) {
+        // Cursor repulsion
+        if (interactive) {
+          const dx = d.x - mouse.x;
+          const dy = d.y - mouse.y;
+          const dist2 = dx * dx + dy * dy;
+          const r2 = repelRadius * repelRadius;
+          if (dist2 < r2 && dist2 > 0.01) {
+            const dist = Math.sqrt(dist2);
+            const force = ((repelRadius - dist) / repelRadius) * repelStrength;
+            d.x += (dx / dist) * force;
+            d.y += (dy / dist) * force;
+          }
+        }
+
         d.x += d.vx;
         d.y += d.vy;
         if (d.x < -10) d.x = w + 10;
@@ -88,7 +110,20 @@ export function Particles({
       resize();
       seed();
     };
+    const onMouse = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    };
+    const onMouseLeave = () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    };
     window.addEventListener("resize", onResize);
+    if (interactive) {
+      window.addEventListener("mousemove", onMouse, { passive: true });
+      document.addEventListener("mouseleave", onMouseLeave);
+    }
 
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -104,9 +139,11 @@ export function Particles({
       running = false;
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("mousemove", onMouse);
+      document.removeEventListener("mouseleave", onMouseLeave);
       io.disconnect();
     };
-  }, [density]);
+  }, [density, interactive, repelRadius, repelStrength]);
 
   return (
     <canvas

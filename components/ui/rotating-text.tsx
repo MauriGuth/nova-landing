@@ -28,14 +28,18 @@ export function RotatingText({
       <span aria-hidden className="invisible whitespace-nowrap">
         {widest}
       </span>
-      <span className="absolute inset-0 overflow-hidden">
+      <span
+        className="absolute inset-0"
+        // Extend clip area 0.35em below so descenders (g, p, y) aren't cut off
+        style={{ clipPath: "inset(-0.05em 0 -0.35em 0)" }}
+      >
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
             key={words[index]}
-            initial={{ y: "80%", opacity: 0 }}
+            initial={{ y: "85%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "-80%", opacity: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ y: "-85%", opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="inline-block whitespace-nowrap gradient-text-animated"
           >
             {words[index]}
