@@ -27,6 +27,11 @@ import { TiltedCard } from "@/components/ui/tilted-card";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { Particles } from "@/components/ui/particles";
 import { Confetti } from "@/components/ui/confetti";
+import { CustomCursor } from "@/components/ui/custom-cursor";
+import { Spotlight } from "@/components/ui/spotlight";
+import { Magnetic } from "@/components/ui/magnetic";
+import { MouseParallax } from "@/components/ui/mouse-parallax";
+import { Marquee } from "@/components/ui/marquee";
 
 /* ── Scroll-reveal helpers ── */
 function useReveal<T extends HTMLElement = HTMLDivElement>() {
@@ -424,8 +429,10 @@ export default function HomePage() {
 
   return (
     <PageTransition>
-    <div className="min-h-screen bg-[#070714] text-slate-200">
+    <div className="relative min-h-screen bg-[#070714] text-slate-200">
 
+      <CustomCursor />
+      <Spotlight />
       <ScrollProgress />
 
       {/* ── Navbar ── */}
@@ -580,19 +587,23 @@ export default function HomePage() {
             className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center opacity-0 animate-fade-up"
             style={{ animationDelay: "440ms" }}
           >
-            <a
-              href="#productos"
-              className="group cursor-pointer inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all hover:bg-indigo-500 hover:shadow-indigo-500/40 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-            >
-              Ver productos
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
-            <a
-              href="#contacto"
-              className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/25 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-            >
-              Contactanos
-            </a>
+            <Magnetic strength={0.35}>
+              <a
+                href="#productos"
+                className="group cursor-pointer inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all hover:bg-indigo-500 hover:shadow-indigo-500/40 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 btn-press"
+              >
+                Ver productos
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.3}>
+              <a
+                href="#contacto"
+                className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/25 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 btn-press"
+              >
+                Contactanos
+              </a>
+            </Magnetic>
           </div>
 
           {/* Floating stat cards */}
@@ -632,10 +643,12 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Glow orbs — drift slowly */}
-        <div className="pointer-events-none absolute -left-64 top-1/4 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl animate-orb-drift" />
-        <div className="pointer-events-none absolute -right-64 bottom-1/4 h-96 w-96 rounded-full bg-violet-600/15 blur-3xl animate-orb-drift-reverse" />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-72 w-72 rounded-full bg-emerald-500/5 blur-3xl animate-pulse" />
+        {/* Glow orbs — drift slowly, plus subtle mouse parallax */}
+        <MouseParallax intensity={20} className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-64 top-1/4 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl animate-orb-drift" />
+          <div className="absolute -right-64 bottom-1/4 h-96 w-96 rounded-full bg-violet-600/15 blur-3xl animate-orb-drift-reverse" />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-72 w-72 rounded-full bg-emerald-500/5 blur-3xl animate-pulse" />
+        </MouseParallax>
       </section>
 
       {/* ── Sobre nosotros ── */}
@@ -730,6 +743,39 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── Tech stack marquee ── */}
+      <section aria-label="Stack tecnológico" className="py-14 px-0 border-y border-white/5 bg-white/[0.02]">
+        <div className="mx-auto max-w-6xl mb-6 px-4 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+            Construido con tecnología moderna
+          </p>
+        </div>
+        <Marquee speed={32}>
+          {[
+            "React",
+            "Next.js",
+            "TypeScript",
+            "NestJS",
+            "PostgreSQL",
+            "Redis",
+            "WebSockets",
+            "Tailwind CSS",
+            "Docker",
+            "AWS",
+            "Vercel",
+            "Prisma",
+          ].map((t) => (
+            <span
+              key={t}
+              className="flex items-center gap-2 font-heading text-2xl font-semibold text-slate-500 transition-colors hover:text-white sm:text-3xl"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-indigo-400/60" />
+              {t}
+            </span>
+          ))}
+        </Marquee>
       </section>
 
       {/* ── Por qué Nova ── */}

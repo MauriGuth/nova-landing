@@ -14,6 +14,21 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide native cursor on fine-pointer devices when CustomCursor is mounted.
+   Text inputs/textareas keep their native I-beam so users can see what
+   they're editing. */
+@media (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active body,
+  html.custom-cursor-active a,
+  html.custom-cursor-active button,
+  html.custom-cursor-active [role="button"],
+  html.custom-cursor-active select,
+  html.custom-cursor-active label {
+    cursor: none !important;
+  }
+}
+
 body {
   background-color: #070714;
   color: #E2E8F0;
