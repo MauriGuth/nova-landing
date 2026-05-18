@@ -164,6 +164,7 @@ type Product = {
   accent: string;
   glow: string;
   features: string[];
+  href?: string;
 };
 
 function ProductCard({ product: p }: { product: Product }) {
@@ -200,6 +201,20 @@ function ProductCard({ product: p }: { product: Product }) {
           </li>
         ))}
       </ul>
+
+      {/* External product CTA — only rendered for products with a dedicated site */}
+      {p.href && (
+        <a
+          href={p.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`group/cta mt-6 inline-flex items-center justify-center gap-2 w-full rounded-xl bg-gradient-to-r ${p.accent} px-5 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl btn-press`}
+          style={{ boxShadow: `0 10px 30px -10px ${p.glow}` }}
+        >
+          Conocé {p.name}
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />
+        </a>
+      )}
     </TiltedCard>
   );
 }
@@ -215,6 +230,7 @@ const products = [
       "Centralizá stock, compras, facturación y reportes de tu empresa en un solo lugar. Multi-sucursal, multi-usuario y con dashboard ejecutivo en tiempo real.",
     accent: "from-indigo-500 to-violet-600",
     glow: "rgba(99,102,241,0.3)",
+    href: "https://novaerp.com.ar",
     features: [
       "Gestión de stock multi-depósito",
       "Compras y proveedores",
@@ -959,9 +975,21 @@ export default function HomePage() {
             <div>
               <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">Productos</p>
               <ul className="space-y-2.5 text-sm text-slate-500">
-                {["Nova POS", "Nova Loyalty", "Nova Print"].map((p) => (
-                  <li key={p}>
-                    <a href="#productos" className="cursor-pointer transition-colors hover:text-slate-200">{p}</a>
+                {[
+                  { label: "Nova ERP", href: "https://novaerp.com.ar", external: true },
+                  { label: "Nova Point", href: "#productos", external: false },
+                  { label: "Nova POS", href: "#productos", external: false },
+                ].map((p) => (
+                  <li key={p.label}>
+                    <a
+                      href={p.href}
+                      target={p.external ? "_blank" : undefined}
+                      rel={p.external ? "noopener noreferrer" : undefined}
+                      className="inline-flex items-center gap-1 cursor-pointer transition-colors hover:text-slate-200"
+                    >
+                      {p.label}
+                      {p.external && <ArrowRight className="h-3 w-3 -rotate-45 opacity-70" />}
+                    </a>
                   </li>
                 ))}
               </ul>
