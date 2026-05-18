@@ -54,6 +54,10 @@ export async function POST(req: NextRequest) {
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
   const to = process.env.CONTACT_TO ?? "info@novasolutions.ar";
+  // From debe ser una dirección del dominio verificado en Google Workspace
+  // (p.ej. info@novasolutions.ar) para que SPF/DKIM/DMARC alineen.
+  const fromAddress = process.env.MAIL_FROM ?? user;
+  const fromName = process.env.MAIL_FROM_NAME ?? "Nova Solutions";
 
   if (!user || !pass) {
     console.error("Missing SMTP_USER or SMTP_PASS env var");
@@ -72,7 +76,8 @@ export async function POST(req: NextRequest) {
 
   try {
     await transporter.sendMail({
-      from: `"Nova Solutions Web" <${user}>`,
+      from: `"${fromName}" <${fromAddress}>`,
+      sender: fromAddress,
       to,
       replyTo: `"${name}" <${email}>`,
       subject: `Nuevo contacto: ${name}${company ? ` (${company})` : ""}`,
