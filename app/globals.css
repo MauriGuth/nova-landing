@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap');
-
+/* Las fuentes (Inter/Poppins) se self-hostean con next/font en layout.tsx —
+   el @import de Google Fonts encadenaba requests render-blocking (peor LCP). */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,7 +32,7 @@ html {
 body {
   background-color: #070714;
   color: #E2E8F0;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
