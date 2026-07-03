@@ -225,19 +225,19 @@ const products = [
     id: "erp",
     icon: Boxes,
     name: "Nova ERP",
-    tagline: "Sistema de gestión empresarial completo",
+    tagline: "Sistema de gestión gastronómica completo",
     description:
-      "Centralizá stock, compras, facturación y reportes de tu empresa en un solo lugar. Multi-sucursal, multi-usuario y con dashboard ejecutivo en tiempo real.",
+      "Centralizá stock, compras, producción, facturación y reportes de tu restaurante u hotel en un solo lugar. Multi-sucursal, multi-usuario y con dashboard ejecutivo en tiempo real.",
     accent: "from-indigo-500 to-violet-600",
     glow: "rgba(99,102,241,0.3)",
     href: "https://novaerp.com.ar",
     features: [
-      "Gestión de stock multi-depósito",
+      "Control de stock multi-depósito",
       "Compras y proveedores",
-      "Facturación electrónica AFIP",
+      "Facturación electrónica ARCA (ex AFIP)",
       "Dashboard ejecutivo en vivo",
       "Roles y permisos por usuario",
-      "Multi-sucursal sincronizada",
+      "Producción con trazabilidad y lotes",
     ],
   },
   {
@@ -262,9 +262,9 @@ const products = [
     id: "pos",
     icon: Monitor,
     name: "Nova POS",
-    tagline: "Sistema de punto de venta completo",
+    tagline: "Sistema POS gastronómico completo",
     description:
-      "Solución integral para restaurantes y cafeterías con gestión de mesas en tiempo real, pantalla de cocina, menú QR digital y cierre de caja automatizado.",
+      "Punto de venta para restaurantes, cafeterías y hoteles: gestión de mesas en tiempo real, pantalla de cocina, menú QR digital, cargo a habitación y cierre de caja automatizado.",
     accent: "from-orange-500 to-amber-600",
     glow: "rgba(249,115,22,0.3)",
     features: [
@@ -616,7 +616,7 @@ export default function HomePage() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
             </span>
-            <span className="relative">Software a medida para tu empresa</span>
+            <span className="relative">Software para gastronomía y hotelería</span>
           </div>
 
           {/* Headline */}
@@ -624,9 +624,9 @@ export default function HomePage() {
             className="font-heading mb-5 text-5xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl opacity-0 animate-fade-up"
             style={{ animationDelay: "180ms" }}
           >
-            Soluciones que{" "}
+            Software de gestión gastronómica que{" "}
             <RotatingText
-              words={["transforman", "impulsan", "aceleran", "digitalizan"]}
+              words={["transforma", "impulsa", "acelera", "digitaliza"]}
               interval={2600}
             />
             <br />
@@ -637,8 +637,8 @@ export default function HomePage() {
             className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl opacity-0 animate-fade-up"
             style={{ animationDelay: "320ms" }}
           >
-            Desarrollamos software a medida que resuelve los problemas reales de tu empresa.
-            Desde el punto de venta hasta la fidelización de clientes — todo en un ecosistema integrado.
+            Sistema de gestión para restaurantes, cafeterías y hoteles de Argentina:
+            punto de venta (POS), control de stock, producción y fidelización de clientes — todo en un ecosistema integrado.
           </p>
 
           {/* CTA buttons */}
@@ -715,9 +715,9 @@ export default function HomePage() {
                 <span className="gradient-text-animated">realmente necesita</span>
               </h2>
               <p className="mb-6 text-lg leading-relaxed text-slate-400">
-                Nova Solutions nació de la necesidad de resolver problemas reales en negocios reales.
-                Somos un equipo de desarrolladores apasionados por la tecnología y comprometidos con
-                el éxito de nuestros clientes.
+                Somos una empresa de software de Neuquén, Patagonia argentina, especializada
+                en el rubro gastronómico y hotelero. Nova Solutions nació de la necesidad de
+                resolver problemas reales en negocios reales: restaurantes, cafeterías y hoteles.
               </p>
               <p className="mb-8 text-lg leading-relaxed text-slate-400">
                 No vendemos soluciones genéricas: analizamos tus procesos, entendemos tus desafíos
@@ -785,7 +785,7 @@ export default function HomePage() {
           <Reveal className="mb-14 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-400">Nuestros productos</p>
             <h2 className="font-heading text-4xl font-bold text-white sm:text-5xl">
-              Un ecosistema completo para tu negocio
+              Un sistema completo para restaurantes, cafeterías y hoteles
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
               Cada producto fue diseñado para resolver un problema específico, y todos trabajan juntos de forma integrada.
@@ -841,7 +841,7 @@ export default function HomePage() {
           <Reveal className="mb-14 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-400">¿Por qué Nova?</p>
             <h2 className="font-heading text-4xl font-bold text-white sm:text-5xl">
-              La diferencia está en los detalles
+              Por qué elegir Nova para la gestión de tu restaurante
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg text-slate-400">
               No somos una agencia más. Somos un equipo comprometido con resultados reales.
@@ -908,7 +908,7 @@ export default function HomePage() {
                   <div className="relative">
                     <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-400">Contacto</p>
                     <h2 className="font-heading mb-5 text-3xl font-bold text-white sm:text-4xl">
-                      Hablemos sobre tu proyecto
+                      Pedí una demo para tu restaurante u hotel
                     </h2>
                     <p className="mb-8 text-base leading-relaxed text-slate-400">
                       Contanos tu idea o problema y te ayudamos a encontrar la mejor solución tecnológica para tu empresa.
@@ -1023,7 +1023,7 @@ export default function HomePage() {
                     contacto@novasolutions.ar
                   </a>
                 </li>
-                <li>Argentina</li>
+                <li>Neuquén, Argentina</li>
               </ul>
             </div>
           </div>
@@ -1033,7 +1033,7 @@ export default function HomePage() {
               © {new Date().getFullYear()} Nova Solutions. Todos los derechos reservados.
             </p>
             <p className="text-xs text-slate-600">
-              Hecho con dedicación en Argentina 🇦🇷
+              Hecho con dedicación en Neuquén, Argentina 🇦🇷
             </p>
           </div>
         </div>

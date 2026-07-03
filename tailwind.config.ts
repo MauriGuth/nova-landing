@@ -8,8 +8,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ["Poppins", "sans-serif"],
-        body: ["Inter", "sans-serif"],
+        heading: ["var(--font-poppins)", "Poppins", "sans-serif"],
+        body: ["var(--font-inter)", "Inter", "sans-serif"],
       },
       colors: {
         indigo: {
