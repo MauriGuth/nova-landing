@@ -243,7 +243,7 @@ const products = [
   {
     id: "point",
     icon: Star,
-    name: "Nova Point",
+    name: "Nova Points",
     tagline: "Fidelización de clientes inteligente",
     description:
       "Programa de puntos y recompensas para retener clientes, aumentar la frecuencia de visita y construir relaciones a largo plazo con tu negocio.",
@@ -977,7 +977,7 @@ export default function HomePage() {
               <ul className="space-y-2.5 text-sm text-slate-500">
                 {[
                   { label: "Nova ERP", href: "https://novaerp.com.ar", external: true },
-                  { label: "Nova Point", href: "#productos", external: false },
+                  { label: "Nova Points", href: "#productos", external: false },
                   { label: "Nova POS", href: "#productos", external: false },
                 ].map((p) => (
                   <li key={p.label}>
