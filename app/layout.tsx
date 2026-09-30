@@ -21,15 +21,15 @@ const SITE_URL = "https://novasolutions.ar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Software de gestión gastronómica y POS para restaurantes | Nova Solutions",
+  title: "Software de gestión para todos los rubros: ERP y POS | Nova Solutions",
   description:
-    "Sistema de gestión para restaurantes, cafeterías y hoteles en Argentina: punto de venta (POS), control de stock, producción y fidelización de clientes. Desarrollado en Neuquén.",
+    "Sistema de gestión para cualquier rubro en Argentina (gastronomía, tiendas, supermercados y más): punto de venta (POS), control de stock, producción y fidelización de clientes. Desarrollado en Neuquén.",
   alternates: { canonical: "/" },
   authors: [{ name: "Nova Solutions" }],
   openGraph: {
-    title: "Nova Solutions — Software de gestión gastronómica",
+    title: "Nova Solutions — Software de gestión para todos los rubros",
     description:
-      "Sistema de gestión para restaurantes, cafeterías y hoteles en Argentina: POS, control de stock, producción y fidelización. Desarrollado en Neuquén.",
+      "Sistema de gestión para cualquier rubro en Argentina: POS, control de stock, producción y fidelización. Desarrollado en Neuquén.",
     url: SITE_URL,
     siteName: "Nova Solutions",
     locale: "es_AR",
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Nova Solutions — Software de gestión gastronómica",
+    title: "Nova Solutions — Software de gestión para todos los rubros",
     description:
-      "Sistema de gestión para restaurantes, cafeterías y hoteles en Argentina: POS, control de stock, producción y fidelización.",
+      "Sistema de gestión para cualquier rubro en Argentina: POS, control de stock, producción y fidelización.",
   },
 };
 
@@ -55,7 +55,7 @@ const jsonLd = {
       url: SITE_URL,
       email: "contacto@novasolutions.ar",
       description:
-        "Empresa de software de Neuquén, Argentina, especializada en sistemas de gestión para gastronomía y hotelería: POS, control de stock, producción y fidelización.",
+        "Empresa de software de Neuquén, Argentina, especializada en sistemas de gestión para todos los rubros (gastronomía, tiendas, supermercados y más): POS, control de stock, producción y fidelización.",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Neuquén",
@@ -71,7 +71,7 @@ const jsonLd = {
       operatingSystem: "Web",
       url: "https://novaerp.com.ar",
       description:
-        "Sistema de gestión gastronómica: punto de venta para restaurantes, cafeterías y hoteles, control de stock multi-depósito, producción con trazabilidad, facturación electrónica ARCA y cierres de caja.",
+        "Sistema de gestión adaptable a cualquier rubro: punto de venta para gastronomía, tiendas y supermercados, control de stock multi-depósito, producción con trazabilidad, facturación electrónica ARCA y cierres de caja.",
       publisher: { "@id": `${SITE_URL}/#org` },
     },
   ],
