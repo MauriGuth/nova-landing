@@ -225,9 +225,9 @@ const products = [
     id: "erp",
     icon: Boxes,
     name: "Nova ERP",
-    tagline: "Sistema de gestión gastronómica completo",
+    tagline: "Sistema de gestión para todos los rubros",
     description:
-      "Centralizá stock, compras, producción, facturación y reportes de tu restaurante u hotel en un solo lugar. Multi-sucursal, multi-usuario y con dashboard ejecutivo en tiempo real.",
+      "Centralizá stock, compras, producción, facturación y reportes de tu negocio en un solo lugar: gastronomía, tiendas, supermercados y más. Se adapta a tu rubro. Multi-sucursal, multi-usuario y con dashboard ejecutivo en tiempo real.",
     accent: "from-indigo-500 to-violet-600",
     glow: "rgba(99,102,241,0.3)",
     href: "https://novaerp.com.ar",
@@ -616,7 +616,7 @@ export default function HomePage() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
             </span>
-            <span className="relative">Software para gastronomía y hotelería</span>
+            <span className="relative">Software de gestión para todos los rubros</span>
           </div>
 
           {/* Headline */}
@@ -624,7 +624,7 @@ export default function HomePage() {
             className="font-heading mb-5 text-5xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl opacity-0 animate-fade-up"
             style={{ animationDelay: "180ms" }}
           >
-            Software de gestión gastronómica que{" "}
+            Software de gestión para tu negocio que{" "}
             <RotatingText
               words={["transforma", "impulsa", "acelera", "digitaliza"]}
               interval={2600}
@@ -716,8 +716,8 @@ export default function HomePage() {
               </h2>
               <p className="mb-6 text-lg leading-relaxed text-slate-400">
                 Somos una empresa de software de Neuquén, Patagonia argentina, especializada
-                en el rubro gastronómico y hotelero. Nova Solutions nació de la necesidad de
-                resolver problemas reales en negocios reales: restaurantes, cafeterías y hoteles.
+                en sistemas de gestión que se adaptan a cualquier rubro. Nova Solutions nació de la necesidad de
+                resolver problemas reales en negocios reales: gastronomía, tiendas, supermercados, hoteles y más.
               </p>
               <p className="mb-8 text-lg leading-relaxed text-slate-400">
                 No vendemos soluciones genéricas: analizamos tus procesos, entendemos tus desafíos
