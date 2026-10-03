@@ -356,11 +356,11 @@ La "NS" (`components/nova-logo.tsx`) es un SVG inline de 28 px: cuadrado `mark-b
 - **Do** usar Lucide a 20 px con trazo 1.75 en `accent-ink` para íconos de contenido, y `ink-3` para íconos de metadatos.
 
 ### Don't:
-- **Don't** animar al cargar, ni con loops: sin typewriter, texto rotativo, marquee, contadores, partículas, canvas, orbes ni spotlight; el ambiente es una capa estática.
+- **Don't** animar al cargar, ni con loops: sin typewriter, texto rotativo, marquee, contadores, orbes ni spotlight. Dos excepciones pedidas por el dueño (octubre 2026): el campo de partículas índigo (`ambient-particles`: un solo canvas fijo, sólo con `(pointer: fine) and (hover: hover)`, sin reduced-motion, pausado fuera de pantalla y con la pestaña oculta, DPR ≤ 2, 60 puntos) y el cursor de anillo (`pointer-ring`: punto + anillo sin blur, sólo desktop, se esconde sobre campos de texto y conserva el I-beam nativo). En celular y con reduced-motion ninguno de los dos se monta; el ambiente queda como la capa estática.
 - **Don't** usar `transition-all` ni animar sombra, ancho, alto, `max-height` o posición; sólo `transform`, `opacity`, color de fondo, de texto y de borde.
 - **Don't** poner eyebrows o kickers sobre títulos, mayúsculas con tracking, peso 800 ni gradientes de texto.
 - **Don't** usar glass fuera de la nav fija, ni sombras en reposo en botones, paneles o filas; la nav no lleva sombra.
-- **Don't** armar grillas de cards iguales ni más de un panel por sección; tampoco cursor custom ni 3D.
+- **Don't** armar grillas de cards iguales ni más de un panel por sección; tampoco 3D. El único cursor custom permitido es el anillo descripto arriba, pedido por el dueño.
 - **Don't** sacar la paleta interna del mock (`#f4f5fa`, `#111827`, `#6b7280`, `#e5e7eb`, `#047857`, ámbar) al resto de la página, ni usar `#faf8f4` fuera de la marca.
 - **Don't** usar Poppins, Inter ni ningún gradiente violeta: el mundo anterior del sitio no existe más.
 - **Don't** escribir "Nova ERP" ni "NovaSolutions": es NovaERP y Nova Solutions, con la "NS" a 28 px.

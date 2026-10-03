@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Nav } from "@/components/nav";
+import { AmbientParticles } from "@/components/ambient-particles";
+import { PointerRing } from "@/components/pointer-ring";
 import { Reveal } from "@/components/reveal";
 import { ContactForm } from "@/components/contact-form";
 import { DashboardMock } from "@/components/dashboard-mock";
@@ -126,6 +128,8 @@ export default function HomePage() {
       {/* Ambiente estático */}
       <div className="ambient-grid -z-10" aria-hidden="true" />
       <div className="ambient-glow -z-10" aria-hidden="true" />
+      <AmbientParticles />
+      <PointerRing />
 
       <Nav />
 

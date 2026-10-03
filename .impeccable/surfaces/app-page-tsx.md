@@ -13,7 +13,7 @@ Alcance: home del sitio de la empresa (novasolutions.ar). Modo: Persuade. Audien
 
 THESIS: "Software de gestión hecho en Neuquén para tu local, por la gente que lo programa." Vende un producto (NovaERP y su familia), no horas de consultoría; refusa el sitio de agencia: sin "innovación/calidad/soporte", sin stack tecnológico, sin "no somos una agencia más".
 
-OWN-WORLD: el mismo del brief de NovaERP: #070714, resplandor índigo estático y grilla al 3 %, superficies al 6 % con borde al 12 %, tinta #F1F5F9 / #B4BFD3 / #8B97AD, un acento índigo #6366F1, Bricolage Grotesque + Geist, nav pill con glass, marca NS actual a 28 px, mocks planos de tema claro enmarcados en oscuro.
+OWN-WORLD: el mismo del brief de NovaERP: #070714, resplandor índigo estático y grilla al 3 %, más el campo de partículas índigo liviano y el cursor de anillo que el dueño pidió conservar ("aplicá las dos cosas para las dos páginas"), sólo en desktop con mouse y apagados en celular y con reduced-motion, superficies al 6 % con borde al 12 %, tinta #F1F5F9 / #B4BFD3 / #8B97AD, un acento índigo #6366F1, Bricolage Grotesque + Geist, nav pill con glass, marca NS actual a 28 px, mocks planos de tema claro enmarcados en oscuro.
 
 STORY: el visitante entiende que Nova Solutions es la empresa de Neuquén que hace NovaERP; cree porque ve el producto y clientes reales con nombre; actúa pidiendo una demo o entrando a NovaERP.
 
