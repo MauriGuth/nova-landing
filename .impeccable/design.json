@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-03T00:00:00Z",
+  "title": "Design System: Nova Solutions — sitio",
+  "extensions": {
+    "colorMeta": {
+      "accent": { "role": "primary", "displayName": "Índigo", "canonical": "#6366f1", "tonalRamp": ["oklch(15% 0.19 275)", "oklch(25% 0.19 275)", "oklch(35% 0.19 275)", "oklch(45% 0.19 275)", "oklch(55% 0.19 275)", "oklch(65% 0.19 275)", "oklch(80% 0.12 275)", "oklch(95% 0.04 275)"] },
+      "accent-hover": { "role": "primary", "displayName": "Índigo profundo", "canonical": "#4f46e5", "tonalRamp": ["oklch(15% 0.19 275)", "oklch(25% 0.19 275)", "oklch(35% 0.19 275)", "oklch(45% 0.19 275)", "oklch(55% 0.19 275)", "oklch(65% 0.19 275)", "oklch(80% 0.12 275)", "oklch(95% 0.04 275)"] },
+      "accent-ink": { "role": "primary", "displayName": "Índigo claro", "canonical": "#a5b4fc", "tonalRamp": ["oklch(15% 0.12 275)", "oklch(25% 0.12 275)", "oklch(35% 0.12 275)", "oklch(45% 0.12 275)", "oklch(55% 0.12 275)", "oklch(65% 0.12 275)", "oklch(80% 0.1 275)", "oklch(95% 0.03 275)"] },
+      "accent-soft": { "role": "primary", "displayName": "Índigo velado", "canonical": "rgba(99, 102, 241, 0.14)", "tonalRamp": ["oklch(15% 0.19 275 / 0.14)", "oklch(25% 0.19 275 / 0.14)", "oklch(35% 0.19 275 / 0.14)", "oklch(45% 0.19 275 / 0.14)", "oklch(55% 0.19 275 / 0.14)", "oklch(65% 0.19 275 / 0.14)", "oklch(80% 0.12 275 / 0.14)", "oklch(95% 0.04 275 / 0.14)"] },
+      "ok": { "role": "secondary", "displayName": "Verde", "canonical": "#34d399", "tonalRamp": ["oklch(15% 0.1 165)", "oklch(25% 0.12 165)", "oklch(35% 0.13 165)", "oklch(45% 0.14 165)", "oklch(55% 0.15 165)", "oklch(65% 0.15 165)", "oklch(80% 0.12 165)", "oklch(95% 0.04 165)"] },
+      "ok-soft": { "role": "secondary", "displayName": "Verde velado", "canonical": "rgba(52, 211, 153, 0.14)", "tonalRamp": ["oklch(15% 0.1 165 / 0.14)", "oklch(25% 0.12 165 / 0.14)", "oklch(35% 0.13 165 / 0.14)", "oklch(45% 0.14 165 / 0.14)", "oklch(55% 0.15 165 / 0.14)", "oklch(65% 0.15 165 / 0.14)", "oklch(80% 0.12 165 / 0.14)", "oklch(95% 0.04 165 / 0.14)"] },
+      "warn": { "role": "secondary", "displayName": "Ámbar (declarado, sin uso fuera del mock)", "canonical": "#fbbf24", "tonalRamp": ["oklch(15% 0.06 85)", "oklch(25% 0.08 85)", "oklch(35% 0.1 85)", "oklch(45% 0.12 85)", "oklch(55% 0.14 85)", "oklch(65% 0.16 85)", "oklch(80% 0.16 85)", "oklch(95% 0.06 85)"] },
+      "danger": { "role": "secondary", "displayName": "Rojo", "canonical": "#f87171", "tonalRamp": ["oklch(15% 0.08 25)", "oklch(25% 0.11 25)", "oklch(35% 0.14 25)", "oklch(45% 0.17 25)", "oklch(55% 0.19 25)", "oklch(65% 0.18 25)", "oklch(80% 0.1 25)", "oklch(95% 0.03 25)"] },
+      "bg": { "role": "neutral", "displayName": "Navy de noche", "canonical": "#070714", "tonalRamp": ["oklch(15% 0.03 285)", "oklch(25% 0.03 285)", "oklch(35% 0.03 285)", "oklch(45% 0.03 285)", "oklch(55% 0.03 285)", "oklch(65% 0.03 285)", "oklch(80% 0.02 285)", "oklch(95% 0.01 285)"] },
+      "bg-raise": { "role": "neutral", "displayName": "Navy elevado", "canonical": "#0c0c1f", "tonalRamp": ["oklch(15% 0.03 285)", "oklch(25% 0.03 285)", "oklch(35% 0.03 285)", "oklch(45% 0.03 285)", "oklch(55% 0.03 285)", "oklch(65% 0.03 285)", "oklch(80% 0.02 285)", "oklch(95% 0.01 285)"] },
+      "surface": { "role": "neutral", "displayName": "Superficie 6 %", "canonical": "rgba(255, 255, 255, 0.06)", "tonalRamp": ["oklch(100% 0 0 / 0.03)", "oklch(100% 0 0 / 0.06)", "oklch(100% 0 0 / 0.09)", "oklch(100% 0 0 / 0.12)", "oklch(100% 0 0 / 0.18)", "oklch(100% 0 0 / 0.2)", "oklch(100% 0 0 / 0.3)", "oklch(100% 0 0 / 0.72)"] },
+      "surface-2": { "role": "neutral", "displayName": "Superficie 9 %", "canonical": "rgba(255, 255, 255, 0.09)", "tonalRamp": ["oklch(100% 0 0 / 0.03)", "oklch(100% 0 0 / 0.06)", "oklch(100% 0 0 / 0.09)", "oklch(100% 0 0 / 0.12)", "oklch(100% 0 0 / 0.18)", "oklch(100% 0 0 / 0.2)", "oklch(100% 0 0 / 0.3)", "oklch(100% 0 0 / 0.72)"] },
+      "line": { "role": "neutral", "displayName": "Hairline 12 %", "canonical": "rgba(255, 255, 255, 0.12)", "tonalRamp": ["oklch(100% 0 0 / 0.03)", "oklch(100% 0 0 / 0.06)", "oklch(100% 0 0 / 0.09)", "oklch(100% 0 0 / 0.12)", "oklch(100% 0 0 / 0.18)", "oklch(100% 0 0 / 0.2)", "oklch(100% 0 0 / 0.3)", "oklch(100% 0 0 / 0.72)"] },
+      "line-strong": { "role": "neutral", "displayName": "Hairline 20 %", "canonical": "rgba(255, 255, 255, 0.2)", "tonalRamp": ["oklch(100% 0 0 / 0.03)", "oklch(100% 0 0 / 0.06)", "oklch(100% 0 0 / 0.09)", "oklch(100% 0 0 / 0.12)", "oklch(100% 0 0 / 0.18)", "oklch(100% 0 0 / 0.2)", "oklch(100% 0 0 / 0.3)", "oklch(100% 0 0 / 0.72)"] },
+      "ink": { "role": "neutral", "displayName": "Tinta", "canonical": "#f1f5f9", "tonalRamp": ["oklch(15% 0.02 250)", "oklch(25% 0.02 250)", "oklch(35% 0.02 250)", "oklch(45% 0.02 250)", "oklch(55% 0.02 250)", "oklch(65% 0.02 250)", "oklch(80% 0.02 250)", "oklch(95% 0.01 250)"] },
+      "ink-2": { "role": "neutral", "displayName": "Tinta 2", "canonical": "#b4bfd3", "tonalRamp": ["oklch(15% 0.02 250)", "oklch(25% 0.02 250)", "oklch(35% 0.02 250)", "oklch(45% 0.02 250)", "oklch(55% 0.02 250)", "oklch(65% 0.02 250)", "oklch(80% 0.02 250)", "oklch(95% 0.01 250)"] },
+      "ink-3": { "role": "neutral", "displayName": "Tinta 3", "canonical": "#8b97ad", "tonalRamp": ["oklch(15% 0.02 250)", "oklch(25% 0.02 250)", "oklch(35% 0.02 250)", "oklch(45% 0.02 250)", "oklch(55% 0.02 250)", "oklch(65% 0.02 250)", "oklch(80% 0.02 250)", "oklch(95% 0.01 250)"] },
+      "on-accent": { "role": "neutral", "displayName": "Blanco", "canonical": "#ffffff", "tonalRamp": ["oklch(15% 0 0)", "oklch(25% 0 0)", "oklch(35% 0 0)", "oklch(45% 0 0)", "oklch(55% 0 0)", "oklch(65% 0 0)", "oklch(80% 0 0)", "oklch(95% 0 0)"] },
+      "nav-glass": { "role": "neutral", "displayName": "Glass de nav", "canonical": "rgba(12, 12, 31, 0.72)", "tonalRamp": ["oklch(15% 0.03 285 / 0.72)", "oklch(25% 0.03 285 / 0.72)", "oklch(35% 0.03 285 / 0.72)", "oklch(45% 0.03 285 / 0.72)", "oklch(55% 0.03 285 / 0.72)", "oklch(65% 0.03 285 / 0.72)", "oklch(80% 0.02 285 / 0.72)", "oklch(95% 0.01 285 / 0.72)"] },
+      "mark-bg": { "role": "neutral", "displayName": "Marca: fondo", "canonical": "#0e1116", "tonalRamp": ["oklch(15% 0.01 250)", "oklch(25% 0.01 250)", "oklch(35% 0.01 250)", "oklch(45% 0.01 250)", "oklch(55% 0.01 250)", "oklch(65% 0.01 250)", "oklch(80% 0.01 250)", "oklch(95% 0.005 250)"] },
+      "mark-ink": { "role": "neutral", "displayName": "Marca: blanco cálido", "canonical": "#faf8f4", "tonalRamp": ["oklch(15% 0.01 80)", "oklch(25% 0.01 80)", "oklch(35% 0.01 80)", "oklch(45% 0.01 80)", "oklch(55% 0.01 80)", "oklch(65% 0.01 80)", "oklch(80% 0.01 80)", "oklch(95% 0.005 80)"] },
+      "mark-accent": { "role": "primary", "displayName": "Marca: índigo OKLCH", "canonical": "oklch(0.62 0.18 265)", "tonalRamp": ["oklch(15% 0.18 265)", "oklch(25% 0.18 265)", "oklch(35% 0.18 265)", "oklch(45% 0.18 265)", "oklch(55% 0.18 265)", "oklch(65% 0.18 265)", "oklch(80% 0.12 265)", "oklch(95% 0.04 265)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "El h1 del hero, balanceado, con una frase subrayada en índigo de 3 px. Sube de 36 a 56 px en 768 px." },
+      "headline": { "displayName": "Headline", "purpose": "h2 de cada sección, sin eyebrow." },
+      "title": { "displayName": "Title", "purpose": "h3 de filas y del estado de éxito. La tarjeta de NovaERP sube a 28 / 32 px como único caso." },
+      "wordmark": { "displayName": "Wordmark", "purpose": "\"Nova Solutions\" junto a la marca NS en nav y pie." },
+      "lead": { "displayName": "Lead", "purpose": "Párrafo bajo cada título, en ink-2, con max-width en rem o ch." },
+      "body": { "displayName": "Body", "purpose": "Base del documento, descripciones de filas, inputs (16 px siempre)." },
+      "body-sm": { "displayName": "Body small", "purpose": "Viñetas de la familia de productos y links de la nav (500)." },
+      "label": { "displayName": "Label", "purpose": "Labels de formulario, links del pie, notas y copyright, CTA compacto de la nav." },
+      "caption": { "displayName": "Caption", "purpose": "\"Datos de ejemplo.\" bajo el mock." },
+      "control": { "displayName": "Control", "purpose": "Botones; 16 px en el botón del hero." },
+      "numeric": { "displayName": "Numeric", "purpose": "Cifras del mock con numerales tabulares." }
+    },
+    "shadows": [
+      { "name": "shadow-2", "value": "0 8px 24px -12px rgba(0, 0, 0, 0.6)", "purpose": "Flotante: menú móvil y marco oscuro del mock. La nav no la usa." },
+      { "name": "focus-ring", "value": "0 0 0 3px rgba(99, 102, 241, 0.14)", "purpose": "Inputs en foco, junto al borde índigo." },
+      { "name": "glass", "value": "backdrop-filter: blur(12px)", "purpose": "Sólo la nav fija, sobre nav-glass con borde line." },
+      { "name": "mock-toast", "value": "0 8px 24px -12px rgba(17, 24, 39, 0.35)", "purpose": "El toast dentro del mock claro; pertenece a la paleta interna del mock." }
+    ],
+    "motion": [
+      { "name": "d-fast", "value": "120ms", "purpose": "Press, color, flecha del link, foco del input." },
+      { "name": "d-base", "value": "200ms", "purpose": "Entrada del menú móvil y del estado de éxito (fadeUp), subrayado de nav." },
+      { "name": "d-slow", "value": "320ms", "purpose": "Reveal por scroll (8 px, una vez)." },
+      { "name": "d-story", "value": "600ms", "purpose": "Anillo del check de éxito (pulseOnce), una sola vez." },
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Easing de todo lo que transiciona en el sitio." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Declarado por el sistema compartido; este sitio no lo usa." },
+      { "name": "press", "value": "transform: scale(0.97)", "purpose": ":active en a, button y [role=button], en d-fast." },
+      { "name": "reveal", "value": "opacity 0 → 1, translateY(8px) → 0, d-slow ease-out; stagger 40ms hasta 200ms; threshold 0.1, rootMargin -8 %", "purpose": "Sólo debajo del fold, una vez." },
+      { "name": "fade-up", "value": "fadeUp var(--d-base) var(--ease-out) both (opacity 0 → 1, translateY 8px → 0)", "purpose": "Menú móvil y tarjeta de éxito." },
+      { "name": "pulse-once", "value": "pulseOnce var(--d-story) var(--ease-out) 1 both (opacity 0.6 → 0, scale 1 → 1.8)", "purpose": "Anillo del check de éxito." },
+      { "name": "reduced-motion", "value": "reveal → opacity 160ms ease-out sin desplazamiento ni retraso; fade-up y pulse-once apagados; flecha y subrayado de nav sin transición; scroll-behavior smooth sólo con no-preference", "purpose": "prefers-reduced-motion: reduce." },
+      { "name": "hover-gate", "value": "@media (hover: hover) and (pointer: fine)", "purpose": "Todo hover (CSS y Tailwind con hoverOnlyWhenSupported)." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA sólido índigo; 48 px, radio 12 px; hover sólo con puntero fino, press a scale(0.97).",
+      "html": "<a class=\"ds-btn-primary\" href=\"#contacto\">Pedí una demo</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 20px; border-radius: 12px; background: var(--accent, #6366f1); color: #fff; font-family: var(--font-body, Geist, system-ui, sans-serif); font-size: 15px; font-weight: 600; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer; border: 0; user-select: none; -webkit-tap-highlight-color: transparent; transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1), background-color 120ms cubic-bezier(0.23, 1, 0.32, 1); } @media (hover: hover) and (pointer: fine) { .ds-btn-primary:hover:not(:disabled) { background: var(--accent-hover, #4f46e5); } } .ds-btn-primary:active:not(:disabled) { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid var(--accent, #6366f1); outline-offset: 2px; transition: none; } .ds-btn-primary:disabled { opacity: 0.7; cursor: default; }"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Transparente con hairline al 20 %; hover a superficie 6 %. En contacto lleva el ícono de WhatsApp en índigo claro.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"ds-btn-secondary__icon\" aria-hidden=\"true\"><path d=\"M7.9 20A9 9 0 1 0 4 16.1L2 22Z\"/></svg>Escribinos por WhatsApp</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 20px; border-radius: 12px; background: transparent; border: 1px solid var(--line-strong, rgba(255,255,255,0.2)); color: var(--ink, #f1f5f9); font-family: var(--font-body, Geist, system-ui, sans-serif); font-size: 15px; font-weight: 600; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer; user-select: none; transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1), background-color 120ms cubic-bezier(0.23, 1, 0.32, 1), border-color 120ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-btn-secondary__icon { color: var(--accent-ink, #a5b4fc); } @media (hover: hover) and (pointer: fine) { .ds-btn-secondary:hover { background: var(--surface, rgba(255,255,255,0.06)); } } .ds-btn-secondary:active { transform: scale(0.97); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--accent, #6366f1); outline-offset: 2px; transition: none; }"
+    },
+    {
+      "name": "Link con flecha",
+      "kind": "custom",
+      "refersTo": "link-arrow",
+      "description": "Acción secundaria en texto índigo claro; la flecha se mueve 2 px en hover.",
+      "html": "<a class=\"ds-link-arrow\" href=\"#\">Ver NovaERP<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-link-arrow { display: inline-flex; align-items: center; gap: 6px; height: 44px; color: var(--accent-ink, #a5b4fc); font-family: var(--font-body, Geist, system-ui, sans-serif); font-size: 16px; font-weight: 500; text-decoration: none; user-select: none; transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1), color 120ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-link-arrow svg { transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1); } @media (hover: hover) and (pointer: fine) { .ds-link-arrow:hover svg { transform: translateX(2px); } } .ds-link-arrow:active { transform: scale(0.97); } .ds-link-arrow:focus-visible { outline: 2px solid var(--accent, #6366f1); outline-offset: 2px; transition: none; }"
+    },
+    {
+      "name": "Nav pill",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Barra flotante de 56 px con glass (navy al 72 %, blur 12 px), hairline y sin sombra; marca NS + wordmark, links con subrayado índigo que crece, CTA compacto de 44 px.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Principal\"><a class=\"ds-nav__brand\" href=\"#\"><svg width=\"28\" height=\"28\" viewBox=\"0 0 512 512\" aria-hidden=\"true\"><rect width=\"512\" height=\"512\" rx=\"118\" fill=\"#0E1116\" stroke=\"rgba(255,255,255,0.12)\" stroke-width=\"12\"/><text x=\"256\" y=\"345\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"282\" letter-spacing=\"-20\" fill=\"#FAF8F4\" style=\"font-family: var(--font-display, 'Bricolage Grotesque', system-ui, sans-serif)\">N<tspan dx=\"-10\" fill=\"oklch(0.62 0.18 265)\">S</tspan></text></svg><span>Nova Solutions</span></a><ul class=\"ds-nav__links\"><li><a class=\"ds-nav__link\" href=\"#\">Productos</a></li><li><a class=\"ds-nav__link\" href=\"#\">Por qué Nova</a></li><li><a class=\"ds-nav__link\" href=\"#\">Clientes</a></li><li><a class=\"ds-nav__link\" href=\"#\">Contacto</a></li></ul><a class=\"ds-nav__cta\" href=\"#\">Pedí una demo</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 8px 0 12px; border-radius: 16px; border: 1px solid var(--line, rgba(255,255,255,0.12)); background: rgba(12, 12, 31, 0.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); font-family: var(--font-body, Geist, system-ui, sans-serif); } @supports not (backdrop-filter: blur(1px)) { .ds-nav { background: var(--bg-raise, #0c0c1f); } } .ds-nav__brand { display: flex; align-items: center; gap: 10px; height: 44px; padding-right: 8px; border-radius: 8px; color: var(--ink, #f1f5f9); font-family: var(--font-display, 'Bricolage Grotesque', system-ui, sans-serif); font-size: 17px; font-weight: 600; text-decoration: none; } .ds-nav__links { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; } .ds-nav__link { position: relative; display: flex; align-items: center; height: 44px; padding: 0 12px; border-radius: 8px; color: var(--ink-2, #b4bfd3); font-size: 15px; font-weight: 500; text-decoration: none; user-select: none; transition: color 120ms cubic-bezier(0.23, 1, 0.32, 1), transform 120ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-nav__link::after { content: \"\"; position: absolute; left: 12px; right: 12px; bottom: 8px; height: 2px; border-radius: 2px; background: var(--accent, #6366f1); transform: scaleX(0); transform-origin: left center; transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); } @media (hover: hover) and (pointer: fine) { .ds-nav__link:hover { color: var(--ink, #f1f5f9); } .ds-nav__link:hover::after { transform: scaleX(1); } .ds-nav__cta:hover { background: var(--accent-hover, #4f46e5); } } .ds-nav__cta { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 16px; border-radius: 12px; background: var(--accent, #6366f1); color: #fff; font-size: 14px; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; transition: background-color 120ms cubic-bezier(0.23, 1, 0.32, 1), transform 120ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-nav a:active { transform: scale(0.97); } .ds-nav a:focus-visible { outline: 2px solid var(--accent, #6366f1); outline-offset: 2px; transition: none; }"
+    },
+    {
+      "name": "Menú móvil",
+      "kind": "nav",
+      "refersTo": "menu-mobile",
+      "description": "Panel sólido navy elevado bajo la nav, con hairline, sombra flotante y entrada fade-up de 200 ms; ítems de 48 px y CTA a ancho completo.",
+      "html": "<div class=\"ds-menu\"><ul class=\"ds-menu__list\"><li><a class=\"ds-menu__item\" href=\"#\">Productos</a></li><li><a class=\"ds-menu__item\" href=\"#\">Por qué Nova</a></li><li><a class=\"ds-menu__item\" href=\"#\">Clientes</a></li><li><a class=\"ds-menu__item\" href=\"#\">Contacto</a></li></ul><a class=\"ds-menu__cta\" href=\"#\">Pedí una demo</a></div>",
+      "css": "@keyframes ds-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } } .ds-menu { padding: 8px; border-radius: 16px; border: 1px solid var(--line, rgba(255,255,255,0.12)); background: var(--bg-raise, #0c0c1f); box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.6); font-family: var(--font-body, Geist, system-ui, sans-serif); animation: ds-fade-up 200ms cubic-bezier(0.23, 1, 0.32, 1) both; } .ds-menu__list { list-style: none; margin: 0; padding: 0; } .ds-menu__item { display: flex; align-items: center; height: 48px; padding: 0 16px; border-radius: 12px; color: var(--ink-2, #b4bfd3); font-size: 16px; font-weight: 500; text-decoration: none; user-select: none; transition: color 120ms cubic-bezier(0.23, 1, 0.32, 1), transform 120ms cubic-bezier(0.23, 1, 0.32, 1); } @media (hover: hover) and (pointer: fine) { .ds-menu__item:hover { color: var(--ink, #f1f5f9); } .ds-menu__cta:hover { background: var(--accent-hover, #4f46e5); } } .ds-menu__cta { display: flex; align-items: center; justify-content: center; width: 100%; height: 48px; margin-top: 8px; border-radius: 12px; background: var(--accent, #6366f1); color: #fff; font-size: 15px; font-weight: 600; line-height: 1; text-decoration: none; transition: background-color 120ms cubic-bezier(0.23, 1, 0.32, 1), transform 120ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-menu a:active { transform: scale(0.97); } .ds-menu a:focus-visible { outline: 2px solid var(--accent, #6366f1); outline-offset: 2px; transition: none; } @media (prefers-reduced-motion: reduce) { .ds-menu { animation: none; } }"
+    },
+    {
+      "name": "Campo de formulario",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Input a 16 px sobre superficie 6 % con hairline; en foco borde índigo, fondo 9 % y anillo de 3 px; error por campo en texto rojo.",
+      "html": "<div class=\"ds-field-wrap\"><label class=\"ds-label\" for=\"ds-email\">Email</label><input class=\"ds-field\" id=\"ds-email\" type=\"email\" placeholder=\"nombre@tulocal.com\"><p class=\"ds-field-error\" role=\"alert\">Necesitamos un email para responderte.</p></div>",
+      "css": ".ds-field-wrap { font-family: var(--font-body, Geist, system-ui, sans-serif); } .ds-label { display: block; margin-bottom: 6px; color: var(--ink-2, #b4bfd3); font-size: 14px; font-weight: 500; line-height: 1.6; } .ds-field { width: 100%; box-sizing: border-box; background: var(--surface, rgba(255,255,255,0.06)); border: 1px solid var(--line, rgba(255,255,255,0.12)); border-radius: 12px; padding: 14px 16px; font: inherit; font-size: 16px; line-height: 1.5; color: var(--ink, #f1f5f9); caret-color: var(--accent-ink, #a5b4fc); transition: border-color 120ms cubic-bezier(0.23, 1, 0.32, 1), background-color 120ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 120ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-field::placeholder { color: var(--ink-3, #8b97ad); } .ds-field:focus, .ds-field:focus-visible { outline: none; border-color: var(--accent, #6366f1); background: var(--surface-2, rgba(255,255,255,0.09)); box-shadow: 0 0 0 3px var(--accent-soft, rgba(99,102,241,0.14)); } .ds-field[aria-invalid=\"true\"] { border-color: var(--danger, #f87171); } .ds-field-error { margin: 6px 0 0; color: var(--danger, #f87171); font-size: 14px; line-height: 1.6; }"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "El único contenedor con fondo: superficie 6 %, hairline, 16 px de radio, sin sombra. Uno por sección (tarjeta de NovaERP, formulario, éxito).",
+      "html": "<article class=\"ds-panel\"><h3 class=\"ds-panel__title\">NovaERP</h3><p class=\"ds-panel__text\">El sistema de gestión completo para tu local: lo que pasa en el salón, la cocina, la caja y el depósito, en un solo lugar y con los mismos datos.</p><ul class=\"ds-panel__list\"><li><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2\"/><path d=\"M7 2v20\"/><path d=\"M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7\"/></svg><span>Mesas y comandas</span></li><li><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M11 14h10\"/><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"/><rect x=\"8\" y=\"2\" width=\"8\" height=\"4\" rx=\"1\"/></svg><span>Facturación electrónica ARCA</span></li></ul></article>",
+      "css": ".ds-panel { padding: 24px; border-radius: 16px; border: 1px solid var(--line, rgba(255,255,255,0.12)); background: var(--surface, rgba(255,255,255,0.06)); color: var(--ink, #f1f5f9); font-family: var(--font-body, Geist, system-ui, sans-serif); font-size: 16px; line-height: 1.6; } @media (min-width: 768px) { .ds-panel { padding: 40px; } } .ds-panel__title { margin: 0; font-family: var(--font-display, 'Bricolage Grotesque', system-ui, sans-serif); font-size: 28px; font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; text-wrap: balance; } .ds-panel__text { margin: 12px 0 0; max-width: 46ch; color: var(--ink-2, #b4bfd3); } .ds-panel__list { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 16px; } .ds-panel__list li { display: flex; align-items: flex-start; gap: 12px; } .ds-panel__list svg { flex-shrink: 0; margin-top: 2px; color: var(--accent-ink, #a5b4fc); }"
+    },
+    {
+      "name": "Fila con hairline",
+      "kind": "custom",
+      "refersTo": "row",
+      "description": "La estructura por defecto para listas: sin fondo, 28 px de padding vertical, hairline al 12 %; título Bricolage 600, línea en ink-2 y viñetas de 4 px índigo claro.",
+      "html": "<ul class=\"ds-rows\"><li class=\"ds-row\"><h3 class=\"ds-row__title\">Jarvis</h3><p class=\"ds-row__line\">El asistente por WhatsApp que contesta con datos reales del sistema.</p><ul class=\"ds-row__points\"><li>Ventas, caja y stock al momento</li><li>Quién faltó, quién fichó y a qué hora</li><li>Si no tiene el dato, no lo inventa</li></ul></li></ul>",
+      "css": ".ds-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line, rgba(255,255,255,0.12)); font-family: var(--font-body, Geist, system-ui, sans-serif); } .ds-row { display: grid; gap: 12px; padding: 28px 0; border-bottom: 1px solid var(--line, rgba(255,255,255,0.12)); } @media (min-width: 768px) { .ds-row { grid-template-columns: 180px minmax(0, 1fr) minmax(0, 1fr); gap: 32px; } } .ds-row__title { margin: 0; font-family: var(--font-display, 'Bricolage Grotesque', system-ui, sans-serif); font-size: 18px; font-weight: 600; line-height: 1.3; color: var(--ink, #f1f5f9); text-wrap: balance; } @media (min-width: 768px) { .ds-row__title { font-size: 20px; } } .ds-row__line { margin: 0; color: var(--ink-2, #b4bfd3); font-size: 16px; line-height: 1.6; } .ds-row__points { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; color: var(--ink-2, #b4bfd3); font-size: 15px; line-height: 1.6; } .ds-row__points li { display: flex; gap: 10px; } .ds-row__points li::before { content: \"\"; flex-shrink: 0; width: 4px; height: 4px; margin-top: 10px; border-radius: 999px; background: var(--accent-ink, #a5b4fc); }"
+    },
+    {
+      "name": "Mock enmarcado",
+      "kind": "custom",
+      "refersTo": "mock-frame",
+      "description": "El producto en tema claro dentro de un marco navy elevado con hairline, 8 px de padding y sombra flotante; barra de navegador arriba y nota \"Datos de ejemplo.\" debajo. Nada se anima.",
+      "html": "<figure class=\"ds-mock\"><div class=\"ds-mock__frame\"><div class=\"ds-mock__bar\" aria-hidden=\"true\"><span class=\"ds-mock__dots\"><i></i><i></i><i></i></span><span class=\"ds-mock__url\">novaerp.com.ar/dashboard</span></div><div class=\"ds-mock__screen\"><div class=\"ds-mock__head\"><strong>Dashboard</strong><span>Día de negocio · hoy</span></div><dl class=\"ds-mock__kpis\"><div><dt>Ventas hoy</dt><dd>$487.230</dd><dd class=\"ds-mock__good\">+12 % vs. ayer</dd></div><div><dt>Tickets</dt><dd>128</dd><dd>cerrados</dd></div><div><dt>Promedio</dt><dd>$3.806</dd><dd>por ticket</dd></div></dl></div></div><figcaption class=\"ds-mock__caption\">Datos de ejemplo.</figcaption></figure>",
+      "css": ".ds-mock { margin: 0; max-width: 560px; font-family: var(--font-body, Geist, system-ui, sans-serif); } .ds-mock__frame { padding: 8px; border-radius: 16px; border: 1px solid var(--line, rgba(255,255,255,0.12)); background: var(--bg-raise, #0c0c1f); box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.6); } .ds-mock__bar { display: flex; align-items: center; gap: 12px; padding: 4px 8px 8px; } .ds-mock__dots { display: flex; gap: 6px; } .ds-mock__dots i { width: 8px; height: 8px; border-radius: 999px; background: var(--line-strong, rgba(255,255,255,0.2)); } .ds-mock__url { flex: 1; display: flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 6px; background: var(--surface, rgba(255,255,255,0.06)); color: var(--ink-3, #8b97ad); font-size: 12px; } .ds-mock__screen { padding: 12px; border-radius: 12px; background: #f4f5fa; color: #111827; } .ds-mock__head { display: flex; align-items: baseline; justify-content: space-between; font-size: 13px; } .ds-mock__head span { font-size: 11px; color: #6b7280; } .ds-mock__kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0 0; } .ds-mock__kpis > div { padding: 10px 12px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fff; } .ds-mock__kpis dt { font-size: 11px; color: #6b7280; } .ds-mock__kpis dd { margin: 2px 0 0; font-size: 15px; font-weight: 600; line-height: 1.25; font-variant-numeric: tabular-nums; } .ds-mock__kpis dd + dd { font-size: 11px; font-weight: 400; color: #6b7280; } .ds-mock__kpis dd.ds-mock__good { color: #047857; font-weight: 500; } .ds-mock__caption { margin-top: 8px; color: var(--ink-3, #8b97ad); font-size: 12px; line-height: 1.6; }"
+    },
+    {
+      "name": "Estado de éxito",
+      "kind": "custom",
+      "refersTo": "success-badge",
+      "description": "Confirmación del formulario: panel centrado con círculo de 56 px verde velado, check verde y un anillo de 2 px que se expande una sola vez en 600 ms.",
+      "html": "<div class=\"ds-success\" role=\"status\"><span class=\"ds-success__badge\"><span class=\"ds-success__ring\" aria-hidden=\"true\"></span><svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg></span><h3 class=\"ds-success__title\">Mensaje recibido</h3><p class=\"ds-success__text\">Te respondemos a <strong>nombre@tulocal.com</strong> en horario laboral. Si es urgente, mandanos un WhatsApp.</p></div>",
+      "css": "@keyframes ds-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } } @keyframes ds-pulse-once { from { opacity: 0.6; transform: scale(1); } to { opacity: 0; transform: scale(1.8); } } .ds-success { padding: 32px; border-radius: 16px; border: 1px solid var(--line, rgba(255,255,255,0.12)); background: var(--surface, rgba(255,255,255,0.06)); text-align: center; font-family: var(--font-body, Geist, system-ui, sans-serif); animation: ds-fade-up 200ms cubic-bezier(0.23, 1, 0.32, 1) both; } .ds-success__badge { position: relative; display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; margin: 0 auto; border-radius: 999px; background: var(--ok-soft, rgba(52,211,153,0.14)); color: var(--ok, #34d399); } .ds-success__ring { position: absolute; inset: 0; border-radius: 999px; border: 2px solid var(--ok, #34d399); animation: ds-pulse-once 600ms cubic-bezier(0.23, 1, 0.32, 1) 1 both; } .ds-success__title { margin: 20px 0 0; font-family: var(--font-display, 'Bricolage Grotesque', system-ui, sans-serif); font-size: 18px; font-weight: 600; line-height: 1.3; color: var(--ink, #f1f5f9); } .ds-success__text { max-width: 36ch; margin: 8px auto 0; color: var(--ink-2, #b4bfd3); font-size: 16px; line-height: 1.6; } .ds-success__text strong { color: var(--ink, #f1f5f9); font-weight: 600; } @media (prefers-reduced-motion: reduce) { .ds-success, .ds-success__ring { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La vidriera de noche",
+    "overview": "Un local cerrado, de noche, con la luz prendida adentro: el fondo es navy casi negro (no negro puro) con un único resplandor índigo que baja desde el borde superior (elipse de 70 % × 60 vh, índigo al 18 %) y una grilla fija de 64 px al 3 %. Sobre eso, el producto aparece iluminado: un mock plano de tema claro del dashboard de NovaERP dentro de un marco oscuro con borde al 12 % y una sola sombra larga. La página muestra la empresa a través de su producto; la jerarquía la llevan Bricolage Grotesque 700 balanceada, un subrayado índigo de 3 px en el h1 y un solo acento.\n\nLa densidad es editorial, no de catálogo: una columna, bandas alternas de fondo, filas con hairline en lugar de cards iguales y un solo panel por sección (la tarjeta de NovaERP, el formulario). El movimiento es casi nulo: nada se anima al cargar, el primer viewport se sirve ya visible, las entradas por scroll son de 8 px y una sola vez, y las únicas animaciones con nombre son la entrada del menú móvil y el pulso del check de éxito.\n\nEste es el mismo sistema que usa la home pública de NovaERP (`/home/user/Nova/apps/web/src/app/(landing)/DESIGN.md`): mismos tokens de color, tipografía, radios, movimiento y componentes. Acá se documenta su expresión en el sitio de Nova Solutions (Tailwind 3, tokens en `:root` de `app/globals.css`). Reemplaza por completo al mundo anterior del sitio (violeta oscuro con partículas, Poppins/Inter y gradientes), del que no queda nada en el build.",
+    "keyCharacteristics": [
+      "Fondo navy casi negro con un solo resplandor índigo estático arriba y grilla de 64 px al 3 %.",
+      "Un acento (índigo) para CTA, links, foco, selección y el subrayado del h1; verde sólo para éxito, rojo sólo para error.",
+      "Bricolage Grotesque 700 con tracking negativo y `text-wrap: balance` en títulos; Geist a 16 px / 1.6 en cuerpo.",
+      "El producto se muestra como mock plano de tema claro dentro de un marco oscuro con borde al 12 %, siempre con nota \"Datos de ejemplo\".",
+      "Filas con hairline y paneles al 6 % en lugar de cards iguales; nav pill flotante con glass.",
+      "Nada se anima al cargar; reveal de 8 px una sola vez debajo del fold; hover sólo con puntero fino; press a scale(0.97)."
+    ],
+    "rules": [
+      { "name": "The One Indigo Rule", "body": "Hay un solo acento. Índigo para acción, foco y énfasis; verde y rojo sólo describen estados. No hay violeta, esmeralda ni naranja decorativos, ni gradientes de texto ni de fondo más allá del resplandor.", "section": "colors" },
+      { "name": "The Lit Mock Rule", "body": "El producto se muestra en tema claro dentro de un marco oscuro. El mock tiene su propia paleta interna (`#f4f5fa` de fondo, `#111827` de tinta, `#6b7280` de meta, `#e5e7eb` de borde, `#047857` para el delta positivo, barras `#c7d2fe` con la de hoy en `#6366f1`, aviso ámbar `#fffbeb` / `#fde68a` / `#92400e`) y esa paleta no sale del mock.", "section": "colors" },
+      { "name": "The Balanced Title Rule", "body": "Todo título lleva Bricolage con `text-wrap: balance` y, cuando hace falta, un `max-width` en `ch` o `rem`; se acepta que el h1 caiga en tres líneas antes que achicarlo.", "section": "typography" },
+      { "name": "The No-Kicker Rule", "body": "No hay eyebrows ni kickers encima de los títulos, ni mayúsculas con tracking, ni peso 800. El título entra directo.", "section": "typography" },
+      { "name": "The Glass Only Floats Rule", "body": "El desenfoque existe únicamente en la nav fija. Paneles, mock y menú son sólidos o al 6 %.", "section": "elevation" },
+      { "name": "The Hairline Rule", "body": "Las filas, las columnas de clientes y el pie se separan con 1 px al 12 %, nunca con cards ni con sombra.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar un solo acento índigo (`accent`) para acción, foco, selección y énfasis, y reservar verde y rojo para estados.",
+      "Do renderizar el primer viewport en su estado final desde el servidor; `.reveal` sólo debajo del fold, una vez, 8 px y 320 ms.",
+      "Do mostrar el producto como mock plano de tema claro dentro de un marco oscuro (`bg-raise`, borde `line`, 16 px, 8 px de padding, sombra flotante) con nota \"Datos de ejemplo.\" en 12 px `ink-3`.",
+      "Do estructurar listas como filas con hairline al 12 % (28 px de padding vertical) o columnas con `divide-x`, y limitar a un panel al 6 % por sección.",
+      "Do dar feedback de press a todo lo pulsable (`scale(0.97)` en 120 ms, 44-48 px de alto táctil) y foco visible con outline índigo de 2 px a 2 px de offset.",
+      "Do poner hover sólo bajo `(hover: hover) and (pointer: fine)` y un efecto por elemento (cambio de fondo, de color de texto, o 2 px de flecha).",
+      "Do mantener inputs a 16 px con fondo `surface`, borde `line`, radio 12 px y foco con borde índigo + anillo `accent-soft`; errores por campo en texto, no en globo nativo.",
+      "Do usar Lucide a 20 px con trazo 1.75 en `accent-ink` para íconos de contenido, y `ink-3` para íconos de metadatos."
+    ],
+    "donts": [
+      "Don't animar al cargar, ni con loops: sin typewriter, texto rotativo, marquee, contadores, partículas, canvas, orbes ni spotlight; el ambiente es una capa estática.",
+      "Don't usar `transition-all` ni animar sombra, ancho, alto, `max-height` o posición; sólo `transform`, `opacity`, color de fondo, de texto y de borde.",
+      "Don't poner eyebrows o kickers sobre títulos, mayúsculas con tracking, peso 800 ni gradientes de texto.",
+      "Don't usar glass fuera de la nav fija, ni sombras en reposo en botones, paneles o filas; la nav no lleva sombra.",
+      "Don't armar grillas de cards iguales ni más de un panel por sección; tampoco cursor custom ni 3D.",
+      "Don't sacar la paleta interna del mock (`#f4f5fa`, `#111827`, `#6b7280`, `#e5e7eb`, `#047857`, ámbar) al resto de la página, ni usar `#faf8f4` fuera de la marca.",
+      "Don't usar Poppins, Inter ni ningún gradiente violeta: el mundo anterior del sitio no existe más.",
+      "Don't escribir \"Nova ERP\" ni \"NovaSolutions\": es NovaERP y Nova Solutions, con la \"NS\" a 28 px."
+    ]
+  }
+}
