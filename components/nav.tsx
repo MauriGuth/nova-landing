@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import { NovaLogo } from "./nova-logo";
 
 const LINKS = [
+  { label: "Diagnóstico", href: "#diagnostico" },
   { label: "Productos", href: "#productos" },
   { label: "Por qué Nova", href: "#por-que-nova" },
   { label: "Clientes", href: "#clientes" },
@@ -58,7 +59,7 @@ export function Nav() {
             href="#contacto"
             className="btn btn-primary hidden h-11 px-4 text-sm md:inline-flex"
           >
-            Pedí una demo
+            Hablemos
           </a>
 
           <button
@@ -100,7 +101,7 @@ export function Nav() {
               onClick={() => setOpen(false)}
               className="btn btn-primary mt-2 h-12 w-full"
             >
-              Pedí una demo
+              Hablemos de tu operación
             </a>
           </div>
         )}

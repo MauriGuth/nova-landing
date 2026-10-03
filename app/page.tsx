@@ -16,14 +16,15 @@ import { AmbientParticles } from "@/components/ambient-particles";
 import { PointerRing } from "@/components/pointer-ring";
 import { Reveal } from "@/components/reveal";
 import { ContactForm } from "@/components/contact-form";
-import { DashboardMock } from "@/components/dashboard-mock";
+import { SystemMock } from "@/components/system-mock";
+import { Diagnostico } from "@/components/diagnostico";
 import { NovaLogo } from "@/components/nova-logo";
 
 const NOVAERP_URL = "https://novaerp.com.ar";
 const CONTACT_MAIL = "contacto@novasolutions.ar";
 const WHATSAPP_URL =
   "https://wa.me/542995171364?text=" +
-  encodeURIComponent("Hola! Quiero una demo de NovaERP");
+  encodeURIComponent("Hola! Quiero hablar sobre un sistema a medida para mi empresa");
 
 const ERP_FEATURES: { icon: LucideIcon; label: string }[] = [
   { icon: Utensils, label: "Mesas y comandas" },
@@ -69,6 +70,10 @@ const FAMILY = [
 
 const REASONS = [
   {
+    title: "El sistema se ajusta a tu operación, no al revés",
+    body: "Partimos de tus requerimientos: tus bases, tus áreas, tus flujos y los sistemas que ya usás. Diseñamos sobre eso y lo potenciamos con IA donde hace diferencia: alertas, predicciones, reportes y un asistente con tus datos.",
+  },
+  {
     title: "Un dato se carga una vez y aparece en todos lados",
     body: "Cargás un producto, un precio o un cliente una sola vez y lo ven el punto de venta, el stock, la caja, los reportes y Jarvis. Sin planillas paralelas ni doble carga.",
   },
@@ -108,6 +113,7 @@ const FOOTER_PRODUCTS = [
   { label: "Jarvis", href: "#jarvis" },
 ];
 const FOOTER_COMPANY = [
+  { label: "Diagnóstico", href: "#diagnostico" },
   { label: "Nosotros", href: "#nosotros" },
   { label: "Por qué Nova", href: "#por-que-nova" },
   { label: "Contacto", href: "#contacto" },
@@ -139,27 +145,28 @@ export default function HomePage() {
           <div className="mx-auto grid max-w-[1120px] items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
             <div>
               <h1 className="h1">
-                Software de gestión{" "}
-                <span className="h1-underline">hecho en Neuquén</span> para
-                tu negocio.
+                Aplicamos IA en tu empresa, con un sistema{" "}
+                <span className="h1-underline">hecho a medida</span>.
               </h1>
               <p className="lead mt-6 max-w-[34rem]">
-                NovaERP para restaurantes, cafeterías, hoteles y comercios:
-                punto de venta, stock, caja, facturación ARCA y fidelización.
-                Lo programamos nosotros y lo adaptamos a tu operación.
+                Para operaciones complejas: varias bases, muchas áreas y
+                muchos datos. Diseñamos el sistema sobre tus requerimientos,
+                lo integramos con lo que ya usás y lo potenciamos con IA.
+                Desde Neuquén, para petróleo y gas, minería, energía,
+                logística y agroindustria.
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
                 <a
-                  href="#contacto"
+                  href="#diagnostico"
                   className="btn btn-primary h-14 w-full text-base sm:h-12 sm:w-auto"
                 >
-                  Pedí una demo
+                  Hacé el diagnóstico
                 </a>
                 <a
-                  href={NOVAERP_URL}
+                  href="#contacto"
                   className="link-arrow h-11 self-start text-base sm:self-auto"
                 >
-                  Ver NovaERP
+                  Hablemos de tu operación
                   <ArrowRight className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
                 </a>
               </div>
@@ -171,19 +178,37 @@ export default function HomePage() {
               </p>
             </div>
 
-            <DashboardMock />
+            <SystemMock />
           </div>
         </section>
 
-        {/* ── Productos ── */}
-        <section id="productos" className="section band scroll-mt-24">
+        {/* ── Diagnóstico ── */}
+        <section id="diagnostico" className="section band scroll-mt-24">
           <div className="container-site">
             <Reveal>
-              <h2 className="h2">Todo el negocio en un solo sistema</h2>
+              <h2 className="h2">¿Cómo opera tu empresa hoy?</h2>
               <p className="lead mt-4 max-w-[62ch]">
-                NovaERP es el centro. NovaStay, NovaPoints y Jarvis trabajan
-                sobre los mismos datos: lo que se carga una vez, se ve en todos
-                lados.
+                Siete preguntas de sí o no. En cada una te mostramos qué te está
+                costando seguir así y qué cambia con un sistema a medida con IA.
+                Al final, un resumen que podés llevar al formulario.
+              </p>
+            </Reveal>
+            <Reveal className="mt-10">
+              <Diagnostico />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ── Lo que ya construimos ── */}
+        <section id="productos" className="section scroll-mt-24">
+          <div className="container-site">
+            <Reveal>
+              <h2 className="h2">Lo que ya construimos</h2>
+              <p className="lead mt-4 max-w-[62ch]">
+                NovaERP es el núcleo que hoy opera en producción. NovaStay,
+                NovaPoints y Jarvis trabajan sobre los mismos datos: lo que se
+                carga una vez, se ve en todos lados. Sobre ese mismo núcleo
+                armamos tu sistema.
               </p>
             </Reveal>
 
@@ -249,7 +274,7 @@ export default function HomePage() {
         </section>
 
         {/* ── Por qué Nova ── */}
-        <section id="por-que-nova" className="section scroll-mt-24">
+        <section id="por-que-nova" className="section band scroll-mt-24">
           <div className="container-site">
             <Reveal>
               <h2 className="h2">Por qué Nova</h2>
@@ -269,7 +294,7 @@ export default function HomePage() {
         </section>
 
         {/* ── Clientes ── */}
-        <section id="clientes" className="section band scroll-mt-24">
+        <section id="clientes" className="section scroll-mt-24">
           <div className="container-site">
             <Reveal>
               <h2 className="h2">Lo usan hoy en Neuquén</h2>
@@ -292,7 +317,7 @@ export default function HomePage() {
         </section>
 
         {/* ── Nosotros ── */}
-        <section id="nosotros" className="section scroll-mt-24">
+        <section id="nosotros" className="section band scroll-mt-24">
           <div className="container-site grid gap-6 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] md:gap-10">
             <Reveal>
               <h2 className="h2">Nosotros</h2>
@@ -304,22 +329,25 @@ export default function HomePage() {
                 cliente: el sistema se ajusta a tu operación, no al revés.
               </p>
               <p>
-                Hoy trabajamos sobre todo con gastronomía y hotelería. El mismo
-                núcleo sirve para un supermercado, un comercio o una
-                concesionaria, con las funciones que cada negocio necesita.
+                Hoy el sistema opera en gastronomía, hotelería y comercio, y el
+                mismo núcleo sirve para un supermercado o una concesionaria.
+                Para operaciones más grandes (petróleo y gas, minería, energía,
+                logística, agroindustria) diseñamos el sistema sobre los
+                requerimientos de la empresa y lo potenciamos con IA.
               </p>
             </Reveal>
           </div>
         </section>
 
         {/* ── Contacto ── */}
-        <section id="contacto" className="section band scroll-mt-24">
+        <section id="contacto" className="section scroll-mt-24">
           <div className="container-site grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
             <Reveal>
-              <h2 className="h2">Hablemos de tu negocio</h2>
+              <h2 className="h2">Hablemos de tu operación</h2>
               <p className="lead mt-4 max-w-[40ch]">
-                Contanos qué tenés y qué querés resolver. Te mostramos NovaERP
-                funcionando con un caso como el tuyo.
+                Contanos qué operación tenés y qué querés resolver. Te
+                proponemos el sistema a medida, con IA, para tu caso, y te
+                mostramos lo que ya construimos.
               </p>
               <ul className="mt-8 space-y-4">
                 <li>
@@ -370,7 +398,7 @@ export default function HomePage() {
                 </span>
               </a>
               <p className="mt-3 max-w-[32ch] text-sm leading-relaxed text-ink-2">
-                Software de gestión para gastronomía y hotelería, hecho en
+                Sistemas a medida con IA para empresas y negocios, hechos en
                 Neuquén, Argentina.
               </p>
             </div>

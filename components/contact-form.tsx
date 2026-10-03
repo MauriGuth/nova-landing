@@ -1,12 +1,14 @@
 "use client";
 
 import {
+  useEffect,
   useRef,
   useState,
   type ChangeEvent,
   type FormEvent,
 } from "react";
 import { Check, LoaderCircle } from "lucide-react";
+import { DIAGNOSTICO_EVENT, DIAGNOSTICO_KEY } from "./diagnostico-data";
 
 type Field = "name" | "company" | "email" | "message";
 type Status = "idle" | "sending" | "sent" | "error";
@@ -32,6 +34,28 @@ export function ContactForm() {
   const [sentTo, setSentTo] = useState("");
   // Enfocamos sólo el primer campo inválido de cada intento de envío.
   const focusedInvalid = useRef(false);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const lastApplied = useRef("");
+
+  // El diagnóstico deja su resumen en sessionStorage (y avisa por evento si el
+  // formulario ya está montado). Completa el mensaje sólo si está vacío o si
+  // todavía tiene el resumen anterior: nunca pisa lo que la persona escribió.
+  useEffect(() => {
+    const aplicar = (texto: string | null) => {
+      const el = messageRef.current;
+      if (!el || !texto) return;
+      const actual = el.value.trim();
+      if (actual !== "" && actual !== lastApplied.current.trim()) return;
+      el.value = texto;
+      lastApplied.current = texto;
+    };
+    try {
+      aplicar(sessionStorage.getItem(DIAGNOSTICO_KEY));
+    } catch {}
+    const onDiagnostico = (e: Event) => aplicar((e as CustomEvent<string>).detail);
+    window.addEventListener(DIAGNOSTICO_EVENT, onDiagnostico);
+    return () => window.removeEventListener(DIAGNOSTICO_EVENT, onDiagnostico);
+  }, []);
 
   function onInvalid(e: FormEvent<FieldEl>) {
     e.preventDefault(); // sin el globo nativo; el mensaje va debajo del campo
@@ -166,7 +190,7 @@ export function ContactForm() {
 
         <div>
           <label htmlFor="company" className="mb-1.5 block text-sm font-medium text-ink-2">
-            Negocio o local
+            Empresa o local
           </label>
           <input
             id="company"
@@ -175,7 +199,7 @@ export function ContactForm() {
             maxLength={120}
             autoComplete="organization"
             enterKeyHint="next"
-            placeholder="Nombre del local o empresa"
+            placeholder="Nombre de la empresa o del local"
             className="field"
             onChange={onChange}
           />
@@ -195,7 +219,7 @@ export function ContactForm() {
           autoComplete="email"
           inputMode="email"
           enterKeyHint="next"
-          placeholder="nombre@tulocal.com"
+          placeholder="nombre@tuempresa.com"
           className="field"
           aria-invalid={errors.email ? "true" : undefined}
           aria-describedby={errors.email ? "email-error" : undefined}
@@ -214,13 +238,14 @@ export function ContactForm() {
           Mensaje
         </label>
         <textarea
+          ref={messageRef}
           id="message"
           name="message"
           required
           rows={4}
           maxLength={5000}
           enterKeyHint="send"
-          placeholder="Contanos qué tipo de local tenés, cuántas mesas o cajas y qué te gustaría resolver"
+          placeholder="Contanos tu operación: cuántas bases o locales, qué áreas y qué querés resolver"
           className="field resize-y"
           aria-invalid={errors.message ? "true" : undefined}
           aria-describedby={errors.message ? "message-error" : undefined}

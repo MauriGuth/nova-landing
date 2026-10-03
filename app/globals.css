@@ -415,11 +415,160 @@
       transform: none;
     }
   }
+
+  /* Diagnóstico: una pregunta por vez. La entrada del panel es la única
+     animación de la sección además del despliegue de la respuesta. */
+  .diag-panel {
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  @media (min-width: 640px) {
+    .diag-panel {
+      padding: 32px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .diag-panel {
+      padding: 40px;
+    }
+  }
+  .diag-enter {
+    animation: diagEnter var(--d-base) var(--ease-out) both;
+  }
+  @keyframes diagEnter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .diag-fade {
+    animation: diagFade 160ms var(--ease-out) both;
+  }
+  @keyframes diagFade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  /* Sí / No: dos controles iguales; el elegido pasa a índigo */
+  .diag-choice {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    border-radius: 12px;
+    border: 1px solid var(--line-strong);
+    background-color: transparent;
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .diag-choice[aria-pressed="true"] {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .diag-choice:not([aria-pressed="true"]):hover {
+      background-color: var(--surface);
+    }
+  }
+  /* Despliegue de la respuesta: la fila de grilla crece de 0 a 1fr y el
+     contenido entra con un pequeño retraso (la única animación de altura). */
+  .diag-reveal {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--d-slow) var(--ease-out);
+  }
+  .diag-reveal[data-open="true"] {
+    grid-template-rows: 1fr;
+  }
+  .diag-reveal > div {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .diag-reveal-body {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity var(--d-base) var(--ease-out),
+      transform var(--d-base) var(--ease-out);
+  }
+  .diag-reveal[data-open="true"] .diag-reveal-body {
+    opacity: 1;
+    transform: none;
+    transition-delay: 60ms;
+  }
+  /* Riel de pasos (desktop) y segmentos de progreso (celular) */
+  .diag-step {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    padding: 10px 8px;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .diag-step[aria-current="step"] {
+    color: var(--ink);
+    background-color: var(--surface);
+  }
+  .diag-step:disabled {
+    color: var(--ink-3);
+    cursor: default;
+  }
+  .diag-step:disabled:active {
+    transform: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .diag-step:not(:disabled):hover {
+      color: var(--ink);
+      background-color: var(--surface);
+    }
+  }
+  .diag-seg {
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--surface-2);
+    transition: background-color var(--d-base) var(--ease-out);
+  }
+  .diag-seg[data-state="si"] {
+    background-color: var(--accent);
+  }
+  .diag-seg[data-state="no"] {
+    background-color: var(--line-strong);
+  }
+  .diag-seg[data-current="true"] {
+    box-shadow: 0 0 0 1px var(--accent-ink);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal-group > * {
+    transform: none;
+    transition: opacity 160ms ease-out;
+    transition-delay: 0ms;
+  }
+  .diag-enter {
+    animation: diagFade 160ms ease-out both;
+  }
+  .diag-reveal {
+    transition: none;
+  }
+  .diag-reveal-body {
     transform: none;
     transition: opacity 160ms ease-out;
     transition-delay: 0ms;

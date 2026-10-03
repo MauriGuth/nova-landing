@@ -27,15 +27,15 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Software de gestión para gastronomía y hotelería | Nova Solutions",
+  title: "Sistemas a medida con IA para empresas | Nova Solutions",
   description:
-    "NovaERP, el sistema de gestión de Nova Solutions para restaurantes, cafeterías, hoteles y comercios de Argentina: punto de venta, stock, caja, facturación electrónica ARCA y fidelización. Hecho en Neuquén y adaptado a cada negocio.",
+    "Nova Solutions diseña el sistema que tu empresa necesita, sobre tus requerimientos, y lo potencia con IA: alertas y predicciones, reportes con resumen ejecutivo y un asistente que responde con tus datos. Hecho en Neuquén para operaciones complejas y para negocios de todos los rubros.",
   alternates: { canonical: "/" },
   authors: [{ name: "Nova Solutions" }],
   openGraph: {
-    title: "Nova Solutions — Software de gestión hecho en Neuquén",
+    title: "Nova Solutions — Aplicamos IA en tu empresa, con un sistema hecho a medida",
     description:
-      "NovaERP para restaurantes, cafeterías, hoteles y comercios: punto de venta, stock, caja, facturación ARCA y fidelización. Lo programamos nosotros y lo adaptamos a tu operación.",
+      "Sistemas a medida con IA para operaciones complejas: varias bases, muchas áreas y muchos datos. Hecho en Neuquén; en producción en gastronomía, hotelería y comercio.",
     url: SITE_URL,
     siteName: "Nova Solutions",
     locale: "es_AR",
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Nova Solutions — Software de gestión hecho en Neuquén",
+    title: "Nova Solutions — Aplicamos IA en tu empresa, con un sistema hecho a medida",
     description:
-      "NovaERP para restaurantes, cafeterías, hoteles y comercios: punto de venta, stock, caja, facturación ARCA y fidelización.",
+      "Sistemas a medida con IA para operaciones complejas. Hecho en Neuquén.",
   },
 };
 
@@ -60,7 +60,7 @@ const jsonLd = {
       url: SITE_URL,
       email: "contacto@novasolutions.ar",
       description:
-        "Empresa de software de Neuquén, Argentina. Hace NovaERP, un sistema de gestión para gastronomía y hotelería (y también comercios y supermercados): punto de venta, stock, caja, facturación electrónica ARCA y fidelización.",
+        "Empresa de software de Neuquén, Argentina. Diseña sistemas a medida potenciados con IA para empresas de rubros complejos y hace NovaERP, un sistema de gestión en producción en gastronomía, hotelería y comercio.",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Neuquén",
