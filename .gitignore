@@ -5,3 +5,6 @@ out/
 .env.local
 .DS_Store
 tsconfig.tsbuildinfo
+
+# Impeccable: capturas de revisión (se regeneran en cada build)
+.impeccable/review/

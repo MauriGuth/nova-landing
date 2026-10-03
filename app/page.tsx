@@ -1,1044 +1,431 @@
-"use client";
-
-import { useState, useEffect, useRef } from "react";
-import type { ReactNode } from "react";
-import { AnimatePresence, motion } from "motion/react";
 import {
-  Terminal,
-  Monitor,
-  Star,
-  Boxes,
-  Zap,
-  Shield,
-  RefreshCw,
-  Headphones,
-  Code,
   ArrowRight,
-  Check,
-  Menu as MenuIcon,
-  X as XIcon,
+  ChartColumn,
+  ChefHat,
   Mail,
-  Loader2,
+  MapPin,
+  MessageCircle,
+  Package,
+  ReceiptText,
+  Utensils,
+  Wallet,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { PageTransition } from "@/lib/animations/page-transition";
-import { RotatingText } from "@/components/ui/rotating-text";
-import { TiltedCard } from "@/components/ui/tilted-card";
-import { AnimatedCounter } from "@/components/ui/animated-counter";
-import { Confetti } from "@/components/ui/confetti";
-import { CustomCursor } from "@/components/ui/custom-cursor";
-import { Spotlight } from "@/components/ui/spotlight";
-import { Magnetic } from "@/components/ui/magnetic";
-import { Marquee } from "@/components/ui/marquee";
-import { GlobalBackground } from "@/components/ui/global-background";
-import { FlipCard } from "@/components/ui/flip-card";
-import { BorderBeam } from "@/components/ui/border-beam";
+import { Nav } from "@/components/nav";
+import { Reveal } from "@/components/reveal";
+import { ContactForm } from "@/components/contact-form";
+import { DashboardMock } from "@/components/dashboard-mock";
+import { NovaLogo } from "@/components/nova-logo";
 
-/* ── Scroll-reveal helpers ── */
-function useReveal<T extends HTMLElement = HTMLDivElement>() {
-  const ref = useRef<T | null>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-  return ref;
-}
+const NOVAERP_URL = "https://novaerp.com.ar";
+const CONTACT_MAIL = "contacto@novasolutions.ar";
+const WHATSAPP_URL =
+  "https://wa.me/542995171364?text=" +
+  encodeURIComponent("Hola! Quiero una demo de NovaERP");
 
-function Reveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useReveal<HTMLDivElement>();
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
-      {children}
-    </div>
-  );
-}
+const ERP_FEATURES: { icon: LucideIcon; label: string }[] = [
+  { icon: Utensils, label: "Mesas y comandas" },
+  { icon: ChefHat, label: "Pantalla de cocina" },
+  { icon: Wallet, label: "Caja, arqueo y cierre" },
+  { icon: Package, label: "Stock por local" },
+  { icon: ReceiptText, label: "Facturación electrónica ARCA" },
+  { icon: ChartColumn, label: "Reportes por día de negocio" },
+];
 
-/* ── Scroll progress bar ── */
-function ScrollProgress() {
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    const onScroll = () => {
-      const h = document.documentElement;
-      const max = h.scrollHeight - h.clientHeight;
-      setProgress(max > 0 ? (h.scrollTop / max) * 100 : 0);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  return (
-    <div
-      aria-hidden
-      className="fixed left-0 top-0 z-[60] h-0.5 w-full bg-transparent"
-    >
-      <div
-        className="h-full origin-left bg-gradient-to-r from-indigo-500 via-violet-500 to-emerald-400 transition-[width] duration-150 ease-out"
-        style={{ width: `${progress}%` }}
-      />
-    </div>
-  );
-}
-
-/* ── Nova logo mark ── */
-function NovaLogo({ size = 32 }: { size?: number }) {
-  return (
-    <>
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 512 512"
-        className="block dark:hidden"
-        aria-hidden="true"
-      >
-        <rect width="512" height="512" rx="118" fill="oklch(0.62 0.18 265)" />
-        <text
-          x="256"
-          y="345"
-          textAnchor="middle"
-          fontFamily="Inter, Poppins, sans-serif"
-          fontWeight="700"
-          fontSize="282"
-          letterSpacing="-20"
-          fill="#FAF8F4"
-        >
-          N<tspan dx="-10" opacity="0.55">S</tspan>
-        </text>
-      </svg>
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 512 512"
-        className="hidden dark:block"
-        aria-hidden="true"
-      >
-        <rect width="512" height="512" rx="118" fill="#0E1116" />
-        <text
-          x="256"
-          y="345"
-          textAnchor="middle"
-          fontFamily="Inter, Poppins, sans-serif"
-          fontWeight="700"
-          fontSize="282"
-          letterSpacing="-20"
-          fill="#FAF8F4"
-        >
-          N<tspan dx="-10" fill="oklch(0.62 0.18 265)">S</tspan>
-        </text>
-      </svg>
-    </>
-  );
-}
-
-/* ── Product card backed by TiltedCard (motion spring + cursor-follow glow) ── */
-type Product = {
-  id: string;
-  icon: LucideIcon;
-  name: string;
-  tagline: string;
-  description: string;
-  accent: string;
-  glow: string;
-  features: string[];
-  href?: string;
-};
-
-function ProductCard({ product: p }: { product: Product }) {
-  return (
-    <TiltedCard
-      glow={p.glow}
-      max={14}
-      className="group glass-strong cursor-default rounded-3xl p-7 h-full"
-    >
-      {/* Icon */}
-      <div
-        className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${p.accent} text-white shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6`}
-      >
-        <p.icon className="h-6 w-6" />
-      </div>
-
-      {/* Name & tagline */}
-      <h3 className="font-heading mb-1 text-xl font-bold text-white">{p.name}</h3>
-      <p className="mb-3 text-sm font-medium text-slate-400">{p.tagline}</p>
-      <p className="mb-6 text-sm leading-relaxed text-slate-500">{p.description}</p>
-
-      {/* Features */}
-      <ul className="space-y-2.5">
-        {p.features.map((f, i) => (
-          <li
-            key={f}
-            className="flex items-center gap-2.5 text-sm text-slate-300 transition-transform duration-300 group-hover:translate-x-0.5"
-            style={{ transitionDelay: `${i * 25}ms` }}
-          >
-            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 transition-transform duration-300 group-hover:scale-110">
-              <Check className="h-2.5 w-2.5" />
-            </span>
-            {f}
-          </li>
-        ))}
-      </ul>
-
-      {/* External product CTA — only rendered for products with a dedicated site */}
-      {p.href && (
-        <a
-          href={p.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`group/cta mt-6 inline-flex items-center justify-center gap-2 w-full rounded-xl bg-gradient-to-r ${p.accent} px-5 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl btn-press`}
-          style={{ boxShadow: `0 10px 30px -10px ${p.glow}` }}
-        >
-          Conocé {p.name}
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />
-        </a>
-      )}
-    </TiltedCard>
-  );
-}
-
-/* ── Products data ── */
-const products = [
+const FAMILY = [
   {
-    id: "erp",
-    icon: Boxes,
-    name: "Nova ERP",
-    tagline: "Sistema de gestión para todos los rubros",
-    description:
-      "Centralizá stock, compras, producción, facturación y reportes de tu negocio en un solo lugar: gastronomía, tiendas, supermercados y más. Se adapta a tu rubro. Multi-sucursal, multi-usuario y con dashboard ejecutivo en tiempo real.",
-    accent: "from-indigo-500 to-violet-600",
-    glow: "rgba(99,102,241,0.3)",
-    href: "https://novaerp.com.ar",
-    features: [
-      "Control de stock multi-depósito",
-      "Compras y proveedores",
-      "Facturación electrónica ARCA (ex AFIP)",
-      "Dashboard ejecutivo en vivo",
-      "Roles y permisos por usuario",
-      "Producción con trazabilidad y lotes",
+    id: "novastay",
+    name: "NovaStay",
+    line: "El PMS para hoteles que comparte la caja con el restaurante.",
+    points: [
+      "Reservas, check-in y check-out",
+      "Cargo a la habitación desde el restaurante",
+      "Caja única: el cierre del día es uno solo",
     ],
   },
   {
-    id: "point",
-    icon: Star,
-    name: "Nova Points",
-    tagline: "Fidelización de clientes inteligente",
-    description:
-      "Programa de puntos y recompensas para retener clientes, aumentar la frecuencia de visita y construir relaciones a largo plazo con tu negocio.",
-    accent: "from-emerald-500 to-teal-600",
-    glow: "rgba(16,185,129,0.3)",
-    features: [
-      "Sistema de puntos y niveles",
-      "Recompensas personalizables",
-      "Historial de clientes",
-      "Integración con Nova POS",
-      "Reportes de fidelización",
-      "App para clientes finales",
+    id: "novapoints",
+    name: "NovaPoints",
+    line: "Fidelización con app propia para tus clientes.",
+    points: [
+      "Puntos por cada compra",
+      "Niveles y premios que definís vos",
+      "Se suma desde el punto de venta, sin pasos extra",
     ],
   },
   {
-    id: "pos",
-    icon: Monitor,
-    name: "Nova POS",
-    tagline: "Sistema POS gastronómico completo",
-    description:
-      "Punto de venta para restaurantes, cafeterías y hoteles: gestión de mesas en tiempo real, pantalla de cocina, menú QR digital, cargo a habitación y cierre de caja automatizado.",
-    accent: "from-orange-500 to-amber-600",
-    glow: "rgba(249,115,22,0.3)",
-    features: [
-      "Mapa de mesas interactivo",
-      "Display cocina y cafetería",
-      "Carta digital QR",
-      "Cierre de caja con fórmulas",
-      "Sincronización en tiempo real",
-      "Modo offline con sync automático",
+    id: "jarvis",
+    name: "Jarvis",
+    line: "El asistente por WhatsApp que contesta con datos reales del sistema.",
+    points: [
+      "Ventas, caja y stock al momento",
+      "Quién faltó, quién fichó y a qué hora",
+      "Si no tiene el dato, no lo inventa",
     ],
   },
 ];
 
-/* ── Why Nova data ── */
-const benefits = [
+const REASONS = [
   {
-    icon: Code,
-    title: "Soluciones a medida",
-    description:
-      "Desarrollamos software adaptado exactamente a los procesos de tu empresa, no soluciones genéricas.",
-    color: "text-indigo-400",
-    bg: "bg-indigo-500/10",
-    backTitle: "Cómo trabajamos",
-    backItems: [
-      "Análisis profundo de tus procesos",
-      "Prototipo navegable en 2 semanas",
-      "Iteración constante con tu equipo",
-      "Lanzamiento + capacitación",
-    ],
+    title: "Un dato se carga una vez y aparece en todos lados",
+    body: "Cargás un producto, un precio o un cliente una sola vez y lo ven el punto de venta, el stock, la caja, los reportes y Jarvis. Sin planillas paralelas ni doble carga.",
   },
   {
-    icon: Zap,
-    title: "Tecnología moderna",
-    description:
-      "Stack tecnológico de última generación: React, NestJS, PostgreSQL, WebSockets para máxima performance.",
-    color: "text-violet-400",
-    bg: "bg-violet-500/10",
-    backTitle: "Nuestro stack",
-    backItems: [
-      "TypeScript · React · Next.js",
-      "NestJS · PostgreSQL · Redis",
-      "WebSockets · Docker · AWS",
-      "CI/CD con deploys sin downtime",
-    ],
+    title: "El sistema te contesta por WhatsApp",
+    body: "Le preguntás a Jarvis “¿cuánto vendí hoy?” o “¿quién faltó?”, por texto o por audio, y te responde con los datos del sistema. Si no tiene el dato, te lo dice: nunca inventa un número.",
   },
   {
-    icon: RefreshCw,
-    title: "Sync en tiempo real",
-    description:
-      "Todos los dispositivos actualizados al instante. Sin recargas, sin demoras, sin discrepancias de datos.",
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/10",
-    backTitle: "Bajo el capó",
-    backItems: [
-      "WebSockets con reconexión automática",
-      "Resolución de conflictos integrada",
-      "Modo offline con sync diferido",
-      "Latencia < 50 ms en red local",
-    ],
+    title: "Soporte directo con quien lo programó, desde Neuquén",
+    body: "Hablás con las mismas personas que escriben el sistema. Un cambio que tu local necesita no entra en una cola de pedidos de otro país: lo hacemos nosotros.",
   },
   {
-    icon: Headphones,
-    title: "Soporte dedicado",
-    description:
-      "Acompañamiento post-lanzamiento. Actualizaciones continuas y soporte directo con el equipo de desarrollo.",
-    color: "text-amber-400",
-    bg: "bg-amber-500/10",
-    backTitle: "Lo que incluye",
-    backItems: [
-      "Respuesta < 2 hs en horario laboral",
-      "Canal directo con el equipo dev",
-      "Updates y patches sin downtime",
-      "Monitoring proactivo 24/7",
-    ],
+    title: "Hotel y restaurante con una sola caja",
+    body: "En La Posada del Dinosaurio, NovaStay y NovaERP comparten la caja: el consumo del restaurante se carga a la habitación y el cierre del día es uno solo.",
   },
 ];
 
-/* ── Contact form ── */
-function ContactForm() {
-  const [form, setForm] = useState({ name: "", company: "", email: "", message: "", _website: "" });
-  const [sent, setSent] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+const CLIENTS = [
+  {
+    name: "La Posada del Dinosaurio",
+    body: "Hotel y restaurante. NovaStay y NovaERP con caja única: lo que se consume en el restaurante se carga a la habitación.",
+  },
+  {
+    name: "The Coffee Store",
+    body: "Cafetería. Punto de venta y fidelización con NovaPoints: sus clientes suman puntos en cada compra.",
+  },
+  {
+    name: "Dorado",
+    body: "Restaurante. Mesas, comandas y caja en NovaERP; sus clientes suman puntos y reservan desde la app con su marca, hecha con NovaPoints.",
+  },
+];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) {
-        const data = (await res.json().catch(() => ({}))) as { error?: string };
-        throw new Error(data.error || "No pudimos enviar el mensaje. Intentá de nuevo.");
-      }
-      setSent(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Error inesperado");
-    } finally {
-      setLoading(false);
-    }
-  };
+const FOOTER_PRODUCTS = [
+  { label: "NovaERP", href: "#novaerp" },
+  { label: "NovaStay", href: "#novastay" },
+  { label: "NovaPoints", href: "#novapoints" },
+  { label: "Jarvis", href: "#jarvis" },
+];
+const FOOTER_COMPANY = [
+  { label: "Nosotros", href: "#nosotros" },
+  { label: "Por qué Nova", href: "#por-que-nova" },
+  { label: "Contacto", href: "#contacto" },
+];
 
-  if (sent) {
-    return (
-      <>
-        <Confetti />
-        <div className="flex flex-col items-center justify-center gap-4 rounded-2xl glass p-10 text-center animate-scale-in">
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
-            <span className="absolute inset-0 rounded-full bg-emerald-500/30 animate-ping" />
-            <Check className="relative h-8 w-8" />
-          </div>
-          <h3 className="text-xl font-semibold font-heading text-white">¡Mensaje recibido!</h3>
-          <p className="text-slate-400 max-w-xs">Te contactamos a la brevedad. Gracias por tu interés en Nova Solutions.</p>
-          <button
-            onClick={() => { setSent(false); setForm({ name: "", company: "", email: "", message: "", _website: "" }); }}
-            className="mt-2 rounded-lg border border-white/10 px-5 py-2 text-sm text-slate-300 transition-all hover:border-indigo-400 hover:text-indigo-300 hover:-translate-y-0.5 cursor-pointer btn-press"
-          >
-            Enviar otro mensaje
-          </button>
-        </div>
-      </>
-    );
-  }
-
-  const inputClass =
-    "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:bg-white/[0.07] transition-all duration-300 hover:border-white/20";
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-      {/* Honeypot — hidden from real users, bots fill it */}
-      <div className="hidden" aria-hidden>
-        <label htmlFor="_website">Sitio web</label>
-        <input
-          id="_website"
-          type="text"
-          tabIndex={-1}
-          autoComplete="off"
-          value={form._website}
-          onChange={(e) => setForm({ ...form, _website: e.target.value })}
-        />
-      </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="name" className="block mb-1.5 text-xs font-medium text-slate-400">Nombre *</label>
-          <input
-            id="name"
-            type="text"
-            required
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            placeholder="Juan García"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="company" className="block mb-1.5 text-xs font-medium text-slate-400">Empresa</label>
-          <input
-            id="company"
-            type="text"
-            value={form.company}
-            onChange={(e) => setForm({ ...form, company: e.target.value })}
-            placeholder="Mi Empresa S.A."
-            className={inputClass}
-          />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="email" className="block mb-1.5 text-xs font-medium text-slate-400">Email *</label>
-        <input
-          id="email"
-          type="email"
-          required
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          placeholder="juan@empresa.com"
-          className={inputClass}
-        />
-      </div>
-      <div>
-        <label htmlFor="message" className="block mb-1.5 text-xs font-medium text-slate-400">Mensaje *</label>
-        <textarea
-          id="message"
-          required
-          rows={4}
-          value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          placeholder="Contanos qué necesitás y te ayudamos a encontrar la mejor solución..."
-          className={`${inputClass} resize-none`}
-        />
-      </div>
-      {error && (
-        <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200" role="alert">
-          {error}
-        </div>
-      )}
-      <button
-        type="submit"
-        disabled={loading}
-        className="group btn-press ripple flex w-full items-center justify-center gap-2 cursor-pointer rounded-xl bg-indigo-600 py-3.5 text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/25 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
-      >
-        {loading ? (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" />
-            <span>Enviando…</span>
-          </>
-        ) : (
-          <>
-            <span>Enviar mensaje</span>
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </>
-        )}
-      </button>
-    </form>
-  );
-}
-
-/* ══════════════════════
-   MAIN PAGE
-══════════════════════ */
 export default function HomePage() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const navLinks = [
-    { label: "Nosotros", href: "#nosotros" },
-    { label: "Productos", href: "#productos" },
-    { label: "¿Por qué Nova?", href: "#beneficios" },
-    { label: "Contacto", href: "#contacto" },
-  ];
+  const year = new Date().getFullYear();
 
   return (
-    <PageTransition>
-    <div className="relative min-h-screen bg-[#070714] text-slate-200">
-
-      <GlobalBackground />
-      <CustomCursor />
-      <Spotlight />
-      <ScrollProgress />
-
-      {/* ── Navbar ── */}
-      <header
-        className={`fixed left-4 right-4 top-4 z-50 mx-auto max-w-6xl rounded-2xl transition-all duration-500 ease-out ${
-          scrolled ? "glass shadow-xl shadow-black/40 translate-y-0" : "bg-transparent"
-        }`}
+    <div className="relative isolate">
+      <a
+        href="#contenido"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-xl focus:bg-accent focus:px-4 focus:py-3 focus:text-white"
       >
-        <nav className="flex items-center justify-between px-5 py-3">
-          <a
-            href="#"
-            className="group flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-lg"
-            aria-label="Nova Solutions inicio"
-          >
-            <span className="inline-block transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110">
-              <NovaLogo size={34} />
-            </span>
-            <span className="font-heading text-lg font-bold text-white">Nova Solutions</span>
-          </a>
+        Ir al contenido
+      </a>
 
-          {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-1">
-            {navLinks.map((l) => (
-              <li key={l.href}>
+      {/* Ambiente estático */}
+      <div className="ambient-grid -z-10" aria-hidden="true" />
+      <div className="ambient-glow -z-10" aria-hidden="true" />
+
+      <Nav />
+
+      <main id="contenido">
+        {/* ── Hero ── */}
+        <section className="hero px-4 pb-16 sm:px-6 md:pb-24">
+          <div className="mx-auto grid max-w-[1120px] items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
+            <div>
+              <h1 className="h1">
+                Software de gestión{" "}
+                <span className="h1-underline">hecho en Neuquén</span> para
+                tu negocio.
+              </h1>
+              <p className="lead mt-6 max-w-[34rem]">
+                NovaERP para restaurantes, cafeterías, hoteles y comercios:
+                punto de venta, stock, caja, facturación ARCA y fidelización.
+                Lo programamos nosotros y lo adaptamos a tu operación.
+              </p>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
                 <a
-                  href={l.href}
-                  className="nav-link cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                  href="#contacto"
+                  className="btn btn-primary h-14 w-full text-base sm:h-12 sm:w-auto"
                 >
-                  {l.label}
+                  Pedí una demo
                 </a>
-              </li>
-            ))}
-          </ul>
+                <a
+                  href={NOVAERP_URL}
+                  className="link-arrow h-11 self-start text-base sm:self-auto"
+                >
+                  Ver NovaERP
+                  <ArrowRight className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
+                </a>
+              </div>
+              <p className="mt-8 text-sm leading-relaxed text-ink-3">
+                Lo usan hoy en Neuquén:{" "}
+                <span className="text-ink-2">
+                  La Posada del Dinosaurio · The Coffee Store · Dorado
+                </span>
+              </p>
+            </div>
 
-          <div className="hidden md:flex items-center gap-3">
-            <a
-              href="#contacto"
-              className="cursor-pointer rounded-xl bg-indigo-600 px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-            >
-              Contactanos
-            </a>
+            <DashboardMock />
           </div>
+        </section>
 
-          {/* Mobile toggle */}
-          <button
-            className="md:hidden cursor-pointer rounded-lg p-2 text-slate-300 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-          >
-            {mobileOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
-          </button>
-        </nav>
+        {/* ── Productos ── */}
+        <section id="productos" className="section band scroll-mt-24">
+          <div className="container-site">
+            <Reveal>
+              <h2 className="h2">Todo el negocio en un solo sistema</h2>
+              <p className="lead mt-4 max-w-[62ch]">
+                NovaERP es el centro. NovaStay, NovaPoints y Jarvis trabajan
+                sobre los mismos datos: lo que se carga una vez, se ve en todos
+                lados.
+              </p>
+            </Reveal>
 
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              key="mobile-menu"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="md:hidden overflow-hidden border-t border-white/10"
+            <Reveal className="mt-12">
+              <article
+                id="novaerp"
+                className="grid gap-8 rounded-2xl border border-line bg-surface p-6 scroll-mt-28 md:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-12"
+              >
+                <div>
+                  <h3 className="font-display text-[28px] font-semibold leading-[1.1] tracking-[-0.01em] text-ink md:text-[32px]">
+                    NovaERP
+                  </h3>
+                  <p className="mt-3 max-w-[46ch] text-ink-2">
+                    El sistema de gestión completo para tu local: lo que pasa
+                    en el salón, la cocina, la caja y el depósito, en un solo
+                    lugar y con los mismos datos.
+                  </p>
+                  <a href={NOVAERP_URL} className="btn btn-primary mt-6">
+                    Conocé NovaERP
+                    <ArrowRight className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
+                  </a>
+                </div>
+                <ul className="grid gap-x-8 gap-y-4 self-center sm:grid-cols-2">
+                  {ERP_FEATURES.map(({ icon: Icon, label }) => (
+                    <li key={label} className="flex items-start gap-3">
+                      <Icon
+                        className="mt-0.5 h-5 w-5 shrink-0 text-accent-ink"
+                        strokeWidth={1.75}
+                        aria-hidden="true"
+                      />
+                      <span className="text-ink">{label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+
+            {/* La única "historia" animada de la página: las tres filas entran con stagger */}
+            <Reveal as="ul" stagger className="mt-6 border-t border-line">
+              {FAMILY.map((p) => (
+                <li
+                  key={p.id}
+                  id={p.id}
+                  className="grid gap-3 border-b border-line py-7 scroll-mt-28 md:grid-cols-[180px_minmax(0,1fr)_minmax(0,1fr)] md:gap-8"
+                >
+                  <h3 className="h3">{p.name}</h3>
+                  <p className="text-ink-2">{p.line}</p>
+                  <ul className="space-y-1.5 text-[15px] text-ink-2">
+                    {p.points.map((pt) => (
+                      <li key={pt} className="flex gap-2.5">
+                        <span
+                          className="mt-[10px] h-1 w-1 shrink-0 rounded-full bg-accent-ink"
+                          aria-hidden="true"
+                        />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ── Por qué Nova ── */}
+        <section id="por-que-nova" className="section scroll-mt-24">
+          <div className="container-site">
+            <Reveal>
+              <h2 className="h2">Por qué Nova</h2>
+            </Reveal>
+            <Reveal as="ul" className="mt-10 border-t border-line">
+              {REASONS.map((r) => (
+                <li
+                  key={r.title}
+                  className="grid gap-2 border-b border-line py-7 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-10"
+                >
+                  <h3 className="h3">{r.title}</h3>
+                  <p className="max-w-[62ch] text-ink-2">{r.body}</p>
+                </li>
+              ))}
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ── Clientes ── */}
+        <section id="clientes" className="section band scroll-mt-24">
+          <div className="container-site">
+            <Reveal>
+              <h2 className="h2">Lo usan hoy en Neuquén</h2>
+              <p className="lead mt-4 max-w-[62ch]">
+                Negocios reales, con nombre, operando todos los días.
+              </p>
+            </Reveal>
+            <Reveal
+              as="ul"
+              className="mt-10 grid gap-8 md:grid-cols-3 md:gap-0 md:divide-x md:divide-line"
             >
-              <ul className="px-5 pb-4 pt-3 space-y-1 stagger-children">
-                {navLinks.map((l) => (
+              {CLIENTS.map((c) => (
+                <li key={c.name} className="md:px-8 md:first:pl-0 md:last:pr-0">
+                  <h3 className="h3">{c.name}</h3>
+                  <p className="mt-3 text-ink-2">{c.body}</p>
+                </li>
+              ))}
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ── Nosotros ── */}
+        <section id="nosotros" className="section scroll-mt-24">
+          <div className="container-site grid gap-6 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] md:gap-10">
+            <Reveal>
+              <h2 className="h2">Nosotros</h2>
+            </Reveal>
+            <Reveal className="max-w-[62ch] space-y-5 text-[17px] leading-relaxed text-ink-2">
+              <p>
+                Nova Solutions es una empresa de software de Neuquén, en la
+                Patagonia argentina. Hacemos NovaERP y lo adaptamos a cada
+                cliente: el sistema se ajusta a tu operación, no al revés.
+              </p>
+              <p>
+                Hoy trabajamos sobre todo con gastronomía y hotelería. El mismo
+                núcleo sirve para un supermercado, un comercio o una
+                concesionaria, con las funciones que cada negocio necesita.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ── Contacto ── */}
+        <section id="contacto" className="section band scroll-mt-24">
+          <div className="container-site grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+            <Reveal>
+              <h2 className="h2">Hablemos de tu negocio</h2>
+              <p className="lead mt-4 max-w-[40ch]">
+                Contanos qué tenés y qué querés resolver. Te mostramos NovaERP
+                funcionando con un caso como el tuyo.
+              </p>
+              <ul className="mt-8 space-y-4">
+                <li>
+                  <a
+                    href={`mailto:${CONTACT_MAIL}`}
+                    className="link-quiet inline-flex min-h-[44px] items-center gap-2.5 text-base font-medium"
+                  >
+                    <Mail className="h-5 w-5 text-accent-ink" strokeWidth={1.75} aria-hidden="true" />
+                    {CONTACT_MAIL}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary"
+                  >
+                    <MessageCircle className="h-5 w-5 text-accent-ink" strokeWidth={1.75} aria-hidden="true" />
+                    Escribinos por WhatsApp
+                  </a>
+                </li>
+              </ul>
+              <p className="mt-6 max-w-[30ch] text-sm text-ink-3 [text-wrap:pretty]">
+                Respondemos en horario laboral, por WhatsApp o por mail.
+              </p>
+            </Reveal>
+            <Reveal>
+              <ContactForm />
+            </Reveal>
+          </div>
+        </section>
+      </main>
+
+      {/* ── Footer ── */}
+      <footer className="border-t border-line">
+        <div className="container-site py-12 md:py-16">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
+            <div>
+              <a
+                href="/"
+                className="inline-flex h-11 items-center gap-2.5 rounded-lg"
+                aria-label="Nova Solutions, inicio"
+              >
+                <NovaLogo size={28} />
+                <span className="font-display text-[17px] font-semibold text-ink">
+                  Nova Solutions
+                </span>
+              </a>
+              <p className="mt-3 max-w-[32ch] text-sm leading-relaxed text-ink-2">
+                Software de gestión para gastronomía y hotelería, hecho en
+                Neuquén, Argentina.
+              </p>
+            </div>
+
+            <nav aria-labelledby="footer-productos">
+              <p id="footer-productos" className="text-sm font-semibold text-ink">
+                Productos
+              </p>
+              <ul className="mt-2">
+                {FOOTER_PRODUCTS.map((l) => (
                   <li key={l.href}>
-                    <a
-                      href={l.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block cursor-pointer rounded-lg px-4 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
-                    >
+                    <a href={l.href} className="link-quiet inline-flex min-h-[44px] min-w-[44px] items-center text-sm">
                       {l.label}
                     </a>
                   </li>
                 ))}
-                <li className="pt-2">
-                  <a
-                    href="#contacto"
-                    onClick={() => setMobileOpen(false)}
-                    className="block cursor-pointer rounded-xl bg-indigo-600 px-5 py-2.5 text-center text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/30"
-                  >
-                    Contactanos
-                  </a>
-                </li>
               </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+            </nav>
 
-      {/* ── Hero ── */}
-      <section className="relative flex min-h-screen items-center justify-center px-4 pt-24 pb-16">
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          {/* Badge */}
-          <div
-            className="relative mb-6 inline-flex items-center gap-2 overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-medium text-indigo-300 opacity-0 animate-fade-up"
-            style={{ animationDelay: "60ms" }}
-          >
-            <BorderBeam duration={5} thickness={1.5} colorFrom="#818CF8" colorTo="#10B981" />
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            </span>
-            <span className="relative">Software de gestión para todos los rubros</span>
-          </div>
-
-          {/* Headline */}
-          <h1
-            className="font-heading mb-5 text-5xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl opacity-0 animate-fade-up"
-            style={{ animationDelay: "180ms" }}
-          >
-            Software de gestión para tu negocio que{" "}
-            <RotatingText
-              words={["transforma", "impulsa", "acelera", "digitaliza"]}
-              interval={2600}
-            />
-            <br />
-            tu negocio
-          </h1>
-
-          <p
-            className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl opacity-0 animate-fade-up"
-            style={{ animationDelay: "320ms" }}
-          >
-            Sistema de gestión para restaurantes, cafeterías y hoteles de Argentina:
-            punto de venta (POS), control de stock, producción y fidelización de clientes — todo en un ecosistema integrado.
-          </p>
-
-          {/* CTA buttons */}
-          <div
-            className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center opacity-0 animate-fade-up"
-            style={{ animationDelay: "440ms" }}
-          >
-            <Magnetic strength={0.35}>
-              <a
-                href="#productos"
-                className="group cursor-pointer inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 transition-all hover:bg-indigo-500 hover:shadow-indigo-500/40 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 btn-press"
-              >
-                Ver productos
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-            </Magnetic>
-            <Magnetic strength={0.3}>
-              <a
-                href="#contacto"
-                className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/25 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 btn-press"
-              >
-                Contactanos
-              </a>
-            </Magnetic>
-          </div>
-
-          {/* Floating stat cards */}
-          <div className="mt-16 grid grid-cols-3 gap-4 sm:gap-6 max-w-lg mx-auto">
-            {[
-              {
-                label: "Productos",
-                float: "animate-float",
-                counter: { to: 3, format: (n: number) => `${Math.round(n)}+` },
-              },
-              {
-                label: "Uptime",
-                float: "animate-float-delayed",
-                counter: { to: 99.9, format: (n: number) => `${n.toFixed(1)}%` },
-              },
-              {
-                label: "Soporte",
-                float: "animate-float",
-                counter: { to: 0, static: "24/7" as const },
-              },
-            ].map((s, i) => (
-              <div
-                key={s.label}
-                className={`glass rounded-2xl px-4 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-white/20 opacity-0 animate-fade-up ${s.float}`}
-                style={{ animationDelay: `${600 + i * 120}ms`, animationFillMode: "forwards" }}
-              >
-                <div className="font-heading text-2xl font-bold text-white">
-                  {"static" in s.counter ? (
-                    s.counter.static
-                  ) : (
-                    <AnimatedCounter to={s.counter.to} format={s.counter.format} />
-                  )}
-                </div>
-                <div className="mt-0.5 text-xs font-medium text-slate-400">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-      </section>
-
-      {/* ── Sobre nosotros ── */}
-      <section id="nosotros" className="py-24 px-4">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <Reveal>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-400">Sobre nosotros</p>
-              <h2 className="font-heading mb-6 text-4xl font-bold leading-tight text-white sm:text-5xl">
-                Creamos el software que tu empresa{" "}
-                <span className="gradient-text-animated">realmente necesita</span>
-              </h2>
-              <p className="mb-6 text-lg leading-relaxed text-slate-400">
-                Somos una empresa de software de Neuquén, Patagonia argentina, especializada
-                en sistemas de gestión que se adaptan a cualquier rubro. Nova Solutions nació de la necesidad de
-                resolver problemas reales en negocios reales: gastronomía, tiendas, supermercados, hoteles y más.
+            <nav aria-labelledby="footer-empresa">
+              <p id="footer-empresa" className="text-sm font-semibold text-ink">
+                Empresa
               </p>
-              <p className="mb-8 text-lg leading-relaxed text-slate-400">
-                No vendemos soluciones genéricas: analizamos tus procesos, entendemos tus desafíos
-                y construimos herramientas que se adaptan exactamente a tu operación.
-              </p>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="#productos"
-                  className="group cursor-pointer inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/30"
-                >
-                  Conocé nuestros productos
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
-              </div>
-            </Reveal>
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-              {[
-                {
-                  icon: Zap,
-                  title: "Innovación",
-                  desc: "Tecnologías de punta para resultados que marcan la diferencia.",
-                  color: "text-indigo-400",
-                  bg: "bg-indigo-500/10",
-                },
-                {
-                  icon: Shield,
-                  title: "Calidad",
-                  desc: "Código robusto, bien probado y mantenible en el tiempo.",
-                  color: "text-emerald-400",
-                  bg: "bg-emerald-500/10",
-                },
-                {
-                  icon: Headphones,
-                  title: "Soporte",
-                  desc: "Acompañamos a nuestros clientes mucho más allá del lanzamiento.",
-                  color: "text-amber-400",
-                  bg: "bg-amber-500/10",
-                },
-              ].map((p, i) => (
-                <Reveal key={p.title} delay={120 + i * 100}>
-                  <TiltedCard
-                    glow={`rgba(${p.color.includes("indigo") ? "99,102,241" : p.color.includes("emerald") ? "16,185,129" : "245,158,11"}, 0.22)`}
-                    max={16}
-                    className="group glass rounded-2xl p-6 h-full"
-                  >
-                    <div
-                      className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${p.bg} ${p.color} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6`}
-                    >
-                      <p.icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="font-heading mb-1.5 text-base font-semibold text-white">{p.title}</h3>
-                    <p className="text-sm leading-relaxed text-slate-400">{p.desc}</p>
-                  </TiltedCard>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Productos ── */}
-      <section id="productos" className="py-24 px-4">
-        <div className="mx-auto max-w-6xl">
-          <Reveal className="mb-14 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-400">Nuestros productos</p>
-            <h2 className="font-heading text-4xl font-bold text-white sm:text-5xl">
-              Un sistema completo para restaurantes, cafeterías y hoteles
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
-              Cada producto fue diseñado para resolver un problema específico, y todos trabajan juntos de forma integrada.
-            </p>
-          </Reveal>
-
-          <div className="grid gap-6 lg:grid-cols-3">
-            {products.map((p, idx) => (
-              <Reveal key={p.id} delay={idx * 120} className="h-full">
-                <ProductCard product={p} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Tech stack marquee ── */}
-      <section aria-label="Stack tecnológico" className="py-14 px-0 border-y border-white/5 bg-white/[0.02]">
-        <div className="mx-auto max-w-6xl mb-6 px-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-            Construido con tecnología moderna
-          </p>
-        </div>
-        <Marquee speed={32}>
-          {[
-            "React",
-            "Next.js",
-            "TypeScript",
-            "NestJS",
-            "PostgreSQL",
-            "Redis",
-            "WebSockets",
-            "Tailwind CSS",
-            "Docker",
-            "AWS",
-            "Vercel",
-            "Prisma",
-          ].map((t) => (
-            <span
-              key={t}
-              className="flex items-center gap-2 font-heading text-2xl font-semibold text-slate-500 transition-colors hover:text-white sm:text-3xl"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-indigo-400/60" />
-              {t}
-            </span>
-          ))}
-        </Marquee>
-      </section>
-
-      {/* ── Por qué Nova ── */}
-      <section id="beneficios" className="py-24 px-4">
-        <div className="mx-auto max-w-6xl">
-          <Reveal className="mb-14 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-400">¿Por qué Nova?</p>
-            <h2 className="font-heading text-4xl font-bold text-white sm:text-5xl">
-              Por qué elegir Nova para la gestión de tu restaurante
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-slate-400">
-              No somos una agencia más. Somos un equipo comprometido con resultados reales.
-            </p>
-          </Reveal>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {benefits.map((b, i) => (
-              <Reveal key={b.title} delay={i * 100} className="h-full">
-                <FlipCard
-                  className="min-h-[280px]"
-                  front={
-                    <div className="flex h-full flex-col items-center justify-center rounded-2xl glass p-6 text-center cursor-pointer">
-                      <div
-                        className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl ${b.bg} ${b.color}`}
-                      >
-                        <b.icon className="h-6 w-6" />
-                      </div>
-                      <h3 className="font-heading mb-2 text-base font-semibold text-white">{b.title}</h3>
-                      <p className="text-sm leading-relaxed text-slate-400">{b.description}</p>
-                      <p className="mt-4 text-[11px] font-medium uppercase tracking-widest text-slate-500">
-                        Pasá el cursor →
-                      </p>
-                    </div>
-                  }
-                  back={
-                    <div
-                      className={`flex h-full flex-col justify-center rounded-2xl border p-6 cursor-pointer ${b.bg.replace("/10", "/20")} ${b.color.replace("text-", "border-").replace("400", "500/30")}`}
-                    >
-                      <p
-                        className={`mb-3 text-xs font-semibold uppercase tracking-widest ${b.color}`}
-                      >
-                        {b.backTitle}
-                      </p>
-                      <ul className="space-y-2 text-left">
-                        {b.backItems.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-start gap-2 text-sm leading-snug text-slate-200"
-                          >
-                            <Check className={`h-4 w-4 shrink-0 mt-0.5 ${b.color}`} />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  }
-                />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Contacto ── */}
-      <section id="contacto" className="py-24 px-4">
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-950/60 via-[#0a0a1e]/80 to-[#070714] backdrop-blur-xl">
-              <div className="grid lg:grid-cols-2">
-                {/* Left: info */}
-                <div className="relative p-10 lg:p-14">
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-transparent" />
-                  <div className="relative">
-                    <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-indigo-400">Contacto</p>
-                    <h2 className="font-heading mb-5 text-3xl font-bold text-white sm:text-4xl">
-                      Pedí una demo para tu restaurante u hotel
-                    </h2>
-                    <p className="mb-8 text-base leading-relaxed text-slate-400">
-                      Contanos tu idea o problema y te ayudamos a encontrar la mejor solución tecnológica para tu empresa.
-                      Sin compromisos, sin costos ocultos.
-                    </p>
-
-                    <div className="space-y-5">
-                      <a
-                        href="mailto:contacto@novasolutions.ar"
-                        className="group flex items-center gap-4 -mx-2 px-2 py-1 rounded-lg transition-colors hover:bg-white/5"
-                      >
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-400 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                          <Mail className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Email</p>
-                          <p className="text-sm font-medium text-slate-200 group-hover:text-white transition-colors">
-                            contacto@novasolutions.ar
-                          </p>
-                        </div>
-                      </a>
-                      <div className="flex items-center gap-4">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-400">
-                          <Terminal className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Respuesta</p>
-                          <p className="text-sm font-medium text-slate-200">En menos de 24 horas hábiles</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Decorative orb */}
-                    <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-indigo-600/10 blur-3xl animate-orb-drift" />
-                  </div>
-                </div>
-
-                {/* Right: form */}
-                <div className="border-t border-white/10 p-10 lg:border-l lg:border-t-0 lg:p-14">
-                  <ContactForm />
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── Footer ── */}
-      <footer className="border-t border-white/10 px-4 py-12">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mb-10">
-            {/* Brand */}
-            <div className="sm:col-span-2 lg:col-span-1">
-              <a href="#" className="mb-4 flex items-center gap-2.5 cursor-pointer">
-                <NovaLogo size={32} />
-                <span className="font-heading text-base font-bold text-white">Nova Solutions</span>
-              </a>
-              <p className="text-sm leading-relaxed text-slate-500 max-w-xs">
-                Soluciones de software para los problemas reales de tu empresa.
-              </p>
-            </div>
-
-            {/* Products */}
-            <div>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">Productos</p>
-              <ul className="space-y-2.5 text-sm text-slate-500">
-                {[
-                  { label: "Nova ERP", href: "https://novaerp.com.ar", external: true },
-                  { label: "Nova Points", href: "#productos", external: false },
-                  { label: "Nova POS", href: "#productos", external: false },
-                ].map((p) => (
-                  <li key={p.label}>
-                    <a
-                      href={p.href}
-                      target={p.external ? "_blank" : undefined}
-                      rel={p.external ? "noopener noreferrer" : undefined}
-                      className="inline-flex items-center gap-1 cursor-pointer transition-colors hover:text-slate-200"
-                    >
-                      {p.label}
-                      {p.external && <ArrowRight className="h-3 w-3 -rotate-45 opacity-70" />}
+              <ul className="mt-2">
+                {FOOTER_COMPANY.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} className="link-quiet inline-flex min-h-[44px] min-w-[44px] items-center text-sm">
+                      {l.label}
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
-            {/* Company */}
             <div>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">Empresa</p>
-              <ul className="space-y-2.5 text-sm text-slate-500">
-                {[
-                  { label: "Sobre nosotros", href: "#nosotros" },
-                  { label: "¿Por qué Nova?", href: "#beneficios" },
-                  { label: "Contacto", href: "#contacto" },
-                ].map((l) => (
-                  <li key={l.href}>
-                    <a href={l.href} className="cursor-pointer transition-colors hover:text-slate-200">{l.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">Contacto</p>
-              <ul className="space-y-2.5 text-sm text-slate-500">
+              <p className="text-sm font-semibold text-ink">Contacto</p>
+              <ul className="mt-2">
                 <li>
                   <a
-                    href="mailto:contacto@novasolutions.ar"
-                    className="cursor-pointer transition-colors hover:text-slate-200"
+                    href={`mailto:${CONTACT_MAIL}`}
+                    className="link-quiet inline-flex min-h-[44px] min-w-[44px] items-center text-sm"
                   >
-                    contacto@novasolutions.ar
+                    {CONTACT_MAIL}
                   </a>
                 </li>
-                <li>Neuquén, Argentina</li>
+                <li className="flex min-h-[44px] items-center gap-2 text-sm text-ink-2">
+                  <MapPin className="h-4 w-4 text-ink-3" strokeWidth={1.75} aria-hidden="true" />
+                  Neuquén, Argentina
+                </li>
               </ul>
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 sm:flex-row">
-            <p className="text-xs text-slate-600">
-              © {new Date().getFullYear()} Nova Solutions. Todos los derechos reservados.
-            </p>
-            <p className="text-xs text-slate-600">
-              Hecho con dedicación en Neuquén, Argentina 🇦🇷
-            </p>
-          </div>
+          <p className="mt-10 border-t border-line pt-6 text-sm text-ink-3">
+            © {year} Nova Solutions. NovaERP, NovaStay, NovaPoints y Jarvis son
+            productos de Nova Solutions.
+          </p>
         </div>
       </footer>
     </div>
-    </PageTransition>
   );
 }
