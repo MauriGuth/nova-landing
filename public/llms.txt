@@ -1,0 +1,27 @@
+# Nova Solutions
+
+> Empresa de software de Neuquén, Patagonia argentina. Aplicamos IA en tu empresa, con un sistema hecho a medida: lo diseñamos sobre tus requerimientos, lo integramos con lo que ya usás y lo potenciamos con IA (alertas y predicciones, reportes con resumen ejecutivo y un asistente que responde con los datos de la empresa).
+
+## Qué hacemos
+
+- Software a medida con IA para empresas de operaciones complejas (petróleo y gas, minería, energía, logística, agro, construcción) y para negocios de gastronomía, hotelería, comercio y supermercados.
+- Soporte directo de quienes programan el sistema.
+
+## Productos
+
+- [NovaERP](https://novaerp.com.ar): sistema de gestión con punto de venta, stock multi-local, caja y cierres, facturación electrónica ARCA, personal y fichadas, logística, producción, reportes, Eventos IA y Chat Auditor.
+- NovaStay: sistema de gestión hotelera (PMS).
+- NovaPoints: fidelización de clientes con app propia.
+- Jarvis: asistente por WhatsApp que responde con los datos reales del negocio.
+- nova-print: impresión local de comandas y tickets.
+
+## Clientes en producción
+
+La Posada del Dinosaurio, The Coffee Store y Dorado (gastronomía, hotelería y comercio).
+
+## Contacto
+
+- Sitio: https://novasolutions.ar
+- Email: contacto@novasolutions.ar
+- WhatsApp: +54 299 517 1364
+- Ubicación: Neuquén, Argentina
