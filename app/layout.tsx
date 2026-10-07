@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
 import "./globals.css";
+import { GoogleAds } from "@/components/google-ads";
 
 // Fuentes self-hosteadas por next/font: Bricolage Grotesque (display, variable,
 // con eje óptico) y Geist (cuerpo, variable). Sin requests externos en el render.
@@ -98,6 +99,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <GoogleAds />
       </body>
     </html>
   );

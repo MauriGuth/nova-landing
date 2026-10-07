@@ -9,6 +9,7 @@ import {
 } from "react";
 import { Check, LoaderCircle } from "lucide-react";
 import { DIAGNOSTICO_EVENT, DIAGNOSTICO_KEY } from "./diagnostico-data";
+import { trackLead } from "./google-ads";
 
 type Field = "name" | "company" | "email" | "message";
 type Status = "idle" | "sending" | "sent" | "error";
@@ -103,6 +104,7 @@ export function ContactForm() {
       if (!res.ok) throw new Error("send-failed");
       setSentTo(payload.email);
       setStatus("sent");
+      trackLead();
     } catch {
       setStatus("error");
     }
