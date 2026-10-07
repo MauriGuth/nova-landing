@@ -12,7 +12,8 @@ export const GOOGLE_ADS_ID = "AW-18499741291";
  *  Conversiones → la acción → Configurar etiqueta). Mientras estén vacías se
  *  mandan solo los eventos genéricos, que no cuentan como conversión. */
 const CONVERSION_LABELS = {
-  lead: "",
+  /** "Envío de formulario para clientes potenciales" */
+  lead: "811TCKbBspQdEOvMrvVE",
   whatsapp: "",
 };
 
@@ -27,7 +28,12 @@ function send(kind: keyof typeof CONVERSION_LABELS, event: string) {
   window.gtag("event", event);
   const label = CONVERSION_LABELS[kind];
   if (label) {
-    window.gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/${label}` });
+    // value y currency: los del fragmento de evento que da Google Ads.
+    window.gtag("event", "conversion", {
+      send_to: `${GOOGLE_ADS_ID}/${label}`,
+      value: 1.0,
+      currency: "ARS",
+    });
   }
 }
 
