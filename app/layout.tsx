@@ -17,7 +17,7 @@ const body = Geist({
   display: "swap",
 });
 
-const SITE_URL = "https://novasolutions.ar";
+const SITE_URL = "https://www.novasolutions.ar";
 
 export const viewport: Viewport = {
   themeColor: "#070714",
