@@ -1,11 +1,7 @@
 "use client";
 
-import Script from "next/script";
 import { useEffect } from "react";
-
-/** Etiqueta de Google de la cuenta de Google Ads de Nova Solutions. Es
- *  pública: viaja en el HTML de cualquier sitio que la use. */
-export const GOOGLE_ADS_ID = "AW-18499741291";
+import { GOOGLE_ADS_ID } from "./google-tag";
 
 /** Etiquetas de las acciones de conversión de Google Ads (lo que va después
  *  de la barra en el `send_to` del fragmento de evento: Objetivos →
@@ -47,8 +43,9 @@ export function trackWhatsApp() {
   send("whatsapp", "contact");
 }
 
-/** Carga la etiqueta de Google y escucha los clics a WhatsApp de toda la
- *  página (un solo listener: los links están en componentes de servidor). */
+/** Escucha los clics a WhatsApp de toda la página (un solo listener: los
+ *  links están en componentes de servidor). La etiqueta la carga GoogleTag,
+ *  en el <head>. */
 export function GoogleAds() {
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -59,18 +56,5 @@ export function GoogleAds() {
     return () => document.removeEventListener("click", onClick, { capture: true });
   }, []);
 
-  return (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-ads-gtag" strategy="afterInteractive">
-        {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GOOGLE_ADS_ID}');`}
-      </Script>
-    </>
-  );
+  return null;
 }

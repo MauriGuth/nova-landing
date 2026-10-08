@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
 import "./globals.css";
 import { GoogleAds } from "@/components/google-ads";
+import { GoogleTag } from "@/components/google-tag";
 
 // Fuentes self-hosteadas por next/font: Bricolage Grotesque (display, variable,
 // con eje óptico) y Geist (cuerpo, variable). Sin requests externos en el render.
@@ -92,6 +93,7 @@ export default function RootLayout({
     <html lang="es-AR" className={`${display.variable} ${body.variable}`}>
       <head>
         <link rel="icon" type="image/svg+xml" href="/logo-dark.svg" />
+        <GoogleTag />
       </head>
       <body>
         <script
