@@ -296,7 +296,14 @@ export function ContactForm() {
             "Enviar"
           )}
         </button>
-        <p className="text-sm text-ink-3">Sin spam. Te responde una persona.</p>
+        <p className="text-sm text-ink-3">
+          Sin spam. Te responde una persona. Usamos tus datos solo para
+          contestarte (
+          <a href="/privacidad" className="underline underline-offset-4">
+            privacidad
+          </a>
+          ).
+        </p>
       </div>
     </form>
   );
