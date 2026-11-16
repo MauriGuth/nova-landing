@@ -452,10 +452,24 @@ export default function HomePage() {
             </div>
           </div>
 
-          <p className="mt-10 border-t border-line pt-6 text-sm text-ink-3">
-            © {year} Nova Solutions. NovaERP, NovaStay, NovaPoints y Jarvis son
-            productos de Nova Solutions.
-          </p>
+          <div className="mt-10 flex flex-col gap-2 border-t border-line pt-6 text-sm text-ink-3 md:flex-row md:items-center md:justify-between">
+            <p>
+              © {year} Nova Solutions. NovaERP, NovaStay, NovaPoints y Jarvis son
+              productos de Nova Solutions.
+            </p>
+            <ul className="flex gap-4">
+              <li>
+                <a href="/privacidad" className="link-quiet inline-flex min-h-[44px] items-center">
+                  Privacidad
+                </a>
+              </li>
+              <li>
+                <a href="/terminos" className="link-quiet inline-flex min-h-[44px] items-center">
+                  Términos
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </footer>
     </div>
