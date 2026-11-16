@@ -32,8 +32,8 @@ export default function TerminosPage() {
 
       <Section title="Uso correcto">
         <p>
-          No uses el sitio ni el formulario para mandar spam, contenido ilegal o
-          para intentar romper o sobrecargar el servicio.
+          No uses el sitio ni el formulario para mandar spam o contenido ilegal,
+          ni para intentar romper o sobrecargar el servicio.
         </p>
       </Section>
 

@@ -26,7 +26,7 @@ export default function PrivacidadPage() {
       <Section title="Qué datos juntamos">
         <p>
           <strong>Formulario de contacto.</strong> Cuando nos escribís desde el
-          formulario guardamos tu nombre, tu empresa (si la ponés), tu email y el
+          formulario, guardamos tu nombre, tu empresa (si la ponés), tu email y el
           mensaje. Los usamos solo para responderte y, si avanzamos, para preparar
           una propuesta.
         </p>
