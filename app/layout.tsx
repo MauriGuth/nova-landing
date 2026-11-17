@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Nova Solutions — Aplicamos IA en tu empresa, con un sistema hecho a medida",
     description:
       "Sistemas a medida con IA para operaciones complejas. Hecho en Neuquén.",
