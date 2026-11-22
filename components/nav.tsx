@@ -59,7 +59,7 @@ export function Nav() {
             href="#contacto"
             className="btn btn-primary hidden h-11 px-4 text-sm md:inline-flex"
           >
-            Hablemos
+            Pedí una demo
           </a>
 
           <button
@@ -101,7 +101,7 @@ export function Nav() {
               onClick={() => setOpen(false)}
               className="btn btn-primary mt-2 h-12 w-full"
             >
-              Hablemos de tu operación
+              Pedí una demo
             </a>
           </div>
         )}

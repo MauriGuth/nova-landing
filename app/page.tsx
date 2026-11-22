@@ -19,105 +19,31 @@ import { ContactForm } from "@/components/contact-form";
 import { SystemMock } from "@/components/system-mock";
 import { Diagnostico } from "@/components/diagnostico";
 import { NovaLogo } from "@/components/nova-logo";
+import { BigScrollTitle } from "@/components/big-scroll-title";
+import { StatCard } from "@/components/stat-card";
+import { ProductCard } from "@/components/product-card";
+import { WhatsAppFab } from "@/components/whatsapp-fab";
+import {
+  CLIENTS,
+  CONTACT_MAIL,
+  ERP_FEATURES,
+  FOOTER_COMPANY,
+  FOOTER_PRODUCTS,
+  PRODUCTS,
+  REASONS,
+  STATS,
+  WHATSAPP_URL,
+} from "@/lib/site";
 
-const NOVAERP_URL = "https://novaerp.com.ar";
-const CONTACT_MAIL = "contacto@novasolutions.ar";
-const WHATSAPP_URL =
-  "https://wa.me/542995171364?text=" +
-  encodeURIComponent("Hola! Quiero hablar sobre un sistema a medida para mi empresa");
-
-const ERP_FEATURES: { icon: LucideIcon; label: string }[] = [
-  { icon: Utensils, label: "Mesas y comandas" },
-  { icon: ChefHat, label: "Pantalla de cocina" },
-  { icon: Wallet, label: "Caja, arqueo y cierre" },
-  { icon: Package, label: "Stock por local" },
-  { icon: ReceiptText, label: "Facturación electrónica ARCA" },
-  { icon: ChartColumn, label: "Reportes por día de negocio" },
-];
-
-const FAMILY = [
-  {
-    id: "novastay",
-    name: "NovaStay",
-    line: "El PMS para hoteles que comparte la caja con el restaurante.",
-    points: [
-      "Reservas, check-in y check-out",
-      "Cargo a la habitación desde el restaurante",
-      "Caja única: el cierre del día es uno solo",
-    ],
-  },
-  {
-    id: "novapoints",
-    name: "NovaPoints",
-    line: "Fidelización con app propia para tus clientes.",
-    points: [
-      "Puntos por cada compra",
-      "Niveles y premios que definís vos",
-      "Se suma desde el punto de venta, sin pasos extra",
-    ],
-  },
-  {
-    id: "jarvis",
-    name: "Jarvis",
-    line: "El asistente por WhatsApp que contesta con datos reales del sistema.",
-    points: [
-      "Ventas, caja y stock al momento",
-      "Quién faltó, quién fichó y a qué hora",
-      "Si no tiene el dato, no lo inventa",
-    ],
-  },
-];
-
-const REASONS = [
-  {
-    title: "El sistema se ajusta a tu operación, no al revés",
-    body: "Partimos de tus requerimientos: tus bases, tus áreas, tus flujos y los sistemas que ya usás. Diseñamos sobre eso y lo potenciamos con IA donde hace diferencia: alertas, predicciones, reportes y un asistente con tus datos.",
-  },
-  {
-    title: "Un dato se carga una vez y aparece en todos lados",
-    body: "Cargás un producto, un precio o un cliente una sola vez y lo ven el punto de venta, el stock, la caja, los reportes y Jarvis. Sin planillas paralelas ni doble carga.",
-  },
-  {
-    title: "El sistema te contesta por WhatsApp",
-    body: "Le preguntás a Jarvis “¿cuánto vendí hoy?” o “¿quién faltó?”, por texto o por audio, y te responde con los datos del sistema. Si no tiene el dato, te lo dice: nunca inventa un número.",
-  },
-  {
-    title: "Soporte directo con quien lo programó, desde Neuquén",
-    body: "Hablás con las mismas personas que escriben el sistema. Un cambio que tu local necesita no entra en una cola de pedidos de otro país: lo hacemos nosotros.",
-  },
-  {
-    title: "Hotel y restaurante con una sola caja",
-    body: "En La Posada del Dinosaurio, NovaStay y NovaERP comparten la caja: el consumo del restaurante se carga a la habitación y el cierre del día es uno solo.",
-  },
-];
-
-const CLIENTS = [
-  {
-    name: "La Posada del Dinosaurio",
-    body: "Hotel y restaurante. NovaStay y NovaERP con caja única: lo que se consume en el restaurante se carga a la habitación.",
-  },
-  {
-    name: "The Coffee Store",
-    body: "Cafetería. Punto de venta y fidelización con NovaPoints: sus clientes suman puntos en cada compra.",
-  },
-  {
-    name: "Dorado",
-    body: "Restaurante. Mesas, comandas y caja en NovaERP; sus clientes suman puntos y reservan desde la app con su marca, hecha con NovaPoints.",
-  },
-];
-
-const FOOTER_PRODUCTS = [
-  { label: "NovaERP", href: "#novaerp" },
-  { label: "NovaStay", href: "#novastay" },
-  { label: "NovaPoints", href: "#novapoints" },
-  { label: "Jarvis", href: "#jarvis" },
-];
-const FOOTER_COMPANY = [
-  { label: "Diagnóstico", href: "#diagnostico" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Por qué Nova", href: "#por-que-nova" },
-  { label: "Contacto", href: "#contacto" },
-];
+// Íconos de las capacidades de NovaERP (las claves salen de lib/site).
+const ERP_ICONS: Record<string, LucideIcon> = {
+  utensils: Utensils,
+  "chef-hat": ChefHat,
+  wallet: Wallet,
+  package: Package,
+  "receipt-text": ReceiptText,
+  "chart-column": ChartColumn,
+};
 
 export default function HomePage() {
   const year = new Date().getFullYear();
@@ -131,7 +57,7 @@ export default function HomePage() {
         Ir al contenido
       </a>
 
-      {/* Ambiente estático */}
+      {/* Ambiente estático (visible en las secciones oscuras; las claras lo tapan) */}
       <div className="ambient-grid -z-10" aria-hidden="true" />
       <div className="ambient-glow -z-10" aria-hidden="true" />
       <AmbientParticles />
@@ -140,36 +66,42 @@ export default function HomePage() {
       <Nav />
 
       <main id="contenido">
-        {/* ── Hero ── */}
+        {/* ── Hero (oscuro) ── */}
         <section className="hero px-4 pb-16 sm:px-6 md:pb-24">
           <div className="mx-auto grid max-w-[1120px] items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
             <div>
+              <p className="eyebrow mb-5">Software a medida · Neuquén</p>
               <h1 className="h1">
                 Aplicamos IA en tu empresa, con un sistema{" "}
                 <span className="h1-underline">hecho a medida</span>.
               </h1>
               <p className="lead mt-6 max-w-[34rem]">
-                Para operaciones complejas: varias bases, muchas áreas y
-                muchos datos. Diseñamos el sistema sobre tus requerimientos,
-                lo integramos con lo que ya usás y lo potenciamos con IA.
-                Desde Neuquén, para petróleo y gas, minería, energía,
-                logística y agroindustria.
+                Para operaciones complejas: varias bases, muchas áreas y muchos
+                datos. Diseñamos el sistema sobre tus requerimientos, lo
+                integramos con lo que ya usás y lo potenciamos con IA. Desde
+                Neuquén, para petróleo y gas, minería, energía, logística y
+                agroindustria.
               </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-                <a
-                  href="#diagnostico"
-                  className="btn btn-primary h-14 w-full text-base sm:h-12 sm:w-auto"
-                >
-                  Hacé el diagnóstico
-                </a>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
                 <a
                   href="#contacto"
-                  className="link-arrow h-11 self-start text-base sm:self-auto"
+                  className="btn btn-primary h-14 w-full text-base sm:h-12 sm:w-auto"
                 >
-                  Hablemos de tu operación
-                  <ArrowRight className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
+                  Pedí una demo
+                </a>
+                <a
+                  href="#productos"
+                  className="btn btn-secondary h-14 w-full text-base sm:h-12 sm:w-auto"
+                >
+                  Ver productos
                 </a>
               </div>
+              <p className="mt-6">
+                <a href="#diagnostico" className="link-arrow text-[15px]">
+                  ¿Cómo opera tu empresa? Hacé el diagnóstico
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+                </a>
+              </p>
               <p className="mt-8 text-sm leading-relaxed text-ink-3">
                 Lo usan hoy en Neuquén:{" "}
                 <span className="text-ink-2">
@@ -182,7 +114,76 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── Diagnóstico ── */}
+        {/* ── Productos (oscuro) ── */}
+        <section id="productos" className="section scroll-mt-24">
+          <div className="container-site">
+            <Reveal>
+              <p className="eyebrow">Lo que ya construimos</p>
+            </Reveal>
+            <BigScrollTitle direction="left">Productos</BigScrollTitle>
+            <Reveal>
+              <p className="lead mt-4 max-w-[62ch]">
+                NovaERP es el núcleo que hoy opera en producción. NovaStay,
+                NovaPoints y Jarvis trabajan sobre los mismos datos: lo que se
+                carga una vez, se ve en todos lados. Sobre ese mismo núcleo
+                armamos tu sistema.
+              </p>
+            </Reveal>
+
+            <Reveal
+              as="ul"
+              stagger
+              className="mt-12 grid gap-6 sm:grid-cols-2"
+            >
+              {PRODUCTS.map((p) => (
+                <li key={p.id} className="h-full">
+                  <ProductCard product={p} />
+                </li>
+              ))}
+            </Reveal>
+
+            {/* NovaERP en detalle: el núcleo que incluye el módulo de salón Nova POS */}
+            <Reveal className="mt-10 rounded-2xl border border-line bg-surface p-6 md:p-8">
+              <p className="eyebrow">NovaERP incluye</p>
+              <ul className="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+                {ERP_FEATURES.map(({ icon, label }) => {
+                  const Icon = ERP_ICONS[icon];
+                  return (
+                    <li key={label} className="flex items-start gap-3">
+                      {Icon ? (
+                        <Icon
+                          className="mt-0.5 h-5 w-5 shrink-0 text-accent-ink"
+                          strokeWidth={1.75}
+                          aria-hidden="true"
+                        />
+                      ) : null}
+                      <span className="text-ink">{label}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ── Métricas (claro) ── */}
+        <section className="section theme-light scroll-mt-24">
+          <div className="container-site">
+            <Reveal>
+              <p className="eyebrow">En números</p>
+              <h2 className="h2 mt-2">Lo que ya está operando</h2>
+            </Reveal>
+            <Reveal as="ul" stagger className="mt-10 grid gap-6 sm:grid-cols-3">
+              {STATS.map((s) => (
+                <li key={s.id}>
+                  <StatCard stat={s} />
+                </li>
+              ))}
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ── Diagnóstico (oscuro) ── */}
         <section id="diagnostico" className="section band scroll-mt-24">
           <div className="container-site">
             <Reveal>
@@ -199,85 +200,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── Lo que ya construimos ── */}
-        <section id="productos" className="section scroll-mt-24">
+        {/* ── Por qué Nova (claro) ── */}
+        <section id="por-que-nova" className="section theme-light scroll-mt-24">
           <div className="container-site">
             <Reveal>
-              <h2 className="h2">Lo que ya construimos</h2>
-              <p className="lead mt-4 max-w-[62ch]">
-                NovaERP es el núcleo que hoy opera en producción. NovaStay,
-                NovaPoints y Jarvis trabajan sobre los mismos datos: lo que se
-                carga una vez, se ve en todos lados. Sobre ese mismo núcleo
-                armamos tu sistema.
-              </p>
-            </Reveal>
-
-            <Reveal className="mt-12">
-              <article
-                id="novaerp"
-                className="grid gap-8 rounded-2xl border border-line bg-surface p-6 scroll-mt-28 md:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-12"
-              >
-                <div>
-                  <h3 className="font-display text-[28px] font-semibold leading-[1.1] tracking-[-0.01em] text-ink md:text-[32px]">
-                    NovaERP
-                  </h3>
-                  <p className="mt-3 max-w-[46ch] text-ink-2">
-                    El sistema de gestión completo para tu local: lo que pasa
-                    en el salón, la cocina, la caja y el depósito, en un solo
-                    lugar y con los mismos datos.
-                  </p>
-                  <a href={NOVAERP_URL} className="btn btn-primary mt-6">
-                    Conocé NovaERP
-                    <ArrowRight className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
-                  </a>
-                </div>
-                <ul className="grid gap-x-8 gap-y-4 self-center sm:grid-cols-2">
-                  {ERP_FEATURES.map(({ icon: Icon, label }) => (
-                    <li key={label} className="flex items-start gap-3">
-                      <Icon
-                        className="mt-0.5 h-5 w-5 shrink-0 text-accent-ink"
-                        strokeWidth={1.75}
-                        aria-hidden="true"
-                      />
-                      <span className="text-ink">{label}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            </Reveal>
-
-            {/* La única "historia" animada de la página: las tres filas entran con stagger */}
-            <Reveal as="ul" stagger className="mt-6 border-t border-line">
-              {FAMILY.map((p) => (
-                <li
-                  key={p.id}
-                  id={p.id}
-                  className="grid gap-3 border-b border-line py-7 scroll-mt-28 md:grid-cols-[180px_minmax(0,1fr)_minmax(0,1fr)] md:gap-8"
-                >
-                  <h3 className="h3">{p.name}</h3>
-                  <p className="text-ink-2">{p.line}</p>
-                  <ul className="space-y-1.5 text-[15px] text-ink-2">
-                    {p.points.map((pt) => (
-                      <li key={pt} className="flex gap-2.5">
-                        <span
-                          className="mt-[10px] h-1 w-1 shrink-0 rounded-full bg-accent-ink"
-                          aria-hidden="true"
-                        />
-                        {pt}
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ── Por qué Nova ── */}
-        <section id="por-que-nova" className="section band scroll-mt-24">
-          <div className="container-site">
-            <Reveal>
-              <h2 className="h2">Por qué Nova</h2>
+              <p className="eyebrow">Por qué Nova</p>
+              <h2 className="h2 mt-2">La diferencia es cómo trabajamos</h2>
             </Reveal>
             <Reveal as="ul" className="mt-10 border-t border-line">
               {REASONS.map((r) => (
@@ -293,34 +221,44 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── Clientes ── */}
+        {/* ── Clientes / Casos (oscuro) ── */}
         <section id="clientes" className="section scroll-mt-24">
           <div className="container-site">
             <Reveal>
-              <h2 className="h2">Lo usan hoy en Neuquén</h2>
+              <p className="eyebrow">Lo usan hoy en Neuquén</p>
+            </Reveal>
+            <BigScrollTitle direction="right">Casos</BigScrollTitle>
+            <Reveal>
               <p className="lead mt-4 max-w-[62ch]">
                 Negocios reales, con nombre, operando todos los días.
               </p>
             </Reveal>
             <Reveal
               as="ul"
-              className="mt-10 grid gap-8 md:grid-cols-3 md:gap-0 md:divide-x md:divide-line"
+              stagger
+              className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4"
             >
               {CLIENTS.map((c) => (
-                <li key={c.name} className="md:px-8 md:first:pl-0 md:last:pr-0">
+                <li
+                  key={c.name}
+                  className="rounded-2xl border border-line bg-surface p-6"
+                >
                   <h3 className="h3">{c.name}</h3>
-                  <p className="mt-3 text-ink-2">{c.body}</p>
+                  <p className="mt-3 text-[15px] leading-relaxed text-ink-2">
+                    {c.body}
+                  </p>
                 </li>
               ))}
             </Reveal>
           </div>
         </section>
 
-        {/* ── Nosotros ── */}
-        <section id="nosotros" className="section band scroll-mt-24">
+        {/* ── Nosotros (claro) ── */}
+        <section id="nosotros" className="section theme-light scroll-mt-24">
           <div className="container-site grid gap-6 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] md:gap-10">
             <Reveal>
-              <h2 className="h2">Nosotros</h2>
+              <p className="eyebrow">Nosotros</p>
+              <h2 className="h2 mt-2">Hecho en Neuquén</h2>
             </Reveal>
             <Reveal className="max-w-[62ch] space-y-5 text-[17px] leading-relaxed text-ink-2">
               <p>
@@ -339,45 +277,50 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── Contacto ── */}
+        {/* ── Contacto (oscuro) ── */}
         <section id="contacto" className="section scroll-mt-24">
-          <div className="container-site grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+          <div className="container-site">
             <Reveal>
-              <h2 className="h2">Hablemos de tu operación</h2>
-              <p className="lead mt-4 max-w-[40ch]">
-                Contanos qué operación tenés y qué querés resolver. Te
-                proponemos el sistema a medida, con IA, para tu caso, y te
-                mostramos lo que ya construimos.
-              </p>
-              <ul className="mt-8 space-y-4">
-                <li>
-                  <a
-                    href={`mailto:${CONTACT_MAIL}`}
-                    className="link-quiet inline-flex min-h-[44px] items-center gap-2.5 text-base font-medium"
-                  >
-                    <Mail className="h-5 w-5 text-accent-ink" strokeWidth={1.75} aria-hidden="true" />
-                    {CONTACT_MAIL}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-secondary"
-                  >
-                    <MessageCircle className="h-5 w-5 text-accent-ink" strokeWidth={1.75} aria-hidden="true" />
-                    Escribinos por WhatsApp
-                  </a>
-                </li>
-              </ul>
-              <p className="mt-6 max-w-[30ch] text-sm text-ink-3 [text-wrap:pretty]">
-                Respondemos en horario laboral, por WhatsApp o por mail.
-              </p>
+              <p className="eyebrow">Hablemos de tu operación</p>
             </Reveal>
-            <Reveal>
-              <ContactForm />
-            </Reveal>
+            <BigScrollTitle direction="left">Contacto</BigScrollTitle>
+            <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+              <Reveal>
+                <p className="lead max-w-[40ch]">
+                  Contanos qué operación tenés y qué querés resolver. Te
+                  proponemos el sistema a medida, con IA, para tu caso, y te
+                  mostramos lo que ya construimos.
+                </p>
+                <ul className="mt-8 space-y-4">
+                  <li>
+                    <a
+                      href={`mailto:${CONTACT_MAIL}`}
+                      className="link-quiet inline-flex min-h-[44px] items-center gap-2.5 text-base font-medium"
+                    >
+                      <Mail className="h-5 w-5 text-accent-ink" strokeWidth={1.75} aria-hidden="true" />
+                      {CONTACT_MAIL}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-secondary"
+                    >
+                      <MessageCircle className="h-5 w-5 text-accent-ink" strokeWidth={1.75} aria-hidden="true" />
+                      Escribinos por WhatsApp
+                    </a>
+                  </li>
+                </ul>
+                <p className="mt-6 max-w-[30ch] text-sm text-ink-3 [text-wrap:pretty]">
+                  Respondemos en horario laboral, por WhatsApp o por mail.
+                </p>
+              </Reveal>
+              <Reveal>
+                <ContactForm />
+              </Reveal>
+            </div>
           </div>
         </section>
       </main>
@@ -458,6 +401,8 @@ export default function HomePage() {
           </p>
         </div>
       </footer>
+
+      <WhatsAppFab />
     </div>
   );
 }
