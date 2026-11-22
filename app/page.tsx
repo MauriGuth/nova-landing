@@ -11,6 +11,7 @@ import {
   Wallet,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { Nav } from "@/components/nav";
 import { AmbientParticles } from "@/components/ambient-particles";
 import { PointerRing } from "@/components/pointer-ring";
@@ -330,7 +331,7 @@ export default function HomePage() {
         <div className="container-site py-12 md:py-16">
           <div className="grid gap-10 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
             <div>
-              <a
+              <Link
                 href="/"
                 className="inline-flex h-11 items-center gap-2.5 rounded-lg"
                 aria-label="Nova Solutions, inicio"
@@ -339,7 +340,7 @@ export default function HomePage() {
                 <span className="font-display text-[17px] font-semibold text-ink">
                   Nova Solutions
                 </span>
-              </a>
+              </Link>
               <p className="mt-3 max-w-[32ch] text-sm leading-relaxed text-ink-2">
                 Sistemas a medida con IA para empresas y negocios, hechos en
                 Neuquén, Argentina.

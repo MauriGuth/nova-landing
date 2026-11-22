@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { NovaLogo } from "./nova-logo";
 
@@ -31,7 +32,7 @@ export function Nav() {
           aria-label="Principal"
           className="glass flex h-14 items-center justify-between rounded-2xl pl-3 pr-2 sm:pl-4"
         >
-          <a
+          <Link
             href="/"
             className="flex h-11 items-center gap-2.5 rounded-lg pr-2"
             aria-label="Nova Solutions, inicio"
@@ -40,7 +41,7 @@ export function Nav() {
             <span className="font-display text-[17px] font-semibold text-ink">
               Nova Solutions
             </span>
-          </a>
+          </Link>
 
           <ul className="hidden items-center md:flex">
             {LINKS.map((l) => (
