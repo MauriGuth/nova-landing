@@ -3,7 +3,7 @@
  *
  * Todo lo editable (números de contacto, métricas, productos, clientes) vive
  * acá para que la página sea declarativa. Las métricas usan sólo hechos
- * verificables; las capturas de producto pendientes están marcadas con TODO.
+ * verificables, sin cifras estimadas.
  */
 
 export const SITE_URL = "https://www.novasolutions.ar";
@@ -33,13 +33,22 @@ export const ERP_FEATURES = [
  * cifras estimadas). Si sumás volumen real (tickets, locales), confirmalo antes.
  * `value` es el número final (se anima desde 0), `prefix`/`suffix` lo decoran.
  */
+/** Motivos de LineIllustration (ilustraciones de línea continua). */
+export type Illustration =
+  | "comandera"
+  | "tablet"
+  | "ticket"
+  | "cama"
+  | "tarjeta"
+  | "chat";
+
 export type Stat = {
   id: string;
   prefix?: string;
   value: number;
   suffix?: string;
   label: string;
-  illustration: "comandera" | "tablet" | "ticket";
+  illustration: Illustration;
 };
 
 export const STATS: Stat[] = [
@@ -51,8 +60,8 @@ export const STATS: Stat[] = [
   },
   {
     id: "clientes",
-    value: 4,
-    label: "negocios con nombre que lo usan hoy",
+    value: 3,
+    label: "negocios con nombre que lo usan hoy en Neuquén",
     illustration: "comandera",
   },
   {
@@ -63,7 +72,7 @@ export const STATS: Stat[] = [
   },
 ];
 
-/** Tarjetas de producto grandes. `image` queda en null hasta tener captura. */
+/** Tarjetas de producto grandes. Sin fotos: cada una lleva una ilustración de línea. */
 export type Product = {
   id: string;
   name: string;
@@ -71,8 +80,7 @@ export type Product = {
   body: string;
   href: string;
   cta: string;
-  /** TODO: ruta en /public a la captura del producto (ej. "/products/novaerp.jpg"). */
-  image: string | null;
+  illustration: Illustration;
   badge?: string;
 };
 
@@ -84,7 +92,7 @@ export const PRODUCTS: Product[] = [
     body: "Salón, cocina, caja y depósito en un solo lugar y con los mismos datos. Incluye Nova POS, el módulo de salón: mesas, comandas y cobro.",
     href: NOVAERP_URL,
     cta: "Conocé NovaERP",
-    image: null, // TODO: captura de NovaERP
+    illustration: "tablet",
   },
   {
     id: "novastay",
@@ -93,7 +101,7 @@ export const PRODUCTS: Product[] = [
     body: "Reservas, check-in y check-out. El consumo del restaurante se carga a la habitación y el cierre del día es uno solo.",
     href: "#contacto",
     cta: "Más info",
-    image: null, // TODO: captura de NovaStay
+    illustration: "cama",
   },
   {
     id: "novapoints",
@@ -102,7 +110,7 @@ export const PRODUCTS: Product[] = [
     body: "Puntos por cada compra, niveles y premios que definís vos. Se suma desde el punto de venta, sin pasos extra.",
     href: "#contacto",
     cta: "Más info",
-    image: null, // TODO: captura de NovaPoints
+    illustration: "tarjeta",
   },
   {
     id: "jarvis",
@@ -111,7 +119,7 @@ export const PRODUCTS: Product[] = [
     body: "Ventas, caja y stock al momento; quién faltó y a qué hora. Si no tiene el dato, no lo inventa.",
     href: "#contacto",
     cta: "Más info",
-    image: null, // TODO: captura/mockup de Jarvis
+    illustration: "chat",
   },
 ];
 
@@ -150,11 +158,6 @@ export const CLIENTS = [
   {
     name: "Dorado",
     body: "Restaurante. Mesas, comandas y caja en NovaERP; sus clientes suman puntos y reservan desde la app con su marca, hecha con NovaPoints.",
-  },
-  {
-    name: "Ideas del Lago",
-    // Pendiente: sumar rubro y módulos que usa cuando esté confirmado.
-    body: "Opera con sistemas de Nova Solutions.",
   },
 ];
 

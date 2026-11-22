@@ -751,30 +751,27 @@ html.cursor-ring--text .pointer-ring__ring, html.cursor-ring--text .pointer-ring
       transform: translateY(-2px);
     }
   }
-  .product-media {
-    position: relative;
-    aspect-ratio: 16 / 10;
-    background:
-      radial-gradient(120% 120% at 20% 0%, var(--accent-soft), transparent 60%),
-      var(--surface-2);
-    border-bottom: 1px solid var(--line);
+  /* Cabecera: ilustración de línea + número de orden, sobre un resplandor
+     índigo suave (en lugar de una foto, que no tenemos). */
+  .product-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 28px 24px 8px;
+    background: radial-gradient(90% 140% at 0% 0%, var(--accent-soft), transparent 70%);
   }
-  /* Marca de agua del logo cuando todavía no hay captura (placeholder) */
-  .product-media__ph {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
+  .product-index {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
     color: var(--ink-3);
-    font-family: var(--font-mono), monospace;
-    font-size: 12px;
-    letter-spacing: 0.08em;
   }
   .product-body {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 10px;
-    padding: 24px;
+    padding: 16px 24px 24px;
   }
   .product-badge {
     align-self: flex-start;

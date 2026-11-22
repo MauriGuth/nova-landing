@@ -1,28 +1,22 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { LineIllustration } from "./line-illustration";
 import type { Product } from "@/lib/site";
 
 /**
- * Tarjeta de producto grande: captura (o placeholder mientras no hay imagen),
- * nombre, una línea de valor y el link "Más info →". Server component.
+ * Tarjeta de producto grande: ilustración de línea que se dibuja al entrar,
+ * número de orden en mono, nombre, una línea de valor y el link "Más info →".
+ * Sin fotos a propósito: no hay capturas reales y no las simulamos.
  */
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, index }: { product: Product; index: number }) {
   const external = product.href.startsWith("http");
 
   return (
     <article id={product.id} className="product-card scroll-mt-28">
-      <div className="product-media">
-        {product.image ? (
-          <Image
-            src={product.image}
-            alt={`Captura de ${product.name}`}
-            fill
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover"
-          />
-        ) : (
-          <span className="product-media__ph">{product.name}</span>
-        )}
+      <div className="product-head">
+        <LineIllustration name={product.illustration} size={72} />
+        <span className="product-index" aria-hidden="true">
+          {String(index + 1).padStart(2, "0")}
+        </span>
       </div>
       <div className="product-body">
         {product.badge ? <span className="product-badge">{product.badge}</span> : null}
@@ -31,7 +25,7 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="text-[15px] leading-relaxed text-ink-2">{product.body}</p>
         <a
           href={product.href}
-          className="link-arrow mt-3"
+          className="link-arrow mt-auto pt-3"
           {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
           {product.cta}

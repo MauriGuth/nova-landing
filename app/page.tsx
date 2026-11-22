@@ -136,9 +136,9 @@ export default function HomePage() {
               stagger
               className="mt-12 grid gap-6 sm:grid-cols-2"
             >
-              {PRODUCTS.map((p) => (
+              {PRODUCTS.map((p, i) => (
                 <li key={p.id} className="h-full">
-                  <ProductCard product={p} />
+                  <ProductCard product={p} index={i} />
                 </li>
               ))}
             </Reveal>
@@ -237,7 +237,7 @@ export default function HomePage() {
             <Reveal
               as="ul"
               stagger
-              className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4"
+              className="mt-10 grid gap-6 md:grid-cols-3"
             >
               {CLIENTS.map((c) => (
                 <li
