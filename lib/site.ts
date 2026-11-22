@@ -2,8 +2,8 @@
  * Configuración y contenido central del sitio de Nova Solutions.
  *
  * Todo lo editable (números de contacto, métricas, productos, clientes) vive
- * acá para que la página sea declarativa. Las cifras de métricas están como
- * constantes marcadas con TODO: NO son datos reales todavía.
+ * acá para que la página sea declarativa. Las métricas usan sólo hechos
+ * verificables; las capturas de producto pendientes están marcadas con TODO.
  */
 
 export const SITE_URL = "https://www.novasolutions.ar";
@@ -29,9 +29,8 @@ export const ERP_FEATURES = [
 ] as const;
 
 /**
- * Métricas para las StatCard.
- *
- * TODO: reemplazar por cifras reales confirmadas. No publicar sin validar.
+ * Métricas para las StatCard. Sólo hechos verificables del sitio (nada de
+ * cifras estimadas). Si sumás volumen real (tickets, locales), confirmalo antes.
  * `value` es el número final (se anima desde 0), `prefix`/`suffix` lo decoran.
  */
 export type Stat = {
@@ -45,25 +44,21 @@ export type Stat = {
 
 export const STATS: Stat[] = [
   {
-    id: "locales",
-    prefix: "+",
-    value: 4, // TODO: cantidad real de locales en producción
-    label: "locales operando en Neuquén",
+    id: "productos",
+    value: 4,
+    label: "productos sobre el mismo núcleo de datos: NovaERP, NovaStay, NovaPoints y Jarvis",
     illustration: "tablet",
   },
   {
-    id: "tickets",
-    prefix: "+",
-    value: 100, // TODO: tickets/comandas procesados (placeholder)
-    suffix: "k",
-    label: "comandas procesadas por NovaERP",
+    id: "clientes",
+    value: 4,
+    label: "negocios con nombre que lo usan hoy",
     illustration: "comandera",
   },
   {
-    id: "soporte",
-    value: 24,
-    suffix: "/7",
-    label: "soporte directo con quien lo programó",
+    id: "caja",
+    value: 1,
+    label: "caja única para hotel y restaurante en La Posada del Dinosaurio",
     illustration: "ticket",
   },
 ];
@@ -158,8 +153,8 @@ export const CLIENTS = [
   },
   {
     name: "Ideas del Lago",
-    // TODO: completar con el detalle real de Ideas del Lago (rubro y qué módulos usa).
-    body: "TODO: describir cómo opera Ideas del Lago con Nova (rubro, productos que usa).",
+    // Pendiente: sumar rubro y módulos que usa cuando esté confirmado.
+    body: "Opera con sistemas de Nova Solutions.",
   },
 ];
 

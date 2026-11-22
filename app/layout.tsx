@@ -43,15 +43,16 @@ export const metadata: Metadata = {
     locale: "es_AR",
     type: "website",
     // metadataBase (SITE_URL) resuelve esta ruta al dominio de producción, nunca a localhost.
-    // TODO: crear public/og-cover.jpg (1200×630) con la identidad de Nova.
-    images: [{ url: "/og-cover.jpg", width: 1200, height: 630, alt: "Nova Solutions" }],
+    // Logo cuadrado como imagen de previsualización; cuando haya una portada
+    // 1200×630, reemplazarla acá y pasar twitter.card a "summary_large_image".
+    images: [{ url: "/og-logo.png", width: 1024, height: 1024, alt: "Nova Solutions" }],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Nova Solutions — Aplicamos IA en tu empresa, con un sistema hecho a medida",
     description:
       "Sistemas a medida con IA para operaciones complejas. Hecho en Neuquén.",
-    images: ["/og-cover.jpg"], // TODO: mismo asset que Open Graph
+    images: ["/og-logo.png"],
   },
 };
 
