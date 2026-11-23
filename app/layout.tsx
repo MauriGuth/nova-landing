@@ -1,24 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Geist } from "next/font/google";
+import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { GoogleAds } from "@/components/google-ads";
 import { GoogleTag } from "@/components/google-tag";
+import { SITE_URL } from "@/lib/site";
 
-// Fuentes self-hosteadas por next/font: Bricolage Grotesque (display, variable,
-// con eje óptico) y Geist (cuerpo, variable). Sin requests externos en el render.
-const display = Bricolage_Grotesque({
+// Fuentes self-hosteadas por next/font (sin requests externos en el render):
+// Geist para títulos y texto (una sola carga; --font-body se deriva de
+// --font-display en globals.css) y JetBrains Mono para datos, etiquetas y
+// detalles técnicos.
+const geist = Geist({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  axes: ["opsz"],
 });
-const body = Geist({
+const mono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-mono",
   display: "swap",
 });
-
-const SITE_URL = "https://www.novasolutions.ar";
 
 export const viewport: Viewport = {
   themeColor: "#070714",
@@ -42,12 +42,17 @@ export const metadata: Metadata = {
     siteName: "Nova Solutions",
     locale: "es_AR",
     type: "website",
+    // metadataBase (SITE_URL) resuelve esta ruta al dominio de producción, nunca a localhost.
+    // Logo cuadrado como imagen de previsualización; cuando haya una portada
+    // 1200×630, reemplazarla acá y pasar twitter.card a "summary_large_image".
+    images: [{ url: "/og-logo.png", width: 1024, height: 1024, alt: "Nova Solutions" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nova Solutions — Aplicamos IA en tu empresa, con un sistema hecho a medida",
     description:
       "Sistemas a medida con IA para operaciones complejas. Hecho en Neuquén.",
+    images: ["/og-logo.png"],
   },
 };
 
@@ -90,7 +95,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es-AR" className={`${display.variable} ${body.variable}`}>
+    <html lang="es-AR" className={`${geist.variable} ${mono.variable}`}>
       <head>
         <link rel="icon" type="image/svg+xml" href="/logo-dark.svg" />
         <GoogleTag />

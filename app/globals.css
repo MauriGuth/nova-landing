@@ -23,12 +23,49 @@
   --danger: #f87171;
   --shadow-2: 0 8px 24px -12px rgba(0, 0, 0, 0.6);
 
+  /* Geist cubre títulos y texto: --font-body se deriva de --font-display
+     (que next/font define en <html>) para no cargar la fuente dos veces. */
+  --font-body: var(--font-display);
+
   --d-fast: 120ms;
   --d-base: 200ms;
   --d-slow: 320ms;
   --d-story: 600ms;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ── Tema claro por sección ──
+   Secciones con fondo off-white cálido para dar ritmo frente a la base oscura.
+   Redefine los mismos tokens, con contraste AA sobre el off-white. Es opaca:
+   tapa la grilla/partículas/glow fijas que viven detrás del contenido. */
+.theme-light {
+  color-scheme: light;
+  background-color: var(--bg);
+  color: var(--ink);
+
+  --bg: #f6f3ec;
+  --bg-raise: #efe9dd;
+  --surface: rgba(23, 21, 33, 0.045);
+  --surface-2: rgba(23, 21, 33, 0.08);
+  --line: rgba(23, 21, 33, 0.12);
+  --line-strong: rgba(23, 21, 33, 0.22);
+  --ink: #171521; /* 14:1 sobre el off-white */
+  --ink-2: #3c3747; /* ~9:1 */
+  --ink-3: #514c5d; /* ~6:1, pasa AA en texto chico */
+  --accent: #4f46e5; /* botón índigo: blanco encima ≈6:1 */
+  --accent-hover: #4338ca;
+  --accent-ink: #4338ca; /* links/íconos sobre claro ≈7:1 */
+  --accent-soft: rgba(79, 70, 229, 0.12);
+  --ok: #047857;
+  --ok-soft: rgba(4, 120, 87, 0.12);
+  --warn: #b45309;
+  --danger: #dc2626;
+  --shadow-2: 0 10px 30px -14px rgba(23, 21, 33, 0.28);
+}
+.theme-light ::selection {
+  background-color: var(--accent);
+  color: #fff;
 }
 
 @layer base {
@@ -615,4 +652,194 @@ html.cursor-ring--hover .pointer-ring__dot::before { transform: translate(-50%, 
 html.cursor-ring--press .pointer-ring__ring::before { transform: translate(-50%, -50%) scale(0.7); }
 html.cursor-ring--press .pointer-ring__dot::before { transform: translate(-50%, -50%) scale(1.4); }
 html.cursor-ring--text .pointer-ring__ring, html.cursor-ring--text .pointer-ring__dot { opacity: 0; }
+}
+
+/* ── Rediseño: estética editorial sobre la base espacial ── */
+@layer components {
+  /* Etiqueta mono: datos y detalles técnicos (JetBrains Mono) */
+  .eyebrow {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+
+  /* Título gigante que se desplaza con el scroll (ver BigScrollTitle).
+     El wrap recorta el desborde horizontal: el movimiento nunca genera
+     scroll lateral de la página. letter-spacing negativo SOLO acá. */
+  .big-title-wrap {
+    overflow-x: clip;
+    width: 100%;
+  }
+  .big-title {
+    margin: 0;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    font-size: clamp(3rem, 15vw, 13rem);
+    color: var(--ink);
+    white-space: nowrap;
+    will-change: transform;
+  }
+  .big-title--ghost {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--line-strong);
+  }
+
+  /* Tarjeta de métrica */
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background-color: var(--surface);
+  }
+  .stat-num {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.75rem, 7vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+
+  /* Ilustración de línea continua que se dibuja al entrar (ver LineIllustration).
+     Cada <path pathLength="1" /> permite un dasharray normalizado a 1. */
+  .line-draw path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .line-draw.is-drawn path {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.1s var(--ease-out);
+  }
+  .line-draw path:nth-child(2) {
+    transition-delay: 0.18s;
+  }
+  .line-draw path:nth-child(3) {
+    transition-delay: 0.36s;
+  }
+
+  /* Tarjeta de producto */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background-color: var(--surface);
+    overflow: hidden;
+    transition:
+      border-color var(--d-base) var(--ease-out),
+      transform var(--d-base) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .product-card:hover {
+      border-color: var(--line-strong);
+      transform: translateY(-2px);
+    }
+  }
+  /* Cabecera: ilustración de línea + número de orden, sobre un resplandor
+     índigo suave (en lugar de una foto, que no tenemos). */
+  .product-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 28px 24px 8px;
+    background: radial-gradient(90% 140% at 0% 0%, var(--accent-soft), transparent 70%);
+  }
+  .product-index {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+  }
+  .product-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 24px 24px;
+  }
+  .product-badge {
+    align-self: flex-start;
+    font-family: var(--font-mono), monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+
+  /* Botón flotante de WhatsApp: índigo (blanco encima pasa AA) + ícono */
+  .wa-fab {
+    position: fixed;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 55;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 52px;
+    padding-inline: 18px;
+    border-radius: 999px;
+    background-color: var(--accent-hover);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.6);
+    animation: waIn var(--d-slow) var(--ease-out) both;
+  }
+  .wa-fab span {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .wa-fab span {
+      display: inline;
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .wa-fab:hover {
+      background-color: var(--accent);
+    }
+  }
+  @keyframes waIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* La línea aparece ya dibujada; el título gigante queda quieto; el FAB no entra */
+  .line-draw path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+  .big-title {
+    transform: none !important;
+  }
+  .wa-fab {
+    animation: none;
+  }
 }
