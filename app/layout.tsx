@@ -42,17 +42,13 @@ export const metadata: Metadata = {
     siteName: "Nova Solutions",
     locale: "es_AR",
     type: "website",
-    // metadataBase (SITE_URL) resuelve esta ruta al dominio de producción, nunca a localhost.
-    // Logo cuadrado como imagen de previsualización; cuando haya una portada
-    // 1200×630, reemplazarla acá y pasar twitter.card a "summary_large_image".
-    images: [{ url: "/og-logo.png", width: 1024, height: 1024, alt: "Nova Solutions" }],
+    // La imagen sale de app/opengraph-image.png (1200×630) y su .alt.txt.
   },
   twitter: {
     card: "summary_large_image",
     title: "Nova Solutions — Aplicamos IA en tu empresa, con un sistema hecho a medida",
     description:
       "Sistemas a medida con IA para operaciones complejas. Hecho en Neuquén.",
-    images: ["/og-logo.png"],
   },
 };
 
