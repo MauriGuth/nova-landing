@@ -7,11 +7,13 @@ import type { Stat } from "@/lib/site";
 /**
  * Tarjeta de métrica: una ilustración de línea que se dibuja al entrar y un
  * número que cuenta desde 0. Con prefers-reduced-motion muestra el valor final
- * directo, sin animar.
+ * directo, sin animar. El HTML del servidor trae el valor real (lo que ven los
+ * buscadores, las previsualizaciones y quien no tiene JS); recién en el cliente
+ * se baja a 0 para animarlo.
  */
 export function StatCard({ stat }: { stat: Stat }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [n, setN] = useState(0);
+  const [n, setN] = useState(stat.value);
 
   useEffect(() => {
     const el = ref.current;
@@ -21,6 +23,7 @@ export function StatCard({ stat }: { stat: Stat }) {
       setN(stat.value);
       return;
     }
+    setN(0);
     const io = new IntersectionObserver(
       (entries) => {
         if (!entries.some((e) => e.isIntersecting)) return;
